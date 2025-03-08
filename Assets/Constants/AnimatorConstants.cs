@@ -1,0 +1,10 @@
+﻿using UnityEngine;
+
+namespace Constants
+{
+    public static class AnimatorConstants
+    {
+        public static readonly int Vertical = Animator.StringToHash("Vertical");
+        public static readonly int Horizontal = Animator.StringToHash("Horizontal");        
+    }
+}
