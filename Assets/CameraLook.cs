@@ -17,14 +17,15 @@ public class CameraLook : MonoBehaviour
 
     public void MoveCamera(Vector2 cameraTransform)
     {
-        _rotation.y += cameraTransform.x;
-        _rotation.x += -cameraTransform.y;
+        _rotation.y += cameraTransform.x * speed;
+        _rotation.x += -cameraTransform.y * speed;
 
-        var rotation = _rotation * speed;
-        var currentRotation = transform.eulerAngles;
-        rotation.x = Mathf.Clamp(rotation.x, maxLookAngleDown, maxLookAngleUp);
+        _rotation.x = Mathf.Clamp(_rotation.x, maxLookAngleDown, maxLookAngleUp);
+
+        var currentTransform = transform;
+        var currentRotation = currentTransform.eulerAngles;
         
-        fpCamera.transform.eulerAngles = rotation;
-        transform.eulerAngles = new Vector3(currentRotation.x, rotation.y, currentRotation.z);
+        fpCamera.transform.eulerAngles = _rotation;
+        currentTransform.eulerAngles = new Vector3(currentRotation.x, _rotation.y, currentRotation.z);
     }
 }

@@ -8,21 +8,25 @@ namespace PlayerMovement
     {
         private ActorMovement _movement;
         private CameraLook _cameraLook;
+        private FirstPersonCameraSwap _armSwap;
         
         private PlayerInput _input;
         private InputAction _moveAction;
         private InputAction _increaseSpeedAction;
         private InputAction _lookAction;
+        private InputAction _raiseWeaponAction;
 
         public void Start()
         {
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
+            _armSwap = GetComponent<FirstPersonCameraSwap>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
             _increaseSpeedAction = _input.actions[InputConstants.ChangeSpeed];
             _lookAction = _input.actions[InputConstants.Look];
+            _raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
         }
 
         public void Update()
@@ -30,6 +34,11 @@ namespace PlayerMovement
             _movement.Move(_moveAction.ReadValue<Vector2>());
             _movement.ChangeSpeed(_increaseSpeedAction.ReadValue<float>() * 0.1f);
             _cameraLook.MoveCamera(_lookAction.ReadValue<Vector2>());
+            
+            if (_raiseWeaponAction.WasCompletedThisFrame())
+            {
+                _armSwap.SwitchArms();
+            }
         }
     }
 }
