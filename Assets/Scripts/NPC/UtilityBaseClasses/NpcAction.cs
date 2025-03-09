@@ -7,7 +7,7 @@ namespace NPC.UtilityBaseClasses
     [Serializable]
     public abstract class NpcAction : ScriptableObject
     {
-        public abstract void Execute(NpcController executor);
+        public abstract void Execute(NpcController npcController);
         [SerializeField] private Consideration[] considerations;
 
         public float CalculateScore()

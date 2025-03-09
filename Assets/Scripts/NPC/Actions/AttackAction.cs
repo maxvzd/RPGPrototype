@@ -6,9 +6,9 @@ namespace NPC.Actions
     [CreateAssetMenu(menuName = "NPC/Actions/Attack")]
     public class AttackAction : NpcAction
     {
-        public override void Execute(NpcController executor)
+        public override void Execute(NpcController npcController)
         {
-            Debug.Log("Im attacking");
+            //Debug.Log("Im attacking");
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,7 @@ namespace NPC
     public class NpcController : MonoBehaviour
     {
         private NavMeshAgent _navMeshAgent;
+        private IEnumerator _currentCoroutine;
         public bool IsIdle { get; private set; } = true;
 
         private void Start()
@@ -18,11 +20,20 @@ namespace NPC
         {
             IsIdle = false;
             _navMeshAgent.destination = destination;
-
-            StartCoroutine(CheckRemainingDistanceCoroutine());
+            StartStopCoroutine(CheckRemainingDistanceCoroutine());
         }
 
-        public IEnumerator CheckRemainingDistanceCoroutine()
+        private void StartStopCoroutine(IEnumerator coroutine)
+        {
+            if (_currentCoroutine is not null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            _currentCoroutine = coroutine;
+            StartCoroutine(_currentCoroutine);
+        }
+
+        private IEnumerator CheckRemainingDistanceCoroutine()
         {
             while (_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance)
             {

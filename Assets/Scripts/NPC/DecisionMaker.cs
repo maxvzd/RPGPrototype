@@ -11,7 +11,7 @@ namespace NPC
         [SerializeField] private NpcAction[] availableActions;
         private NpcController _npcController;
 
-        public void Start()
+        private void Start()
         {
             _npcController = GetComponent<NpcController>();
         }
