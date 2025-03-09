@@ -8,6 +8,9 @@ public class MoveNavAgent : MonoBehaviour
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.destination = Random.insideUnitSphere * 100f;
+
+        var pos = Random.insideUnitSphere * 100f;
+        pos.y = 0f;
+        _navMeshAgent.destination = pos;
     }
 }
