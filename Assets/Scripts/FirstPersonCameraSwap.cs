@@ -12,7 +12,7 @@ public class FirstPersonCameraSwap : MonoBehaviour
     private readonly string[] _mainCameraWithNoArms = { LayerConstants.Default, LayerConstants.TransparentFx, LayerConstants.IgnoreRaycast, LayerConstants.Water, LayerConstants.Ui, LayerConstants.Terrain };
     private readonly string[] _mainCameraWithArms = { LayerConstants.Default, LayerConstants.TransparentFx, LayerConstants.IgnoreRaycast, LayerConstants.Water, LayerConstants.Ui, LayerConstants.Terrain, LayerConstants.PlayerMeshRightArm, LayerConstants.PlayerMeshLeftArm };
     private readonly string[] _fpCameraWithNoArms = Array.Empty<string>();
-    private readonly string[] _fpCameraWithArms = { LayerConstants.FirstPersonLeftArmMesh };
+    private readonly string[] _fpCameraWithArms = { LayerConstants.FirstPersonLeftArmMesh, LayerConstants.FirstPersonRightArmMesh };
 
     public void SwitchArms()
     {

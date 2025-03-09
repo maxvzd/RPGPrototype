@@ -9,6 +9,7 @@ namespace PlayerMovement
         private ActorMovement _movement;
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
+        private SheatheManager _sheathe;
         
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -21,6 +22,7 @@ namespace PlayerMovement
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
             _armSwap = GetComponent<FirstPersonCameraSwap>();
+            _sheathe = GetComponentInChildren<SheatheManager>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
@@ -38,6 +40,7 @@ namespace PlayerMovement
             if (_raiseWeaponAction.WasCompletedThisFrame())
             {
                 _armSwap.SwitchArms();
+                _sheathe.SheatheWeapon();
             }
         }
     }
