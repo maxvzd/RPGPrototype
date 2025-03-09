@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Time : MonoBehaviour
+public class WorldTime : MonoBehaviour
 {
     [SerializeField] private float minutesInDay;
     [SerializeField, Range(0, 24)] private float hourOfDay;
