@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using NPC.UtilityBaseClasses;
@@ -8,8 +7,10 @@ namespace NPC
 {
     public class DecisionMaker : MonoBehaviour
     {
-        [SerializeField] private NpcAction[] availableActions;
+        [SerializeField] private List<NpcAction> availableActions;
         private NpcController _npcController;
+
+        public IReadOnlyList<NpcAction> AvailableActions => availableActions;
 
         private void Start()
         {
