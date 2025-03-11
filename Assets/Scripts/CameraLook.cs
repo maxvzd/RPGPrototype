@@ -21,11 +21,6 @@ public class CameraLook : MonoBehaviour
         _rotation.x += -cameraTransform.y * speed;
 
         _rotation.x = Mathf.Clamp(_rotation.x, maxLookAngleDown, maxLookAngleUp);
-
-        var currentTransform = transform;
-        var currentRotation = currentTransform.eulerAngles;
-        
         fpCamera.transform.eulerAngles = _rotation;
-        currentTransform.eulerAngles = new Vector3(currentRotation.x, _rotation.y, currentRotation.z);
     }
 }

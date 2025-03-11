@@ -444,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.041047353, y: 0, z: 0, w: 0.9991572}
+  m_LocalRotation: {x: 0.050128657, y: 0, z: 0, w: 0.99874276}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -920,7 +920,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 469494042}
-  maxInteractDistance: 0.1
+  maxInteractDistance: 0.3
+--- !u!114 &417809221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417809201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0448b0313a40499aa3e7642e06bc9568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &417809222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417809201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c544223b5742e8bb3cc0165aab51d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  angleToTurnAt: 0
 --- !u!20 &469494042 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6197849072176160992, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
@@ -1675,9 +1701,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 6.313667
+  hourOfDay: 6.3831153
   sunTransform: {fileID: 410087041}
-  time: 06:19
+  time: 06:23
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -5041,6 +5067,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Interactable
       objectReference: {fileID: 0}
+    - target: {fileID: 2473005695301242728, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 5343773556984519115, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
       propertyPath: availableActions.Array.size
       value: 2
@@ -5132,6 +5162,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6327105009001861201, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 417809220}
+    - targetCorrespondingSourceObject: {fileID: 6327105009001861201, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 417809221}
+    - targetCorrespondingSourceObject: {fileID: 6327105009001861201, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 417809222}
   m_SourcePrefab: {fileID: 100100000, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
