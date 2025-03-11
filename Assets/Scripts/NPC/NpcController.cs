@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,6 +22,11 @@ namespace NPC
             StartStopCoroutine(CheckRemainingDistanceCoroutine());
         }
 
+        public void TalkToPlayer()
+        {
+            _navMeshAgent.isStopped = !_navMeshAgent.isStopped;
+        }
+
         private void StartStopCoroutine(IEnumerator coroutine)
         {
             if (_currentCoroutine is not null)
@@ -39,7 +43,6 @@ namespace NPC
             {
                 yield return new WaitForEndOfFrame();
             }
-
             IsIdle = true;
         }
     }

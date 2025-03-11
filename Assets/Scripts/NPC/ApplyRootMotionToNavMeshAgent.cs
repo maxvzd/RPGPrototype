@@ -31,7 +31,7 @@ namespace NPC
         {
             if (!_navMeshAgent.enabled) return;
             
-            if (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance)
+            if (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance && !_navMeshAgent.isStopped)
             {
                 _t += Time.deltaTime;
                 _t = Mathf.Clamp(_t, 0, 1);
@@ -41,12 +41,10 @@ namespace NPC
                 _t -= Time.deltaTime;
                 _t = Mathf.Clamp(_t, 0, 1);
             }
+            
             _speed = Mathf.Lerp(0f, _navMeshAgent.speed, _t);
 
-            //bool isMoving = _speed > 0.01f;
             _animator.SetFloat(AnimatorConstants.Vertical, _speed);
-            //_animator.SetFloat(AnimatorConstants.Speed, _speed);
-            //_animator.SetBool(AnimatorConstants.IsMoving, isMoving);
         }
 
         private void OnAnimatorMove()

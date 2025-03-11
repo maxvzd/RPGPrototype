@@ -6,5 +6,6 @@
         public static string ChangeSpeed => "ChangeSpeed";
         public static string Look => "Look";
         public static string RaiseWeapon => "RaiseWeapon";
+        public static string Interact => "Interact";
     }
 }

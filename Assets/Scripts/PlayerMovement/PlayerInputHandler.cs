@@ -16,6 +16,8 @@ namespace PlayerMovement
         private InputAction _increaseSpeedAction;
         private InputAction _lookAction;
         private InputAction _raiseWeaponAction;
+        private InputAction _interactAction;
+        private PlayerInteractionSystem _interactionSystem;
 
         public void Start()
         {
@@ -23,12 +25,14 @@ namespace PlayerMovement
             _cameraLook = GetComponent<CameraLook>();
             _armSwap = GetComponent<FirstPersonCameraSwap>();
             _sheathe = GetComponentInChildren<SheatheManager>();
+            _interactionSystem = GetComponentInChildren<PlayerInteractionSystem>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
             _increaseSpeedAction = _input.actions[InputConstants.ChangeSpeed];
             _lookAction = _input.actions[InputConstants.Look];
             _raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
+            _interactAction = _input.actions[InputConstants.Interact];
         }
 
         public void Update()
@@ -42,6 +46,11 @@ namespace PlayerMovement
                 _armSwap.SwitchArms();
                 _sheathe.SheatheWeapon();
             }
+            if (_interactAction.WasCompletedThisFrame())
+            {
+                _interactionSystem.Interact();
+            }
+            
         }
     }
 }
