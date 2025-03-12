@@ -1,4 +1,5 @@
-﻿using Constants;
+﻿using System;
+using Constants;
 using UnityEngine;
 
 namespace PlayerMovement
@@ -7,39 +8,59 @@ namespace PlayerMovement
     {
         [SerializeField] private Transform mainCamera;
         [SerializeField] private float angleToTurnAt;
+        [SerializeField] private float turnSpeed;
         
         private Animator _animator;
         private ActorMovement _movement;
+        private PlayerAnimationEventListener _eventListener;
+        private bool _isTurning;
 
         public void Start()
         {
             _animator = GetComponent<Animator>();
             _movement = GetComponent<ActorMovement>();
+            _eventListener = GetComponent<PlayerAnimationEventListener>();
+            _eventListener.FinishedTurning += FinishedTurning;
+        }
+
+        private void FinishedTurning(object sender, EventArgs e)
+        {
+            _isTurning = false;
         }
 
         public void Update()
         {
-            var cameraAngle = mainCamera.eulerAngles.y;
-            var bodyAngle = transform.eulerAngles.y;
-
-            if (_movement.PlayerIsMoving)
+            if (_movement.ActorIsMoving)
             {
                 var currentTransform = transform;
-                var currentForward = currentTransform.forward;
-                var cameraForward = mainCamera.forward;
+                var currentForward = currentTransform.eulerAngles;
+                var cameraRot = mainCamera.eulerAngles;
                 
-                currentTransform.forward = new Vector3(cameraForward.x, currentForward.y, cameraForward.z);
-                return;
+                var playerRot = new Vector3(currentForward.x, cameraRot.y, currentForward.z);
+                
+                transform.rotation = Quaternion.Lerp(currentTransform.rotation, Quaternion.Euler(playerRot), turnSpeed * Time.deltaTime);
+                _isTurning = false;
             }
+            else if(!_isTurning)
+            {
+                float angleBetweenCameraAndBody = mainCamera.eulerAngles.y - transform.eulerAngles.y;
+                if (angleBetweenCameraAndBody < 0)
+                {
+                    angleBetweenCameraAndBody += 360;
+                }
 
-            // if (bodyAngle - cameraAngle < -angleToTurnAt)
-            // {
-            //     _animator.SetTrigger(AnimatorConstants.TurnRightTrigger);
-            // }
-            // else if (bodyAngle - cameraAngle > angleToTurnAt)
-            // {
-            //     _animator.SetTrigger(AnimatorConstants.TurnLeftTrigger);
-            // }
+                if (angleBetweenCameraAndBody > 0 + angleToTurnAt &&  angleBetweenCameraAndBody < 180)
+                {
+                    _isTurning = true;
+                    _animator.SetTrigger(AnimatorConstants.TurnRightTrigger);
+                }
+
+                if (angleBetweenCameraAndBody > 180 && angleBetweenCameraAndBody < 360 - angleToTurnAt)
+                {
+                    _isTurning = true;
+                    _animator.SetTrigger(AnimatorConstants.TurnLeftTrigger);
+                }
+            }
         }
     }
 }

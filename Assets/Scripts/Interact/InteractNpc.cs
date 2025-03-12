@@ -15,6 +15,7 @@ namespace Interact
         public void Interact()
         {
             _npcController.TalkToPlayer();
+            Debug.Log("Hello");
         }
     }
 }

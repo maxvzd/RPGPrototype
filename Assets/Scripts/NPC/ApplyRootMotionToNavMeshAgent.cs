@@ -1,4 +1,4 @@
-﻿using Constants;
+﻿using PlayerMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,10 +8,9 @@ namespace NPC
     {
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
-
-        private float _t;
-        private float _speed;
         
+        private ActorMovement _actorMovement;
+
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -20,6 +19,8 @@ namespace NPC
 
             _animator = GetComponent<Animator>();
             _animator.applyRootMotion = true;
+
+            _actorMovement = GetComponent<ActorMovement>();
         }
         
         private void Update()
@@ -33,18 +34,12 @@ namespace NPC
             
             if (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance && !_navMeshAgent.isStopped)
             {
-                _t += Time.deltaTime;
-                _t = Mathf.Clamp(_t, 0, 1);
+                _actorMovement.Move(new Vector2(0, _navMeshAgent.speed));
             }
-            else if (_t > 0f)
+            else
             {
-                _t -= Time.deltaTime;
-                _t = Mathf.Clamp(_t, 0, 1);
+                _actorMovement.Move(new Vector2(0, 0));
             }
-            
-            _speed = Mathf.Lerp(0f, _navMeshAgent.speed, _t);
-
-            _animator.SetFloat(AnimatorConstants.Vertical, _speed);
         }
 
         private void OnAnimatorMove()

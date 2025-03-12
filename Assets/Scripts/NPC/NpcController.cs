@@ -39,7 +39,7 @@ namespace NPC
 
         private IEnumerator CheckRemainingDistanceCoroutine()
         {
-            while (_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance)
+            while (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance)
             {
                 yield return new WaitForEndOfFrame();
             }

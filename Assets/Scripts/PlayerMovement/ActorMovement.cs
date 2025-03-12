@@ -12,7 +12,7 @@ namespace PlayerMovement
         private Vector2 _smoothedInput;
         private Vector2 _smoothInputVelocity;
 
-        public bool PlayerIsMoving => Mathf.Abs(_smoothedInput.x) > 0.01f || Mathf.Abs(_smoothedInput.y) > 0.01f;
+        public bool ActorIsMoving => Mathf.Abs(_smoothedInput.x) > 0.1f || Mathf.Abs(_smoothedInput.y) > 0.1f;
 
         public void Start()
         {
