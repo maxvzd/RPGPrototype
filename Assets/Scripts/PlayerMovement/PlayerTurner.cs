@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Constants;
 using UnityEngine;
 
@@ -11,14 +13,15 @@ namespace PlayerMovement
         [SerializeField] private float turnSpeed;
         
         private Animator _animator;
-        private ActorMovement _movement;
         private PlayerAnimationEventListener _eventListener;
         private bool _isTurning;
+        private static int _bodyShouldFollowCameraRegister;
+
+        //public List<bool> BodyShouldFollowCamera { get; set; } = false;
 
         public void Start()
         {
             _animator = GetComponent<Animator>();
-            _movement = GetComponent<ActorMovement>();
             _eventListener = GetComponent<PlayerAnimationEventListener>();
             _eventListener.FinishedTurning += FinishedTurning;
         }
@@ -28,9 +31,19 @@ namespace PlayerMovement
             _isTurning = false;
         }
 
+        public static void BodyShouldFollowCameraRegister()
+        {
+            _bodyShouldFollowCameraRegister++;
+        }
+
+        public static void BodyShouldFollowCameraUnRegister()
+        {
+            _bodyShouldFollowCameraRegister = Mathf.Clamp(_bodyShouldFollowCameraRegister - 1, 0, int.MaxValue);
+        }
+        
         public void Update()
         {
-            if (_movement.ActorIsMoving)
+            if (_bodyShouldFollowCameraRegister > 0) 
             {
                 var currentTransform = transform;
                 var currentForward = currentTransform.eulerAngles;
