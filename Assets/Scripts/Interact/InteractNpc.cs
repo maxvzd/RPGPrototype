@@ -5,17 +5,16 @@ namespace Interact
 {
     public class InteractNpc : MonoBehaviour, IInteract
     {
-        private NpcController _npcController;
+        private NpcDecisionMaker _npc;
 
         public void Start()
         {
-            _npcController = GetComponent<NpcController>();
+            _npc = GetComponent<NpcDecisionMaker>();
         }
 
         public void Interact()
         {
-            _npcController.TalkToPlayer();
-            Debug.Log("Hello");
+            _npc.DecideSpeechInteractionWithPlayer();
         }
     }
 }

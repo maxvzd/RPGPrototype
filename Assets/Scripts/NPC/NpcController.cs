@@ -8,11 +8,15 @@ namespace NPC
     {
         private NavMeshAgent _navMeshAgent;
         private IEnumerator _currentCoroutine;
+        private SocialStats _socialStats;
+        
         public bool IsIdle { get; private set; } = true;
+        public float Disposition => _socialStats.Disposition;
 
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _socialStats = GetComponent<SocialStats>();
         }
 
         public void MoveToDestination(Vector3 destination)
@@ -22,7 +26,7 @@ namespace NPC
             StartStopCoroutine(CheckRemainingDistanceCoroutine());
         }
 
-        public void TalkToPlayer()
+        public void Stop()
         {
             _navMeshAgent.isStopped = !_navMeshAgent.isStopped;
         }

@@ -7,19 +7,18 @@ namespace NPC.UtilityBaseClasses
     public abstract class NpcAction : ScriptableObject
     {
         [SerializeField] private string actionId;
-        [SerializeField] private Consideration[] considerations;
-        
+        [SerializeField] private ConsiderationBase[] considerations;
         
         public abstract void Execute(NpcController npcController);
         
-        public float CalculateScore()
+        public float CalculateScore(IConsiderationContext context)
         {
             if (considerations is null || considerations.Length == 0) return 0;
             
             float score = 1f;
             foreach (var consideration in considerations)
             {
-                float considerationScore = consideration.Score();
+                float considerationScore = consideration.Score(context);
                 score *= considerationScore;
 
                 if (score == 0) return 0;

@@ -444,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.062252667, y: 0, z: 0, w: 0.99806046}
+  m_LocalRotation: {x: 0.07367262, y: 0, z: 0, w: 0.9972825}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1645,6 +1645,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAccelerationTime: 0.35
+--- !u!114 &1138218462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138218418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e329df8326da44e5a1c546f23805104e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disposition: 1
 --- !u!4 &1228491640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1380542293860711362, guid: a6a36a52289890b41a2f4bce5dd76e0a, type: 3}
@@ -1732,9 +1745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 6.475883
+  hourOfDay: 6.563328
   sunTransform: {fileID: 410087041}
-  time: 06:29
+  time: 06:34
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -5127,6 +5140,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1906077499979288351, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1138218452}
+    - targetCorrespondingSourceObject: {fileID: 1906077499979288351, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1138218462}
   m_SourcePrefab: {fileID: 100100000, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
 --- !u!1001 &3373991935772179671
 PrefabInstance:

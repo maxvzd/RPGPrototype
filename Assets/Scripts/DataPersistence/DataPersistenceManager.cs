@@ -16,7 +16,7 @@ namespace DataPersistence
             foreach (var person in people)
             {
                 var npc = Instantiate(npcBase, person.Position, Quaternion.identity);
-                var decisionMaker = npc.GetComponent<DecisionMaker>();
+                var decisionMaker = npc.GetComponent<NpcDecisionMaker>();
                 if (decisionMaker is not null)
                 {
                 }

@@ -10,7 +10,7 @@ namespace NPC
     
         public SerializablePerson GetSerializable()
         {
-            var decisionMaker = GetComponent<DecisionMaker>();
+            var decisionMaker = GetComponent<NpcDecisionMaker>();
 
             return new SerializablePerson(npcName, decisionMaker.AvailableActions, transform.position);
         }
