@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SheatheManager : MonoBehaviour
 {
+    public bool IsWeaponSheathed => _isWeaponSheathed;
+    
     private Animator _animator;
     private bool _isWeaponSheathed = true;
 
@@ -14,8 +16,10 @@ public class SheatheManager : MonoBehaviour
 
     public void SheatheWeapon()
     {
-        _animator.SetTrigger(_isWeaponSheathed ? AnimatorConstants.UnSheatheTrigger : AnimatorConstants.SheatheTrigger);
-        if (_isWeaponSheathed)
+        _isWeaponSheathed = !_isWeaponSheathed;
+
+        _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
+        if (!_isWeaponSheathed)
         {
             PlayerTurner.BodyShouldFollowCameraRegister();
         }
@@ -23,7 +27,5 @@ public class SheatheManager : MonoBehaviour
         {
             PlayerTurner.BodyShouldFollowCameraUnRegister();
         }
-        
-        _isWeaponSheathed = !_isWeaponSheathed;
     }
 }

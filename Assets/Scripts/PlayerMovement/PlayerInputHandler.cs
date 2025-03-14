@@ -1,3 +1,4 @@
+using Combat;
 using Constants;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ namespace PlayerMovement
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
         private SheatheManager _sheathe;
+        private PlayerAttack _playerAttack;
+        private PlayerInteractionSystem _interactionSystem;
         
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -17,7 +20,7 @@ namespace PlayerMovement
         private InputAction _lookAction;
         private InputAction _raiseWeaponAction;
         private InputAction _interactAction;
-        private PlayerInteractionSystem _interactionSystem;
+        private InputAction _attackAction;
 
         public void Start()
         {
@@ -26,6 +29,7 @@ namespace PlayerMovement
             _armSwap = GetComponent<FirstPersonCameraSwap>();
             _sheathe = GetComponentInChildren<SheatheManager>();
             _interactionSystem = GetComponentInChildren<PlayerInteractionSystem>();
+            _playerAttack = GetComponentInChildren<PlayerAttack>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
@@ -33,11 +37,14 @@ namespace PlayerMovement
             _lookAction = _input.actions[InputConstants.Look];
             _raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
             _interactAction = _input.actions[InputConstants.Interact];
+            _attackAction = _input.actions[InputConstants.Attack];
         }
 
         public void Update()
         {
-            _movement.Move(_moveAction.ReadValue<Vector2>());
+            var movementInput = _moveAction.ReadValue<Vector2>();
+            _movement.Move(movementInput);
+            _playerAttack.SetMovementInput(movementInput);
             _movement.ChangeSpeed(_increaseSpeedAction.ReadValue<float>() * 0.1f);
             _cameraLook.MoveCamera(_lookAction.ReadValue<Vector2>());
             
@@ -50,7 +57,16 @@ namespace PlayerMovement
             {
                 _interactionSystem.Interact();
             }
-            
+
+            if (_attackAction.WasPressedThisFrame())
+            {
+                _playerAttack.HoldAttack();
+            }
+
+            if (_attackAction.WasReleasedThisFrame())
+            {
+                _playerAttack.ReleaseAttack();
+            }
         }
     }
 }

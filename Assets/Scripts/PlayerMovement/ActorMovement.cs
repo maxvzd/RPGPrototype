@@ -26,7 +26,10 @@ namespace PlayerMovement
 
         public void Move(Vector2 movement)
         {
-            movement *= _movementSpeed;
+            if (movement.y > 0)
+            {
+                movement *= _movementSpeed;
+            }
             
             _smoothedInput = Vector2.SmoothDamp(_smoothedInput, movement, ref _smoothInputVelocity, playerAccelerationTime);
             
