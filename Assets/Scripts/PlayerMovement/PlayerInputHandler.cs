@@ -47,6 +47,7 @@ namespace PlayerMovement
             _playerAttack.SetMovementInput(movementInput);
             _movement.ChangeSpeed(_increaseSpeedAction.ReadValue<float>() * 0.1f);
             _cameraLook.MoveCamera(_lookAction.ReadValue<Vector2>());
+            _cameraLook.TiltCamera(movementInput.x);
             
             if (_raiseWeaponAction.WasCompletedThisFrame())
             {

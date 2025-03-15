@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Constants;
 using UnityEngine;
 
 namespace Combat
@@ -30,6 +29,8 @@ namespace Combat
 
             SetIsLeftMouseHeld(true);
 
+            
+            Debug.Log(_attackCounter);
             if (_attackCounter > 0) return; //Ignore while comboing
             
             ResetReadyToRelease();
@@ -126,7 +127,6 @@ namespace Combat
         private void SwingFinished(object sender, EventArgs e)
         {
             _swingFinished = true;
-            Debug.Log(_attackCounter);
             if (_attackCounter == 0) //Combo has ended and been reset
             {
                 _combatAnimationHandler.TransitionToIdle();
@@ -191,6 +191,8 @@ namespace Combat
         private void EndCombo()
         {
             _attackCounter = 0;
+            _swingFinished = false;
+            _currentAttackDirection = AttackDirection.None;
         }
     }
 }

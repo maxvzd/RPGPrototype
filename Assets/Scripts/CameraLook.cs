@@ -7,13 +7,25 @@ public class CameraLook : MonoBehaviour
     [SerializeField] private float maxLookAngleUp = 60;
     [SerializeField] private float maxLookAngleDown = -60;
     [SerializeField] private float maxHorizontalLook;
+    [SerializeField] private float maxHorizontalCameraTilt;
     
-    private Vector2 _rotation = Vector2.zero;
+    private Vector3 _rotation = Vector3.zero;
+    private float _targetTilt;
+    private float _tiltVelocity;
+    private float _zAxisTilt;
 
-    public void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+    
+    public void TiltCamera(float horizontalDirection)
+    {
+        _targetTilt = horizontalDirection * maxHorizontalCameraTilt * -1;
+
+        var cameraEuler = fpCamera.transform.eulerAngles;
+        _zAxisTilt = Mathf.SmoothDampAngle(cameraEuler.z, _targetTilt, ref _tiltVelocity, 0.2f);
     }
 
     public void MoveCamera(Vector2 mouseInput)
@@ -28,6 +40,7 @@ public class CameraLook : MonoBehaviour
         {
             _rotation.y += mouseInput.x * speed;
         }
-        fpCamera.transform.eulerAngles = _rotation;
+        _rotation.z = _zAxisTilt;
+        fpCamera.transform.rotation = Quaternion.Euler(_rotation);
     }
 }

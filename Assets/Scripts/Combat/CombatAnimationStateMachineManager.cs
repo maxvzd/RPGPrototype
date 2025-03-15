@@ -36,7 +36,7 @@ namespace Combat
 
         public void TransitionToIdle()
         {
-            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.2f, -1, 0f, 0.5f);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.3f, -1, 0f, 0);
         }
 
         public void TransitionAttackStateToState(AttackDirection attackDirection)
