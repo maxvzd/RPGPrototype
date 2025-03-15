@@ -28,9 +28,7 @@ namespace Combat
             if (_sheatheManager.IsWeaponSheathed) return;
 
             SetIsLeftMouseHeld(true);
-
             
-            Debug.Log(_attackCounter);
             if (_attackCounter > 0) return; //Ignore while comboing
             
             ResetReadyToRelease();
