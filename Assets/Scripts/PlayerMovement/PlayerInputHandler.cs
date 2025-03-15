@@ -7,6 +7,8 @@ namespace PlayerMovement
 {
     public class PlayerInputHandler : MonoBehaviour
     {
+        [SerializeField] private Transform fpArms;
+        
         private ActorMovement _movement;
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
@@ -26,10 +28,10 @@ namespace PlayerMovement
         {
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
-            _armSwap = GetComponent<FirstPersonCameraSwap>();
-            _sheathe = GetComponentInChildren<SheatheManager>();
-            _interactionSystem = GetComponentInChildren<PlayerInteractionSystem>();
-            _playerAttack = GetComponentInChildren<PlayerAttack>();
+            _armSwap = fpArms.GetComponent<FirstPersonCameraSwap>();
+            _sheathe = fpArms.GetComponent<SheatheManager>();
+            _interactionSystem = GetComponent<PlayerInteractionSystem>();
+            _playerAttack = fpArms.GetComponent<PlayerAttack>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];

@@ -12,6 +12,7 @@ public class SheatheManager : MonoBehaviour
     public void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
     }
 
     public void SheatheWeapon()
