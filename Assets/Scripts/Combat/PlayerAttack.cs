@@ -20,10 +20,52 @@ namespace Combat
         private AttackDirection _currentAttackDirection;
         private bool _isReadyToRelease;
 
-        private IEnumerator _waitForPlayerClickRoutine;
         private CombatAnimationStateMachineManager _combatAnimationHandler;
+        private Coroutine _waitForPlayerClickRoutine;
         private const int MAX_COMBO_COUNT = 3;
 
+        public void HoldAttack()
+        {
+            if (_sheatheManager.IsWeaponSheathed) return;
+
+            SetIsLeftMouseHeld(true);
+
+            if (_attackCounter > 0) return; //Ignore while comboing
+            ResetReadyToRelease();
+            TransitionToAttackState();
+        }
+        
+        public void ReleaseAttack()
+        {
+            if (_sheatheManager.IsWeaponSheathed) return;
+
+            SetIsLeftMouseHeld(false);
+
+            if (_isReadyToRelease)
+            {
+                _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, true);
+                _attackCounter++;
+                StopWaitForPlayerClickRoutine();
+
+                if (_attackCounter > MAX_COMBO_COUNT - 1)
+                {
+                    EndCombo();
+                }
+            }
+            else
+            {
+                _combatAnimationHandler.TransitionToIdle();
+                EndCombo();
+            }
+
+            _currentAttackDirection = AttackDirection.None;
+        }
+        
+        public void SetMovementInput(Vector2 movementInput)
+        {
+            _movementInput = movementInput;
+        }
+        
         private void Start()
         {
             _animator = GetComponent<Animator>();
@@ -34,22 +76,30 @@ namespace Combat
             _combatAnimationHandler = GetComponent<CombatAnimationStateMachineManager>();
             _currentAttackDirection = AttackDirection.None;
         }
-        
-        
+
         private void Update()
         {
             if (_sheatheManager.IsWeaponSheathed) return;
-            
-            if(_attackCounter is > 0 and < MAX_COMBO_COUNT && IsCurrentAnimatorState(AnimatorConstants.AttackFinishedState))
+
+            if (_attackCounter is > 0 and < MAX_COMBO_COUNT && IsCurrentAnimatorState(AnimatorConstants.AttackFinishedState))
             {
                 ResetReadyToRelease();
                 TransitionToAttackState();
             }
-            
+
             if (_isLeftMouseHeld && _attackCounter == 0)
             {
                 TransitionToHoldState();
             }
+        }
+        
+        private void TransitionToAttackState()
+        {
+            var attackDirection = GetAttackDirection();
+            if (_currentAttackDirection == attackDirection) return;
+
+            _currentAttackDirection = attackDirection;
+            _combatAnimationHandler.TransitionAttackStateToState(_currentAttackDirection);
         }
 
         private void TransitionToHoldState()
@@ -64,51 +114,42 @@ namespace Combat
         private void ReadyToAttack(object sender, EventArgs e)
         {
             _isReadyToRelease = true;
-            
+
             if (_attackCounter > 0)
             {
                 StartWaitForPlayerClickRoutine();
             }
         }
 
+        #region Coroutines
+        
         private void StartWaitForPlayerClickRoutine()
         {
             StopWaitForPlayerClickRoutine();
-
-            _waitForPlayerClickRoutine = WaitForPlayerClick();
-            StartCoroutine(_waitForPlayerClickRoutine);
+            _waitForPlayerClickRoutine = StartCoroutine(WaitForPlayerClick());
         }
 
         private void StopWaitForPlayerClickRoutine()
         {
             if (_waitForPlayerClickRoutine is null) return;
+            
             StopCoroutine(_waitForPlayerClickRoutine);
+            _waitForPlayerClickRoutine = null;
         }
 
         private IEnumerator WaitForPlayerClick()
         {
             yield return new WaitForSeconds(attackOpportunityWindow);
 
-            //EndCombo();
+            EndCombo();
+            _combatAnimationHandler.TransitionToIdle();
         }
-
-        private void TransitionToAttackState()
-        {
-            var attackDirection = GetAttackDirection();
-            if (_currentAttackDirection == attackDirection) return;
-
-            _currentAttackDirection = attackDirection;
-            _combatAnimationHandler.TransitionAttackStateToState(_currentAttackDirection);
-        }
+        
+        #endregion
 
         private bool IsCurrentAnimatorState(int animatorHash)
         {
             return _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == animatorHash;
-        }
-
-        public void SetMovementInput(Vector2 movementInput)
-        {
-            _movementInput = movementInput;
         }
 
         private AttackDirection GetAttackDirection()
@@ -128,17 +169,6 @@ namespace Combat
             return horizontal > 0 ? AttackDirection.Right : AttackDirection.Left;
         }
 
-        public void HoldAttack()
-        {
-            if (_sheatheManager.IsWeaponSheathed) return;
-
-            SetIsLeftMouseHeld(true);
-
-            if (_attackCounter > 0) return; //Ignore while comboing
-            ResetReadyToRelease();
-            TransitionToAttackState();
-        }
-
         private void SetIsLeftMouseHeld(bool isLeftMouseHeld)
         {
             _isLeftMouseHeld = isLeftMouseHeld;
@@ -151,35 +181,9 @@ namespace Combat
             _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, _isReadyToRelease);
         }
 
-
-        public void ReleaseAttack()
-        {
-            if (_sheatheManager.IsWeaponSheathed) return;
-
-            SetIsLeftMouseHeld(false);
-
-            if (_isReadyToRelease)
-            {
-                _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, true);
-                _attackCounter++;
-                if (_attackCounter > MAX_COMBO_COUNT - 1)
-                {
-                    EndCombo();
-                }
-            }
-            else
-            {
-                _combatAnimationHandler.TransitionToIdle();
-                EndCombo();
-            }
-
-            _currentAttackDirection = AttackDirection.None;
-        }
-
         private void EndCombo()
         {
             _attackCounter = 0;
-            StopAllCoroutines();
         }
     }
 }
