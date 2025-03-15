@@ -30,7 +30,7 @@ namespace Combat
         {
             _animator = GetComponent<Animator>();
             
-            _animator.SetFloat(AnimatorConstants.AttackSpeedModifier, 1f);
+            _animator.SetFloat(AnimatorConstants.AttackSpeedModifier, .7f);
             _animator.SetFloat(AnimatorConstants.RaiseWeaponSpeedModifier, 1f);
         }
 
@@ -50,5 +50,20 @@ namespace Combat
             var state = _holdAttacks[attackDirection];
             _animator.CrossFadeInFixedTime(state, 0.3f, -1, 0, 0);
         }
+
+        public void SetShouldReleaseAttack(bool shouldReleaseAttack)
+        {
+            _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, shouldReleaseAttack);
+        }
+        
+        public void SetIsLeftMouseButtonDown(bool isLeftMouseButtonDown)
+        {
+            _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, isLeftMouseButtonDown);
+        }
+        //
+        // public bool IsCurrentAnimatorState(int animatorHash)
+        // {
+        //     return _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == animatorHash;
+        // }
     }
 }

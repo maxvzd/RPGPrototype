@@ -9,7 +9,6 @@ namespace Combat
     {
         [SerializeField] private float attackOpportunityWindow;
 
-        private Animator _animator;
         private SheatheManager _sheatheManager;
         private FpArmsAnimationEventHandler _animationEventHandler;
 
@@ -22,6 +21,7 @@ namespace Combat
 
         private CombatAnimationStateMachineManager _combatAnimationHandler;
         private Coroutine _waitForPlayerClickRoutine;
+        private bool _swingFinished;
         private const int MAX_COMBO_COUNT = 3;
 
         public void HoldAttack()
@@ -31,6 +31,7 @@ namespace Combat
             SetIsLeftMouseHeld(true);
 
             if (_attackCounter > 0) return; //Ignore while comboing
+            
             ResetReadyToRelease();
             TransitionToAttackState();
         }
@@ -43,7 +44,7 @@ namespace Combat
 
             if (_isReadyToRelease)
             {
-                _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, true);
+                _combatAnimationHandler.SetShouldReleaseAttack(true);
                 _attackCounter++;
                 StopWaitForPlayerClickRoutine();
 
@@ -68,10 +69,10 @@ namespace Combat
         
         private void Start()
         {
-            _animator = GetComponent<Animator>();
             _sheatheManager = GetComponent<SheatheManager>();
             _animationEventHandler = GetComponent<FpArmsAnimationEventHandler>();
             _animationEventHandler.ReadyToAttack += ReadyToAttack;
+            _animationEventHandler.SwingFinished += SwingFinished;
 
             _combatAnimationHandler = GetComponent<CombatAnimationStateMachineManager>();
             _currentAttackDirection = AttackDirection.None;
@@ -81,7 +82,7 @@ namespace Combat
         {
             if (_sheatheManager.IsWeaponSheathed) return;
 
-            if (_attackCounter is > 0 and < MAX_COMBO_COUNT && IsCurrentAnimatorState(AnimatorConstants.AttackFinishedState))
+            if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
             {
                 ResetReadyToRelease();
                 TransitionToAttackState();
@@ -114,10 +115,21 @@ namespace Combat
         private void ReadyToAttack(object sender, EventArgs e)
         {
             _isReadyToRelease = true;
+            _swingFinished = false;
 
             if (_attackCounter > 0)
             {
                 StartWaitForPlayerClickRoutine();
+            }
+        }
+        
+        private void SwingFinished(object sender, EventArgs e)
+        {
+            _swingFinished = true;
+            Debug.Log(_attackCounter);
+            if (_attackCounter == 0) //Combo has ended and been reset
+            {
+                _combatAnimationHandler.TransitionToIdle();
             }
         }
 
@@ -147,11 +159,6 @@ namespace Combat
         
         #endregion
 
-        private bool IsCurrentAnimatorState(int animatorHash)
-        {
-            return _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == animatorHash;
-        }
-
         private AttackDirection GetAttackDirection()
         {
             var movement = _movementInput;
@@ -172,13 +179,13 @@ namespace Combat
         private void SetIsLeftMouseHeld(bool isLeftMouseHeld)
         {
             _isLeftMouseHeld = isLeftMouseHeld;
-            _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, _isLeftMouseHeld);
+            _combatAnimationHandler.SetIsLeftMouseButtonDown(_isLeftMouseHeld);
         }
 
         private void ResetReadyToRelease()
         {
             _isReadyToRelease = false;
-            _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, _isReadyToRelease);
+            _combatAnimationHandler.SetShouldReleaseAttack(_isReadyToRelease);
         }
 
         private void EndCombo()
