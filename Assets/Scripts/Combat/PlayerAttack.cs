@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using Constants;
 using UnityEngine;
 
@@ -7,46 +7,98 @@ namespace Combat
 {
     public class PlayerAttack : MonoBehaviour
     {
+        [SerializeField] private float attackOpportunityWindow;
+
         private Animator _animator;
-        //private SheatheManager _sheatheManager;
+        private SheatheManager _sheatheManager;
+        private FpArmsAnimationEventHandler _animationEventHandler;
 
         private int _attackCounter;
         private Vector2 _movementInput;
 
         private bool _isLeftMouseHeld;
         private AttackDirection _currentAttackDirection;
+        private bool _isReadyToRelease;
 
-        private readonly IReadOnlyDictionary<AttackDirection, int> _chargeAttacks = new Dictionary<AttackDirection, int>
-        {
-            { AttackDirection.Forward, AnimatorConstants.ChargeAttackStabState },
-            { AttackDirection.Backward, AnimatorConstants.ChargeAttackDownState },
-            { AttackDirection.Left, AnimatorConstants.ChargeAttackLeftState },
-            { AttackDirection.Right, AnimatorConstants.ChargeAttackRightState }
-        };
+        private IEnumerator _waitForPlayerClickRoutine;
+        private CombatAnimationStateMachineManager _combatAnimationHandler;
+        private const int MAX_COMBO_COUNT = 3;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
-            //_sheatheManager = GetComponent<SheatheManager>();
-            _animator.SetFloat(AnimatorConstants.AttackSpeedModifier, 1f);
-            _animator.SetFloat(AnimatorConstants.RaiseWeaponSpeedModifier, 1f);
-        }
+            _sheatheManager = GetComponent<SheatheManager>();
+            _animationEventHandler = GetComponent<FpArmsAnimationEventHandler>();
+            _animationEventHandler.ReadyToAttack += ReadyToAttack;
 
+            _combatAnimationHandler = GetComponent<CombatAnimationStateMachineManager>();
+            _currentAttackDirection = AttackDirection.None;
+        }
+        
+        
         private void Update()
         {
+            if (_sheatheManager.IsWeaponSheathed) return;
+            
+            if(_attackCounter is > 0 and < MAX_COMBO_COUNT && IsCurrentAnimatorState(AnimatorConstants.AttackFinishedState))
+            {
+                ResetReadyToRelease();
+                TransitionToAttackState();
+            }
+            
+            if (_isLeftMouseHeld && _attackCounter == 0)
+            {
+                TransitionToHoldState();
+            }
+        }
+
+        private void TransitionToHoldState()
+        {
+            var attackDirection = GetAttackDirection();
+            if (_currentAttackDirection == attackDirection) return;
+
+            _currentAttackDirection = attackDirection;
+            _combatAnimationHandler.TransitionToHoldState(_currentAttackDirection);
+        }
+
+        private void ReadyToAttack(object sender, EventArgs e)
+        {
+            _isReadyToRelease = true;
+            
             if (_attackCounter > 0)
             {
-                if (IsCurrentAnimatorState(AnimatorConstants.AttackFinishedState))
-                {
-                    SetAttackAnims();
-                    PlayAttackAnim();
-                }
+                StartWaitForPlayerClickRoutine();
             }
+        }
 
-            if (_isLeftMouseHeld)
-            {
-                SetAttackAnims();
-            }
+        private void StartWaitForPlayerClickRoutine()
+        {
+            StopWaitForPlayerClickRoutine();
+
+            _waitForPlayerClickRoutine = WaitForPlayerClick();
+            StartCoroutine(_waitForPlayerClickRoutine);
+        }
+
+        private void StopWaitForPlayerClickRoutine()
+        {
+            if (_waitForPlayerClickRoutine is null) return;
+            StopCoroutine(_waitForPlayerClickRoutine);
+        }
+
+        private IEnumerator WaitForPlayerClick()
+        {
+            yield return new WaitForSeconds(attackOpportunityWindow);
+
+            //EndCombo();
+        }
+
+        private void TransitionToAttackState()
+        {
+            var attackDirection = GetAttackDirection();
+            if (_currentAttackDirection == attackDirection) return;
+
+            _currentAttackDirection = attackDirection;
+            _combatAnimationHandler.TransitionAttackStateToState(_currentAttackDirection);
         }
 
         private bool IsCurrentAnimatorState(int animatorHash)
@@ -57,33 +109,6 @@ namespace Combat
         public void SetMovementInput(Vector2 movementInput)
         {
             _movementInput = movementInput;
-        }
-
-        public void HoldAttack()
-        {
-            //if (_sheatheManager.IsWeaponSheathed || _attackCounter != 0) return;
-            
-            _isLeftMouseHeld = true;
-            _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, _isLeftMouseHeld);
-            
-            SetAttackAnims();
-
-            PlayAttackAnim();
-        }
-
-        private void PlayAttackAnim()
-        {
-            var anim = _chargeAttacks[_currentAttackDirection];
-            _animator.Play(anim);
-        }
-
-        private void SetAttackAnims()
-        {
-            var attackDirection = GetAttackDirection();
-            if (_currentAttackDirection == attackDirection) return;
-
-            _currentAttackDirection = attackDirection;
-            _animator.SetInteger(AnimatorConstants.AttackDirection, (int)_currentAttackDirection);
         }
 
         private AttackDirection GetAttackDirection()
@@ -103,24 +128,67 @@ namespace Combat
             return horizontal > 0 ? AttackDirection.Right : AttackDirection.Left;
         }
 
+        public void HoldAttack()
+        {
+            if (_sheatheManager.IsWeaponSheathed) return;
+
+            SetIsLeftMouseHeld(true);
+
+            if (_attackCounter > 0) return; //Ignore while comboing
+            ResetReadyToRelease();
+            TransitionToAttackState();
+        }
+
+        private void SetIsLeftMouseHeld(bool isLeftMouseHeld)
+        {
+            _isLeftMouseHeld = isLeftMouseHeld;
+            _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, _isLeftMouseHeld);
+        }
+
+        private void ResetReadyToRelease()
+        {
+            _isReadyToRelease = false;
+            _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, _isReadyToRelease);
+        }
+
+
         public void ReleaseAttack()
         {
-            _isLeftMouseHeld = false;
-            _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, _isLeftMouseHeld);
-            
-            // _attackCounter++;
-            // if (_attackCounter > 2)
-            // {
-            //     _attackCounter = 0;
-            // }
+            if (_sheatheManager.IsWeaponSheathed) return;
+
+            SetIsLeftMouseHeld(false);
+
+            if (_isReadyToRelease)
+            {
+                _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, true);
+                _attackCounter++;
+                if (_attackCounter > MAX_COMBO_COUNT - 1)
+                {
+                    EndCombo();
+                }
+            }
+            else
+            {
+                _combatAnimationHandler.TransitionToIdle();
+                EndCombo();
+            }
+
+            _currentAttackDirection = AttackDirection.None;
+        }
+
+        private void EndCombo()
+        {
+            _attackCounter = 0;
+            StopAllCoroutines();
         }
     }
 }
 
-enum AttackDirection
+public enum AttackDirection
 {
     Forward = 0,
     Backward = 1,
     Left = 2,
-    Right = 3
+    Right = 3,
+    None = -1
 }
