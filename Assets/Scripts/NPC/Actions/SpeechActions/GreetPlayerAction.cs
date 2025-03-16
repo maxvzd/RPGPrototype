@@ -8,7 +8,7 @@ namespace NPC.Actions.SpeechActions
     {
         public override void Execute(NpcController npcController)
         {
-            npcController.Stop();
+            npcController.StopMoving();
             Debug.Log("Hello, it's so nice to meet you!!!!");
         }
     }

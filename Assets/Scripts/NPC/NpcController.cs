@@ -26,7 +26,7 @@ namespace NPC
             StartStopCoroutine(CheckRemainingDistanceCoroutine());
         }
 
-        public void Stop()
+        public void StopMoving()
         {
             _navMeshAgent.isStopped = !_navMeshAgent.isStopped;
         }
