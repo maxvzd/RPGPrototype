@@ -1,8 +1,9 @@
 ﻿using System;
+using Interact;
 
 namespace NPC.UtilityBaseClasses.Contexts
 {
-    public class SpeechContext : IConsiderationContext
+    public class SpeechContext : IConsiderationContext, IInteractionContext
     {
         public float Disposition { get; }
         

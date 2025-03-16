@@ -9,7 +9,7 @@ public class ModLoader : MonoBehaviour
 {
     private void Start()
     {
-        LoadMods(@"C:\RPGPrototypeMods");
+        //LoadMods(@"C:\RPGPrototypeMods");
     }
 
     private static void LoadMods(string modFolderPath)
