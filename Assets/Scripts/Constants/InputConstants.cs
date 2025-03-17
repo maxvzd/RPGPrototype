@@ -8,5 +8,6 @@
         public static string RaiseWeapon => "RaiseWeapon";
         public static string Interact => "Interact";
         public static string Attack => "Attack";
+        public static string Inventory => "Inventory";
     }
 }
