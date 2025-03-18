@@ -648,7 +648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.96200836, y: 0, z: 0, w: 0.27302003}
+  m_LocalRotation: {x: 0.96363413, y: 0, z: 0, w: 0.26722515}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: e99b98ab2346da248ad63322d5fe3dbf, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: ad8d9bfdabc28d44391e7bea842def08, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
@@ -2347,9 +2347,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 15.88746
+  hourOfDay: 15.933438
   sunTransform: {fileID: 410087041}
-  time: 15:53
+  time: 15:56
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0

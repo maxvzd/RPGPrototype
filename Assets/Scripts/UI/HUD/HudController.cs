@@ -10,12 +10,7 @@ namespace UI.HUD
 
         public HudController(VisualElement root)
         {
-            //_interactIcon = root.Q(InventoryHudConstants.InteractIconContainer);
             _interactIcon = root.Q(InventoryHudConstants.InteractIcon);
-            if (_interactIcon is null)
-            {
-                Debug.Log("Didn't find interacticon");
-            }
         }
 
         public void ShowInteractIcon()
@@ -26,6 +21,11 @@ namespace UI.HUD
         public void HideInteractIcon()
         {
             _interactIcon.style.display = DisplayStyle.None;
+        }
+
+        public void UpdateInteractIcon(Texture2D icon)
+        {
+            _interactIcon.style.backgroundImage = icon;
         }
     }
 }

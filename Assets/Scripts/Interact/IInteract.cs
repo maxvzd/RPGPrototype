@@ -1,16 +1,13 @@
-﻿using System;
-
-namespace Interact
+﻿namespace Interact
 {
     public interface IInteract
     {
         void Interact(IInteractionContext context);
-        
-        Type GetInteractionType();
+        string IconName { get; }
     }
     
-    public interface IInteract<in T> : IInteract where T : IInteractionContext
+    public interface IInteract<out T> : IInteract where T : IContextBuilder
     {
-        //void Interact(T interactionContext);
+        T GetInteractionContext();
     }
 }

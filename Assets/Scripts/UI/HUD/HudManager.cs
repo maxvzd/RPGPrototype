@@ -5,10 +5,11 @@ namespace UI.HUD
 {
     public class HudManager : MonoBehaviour
     {
+        public bool InteractionIconShowing { get; private set; }
+        
         [SerializeField] private UIDocument hudUI;
         private HudController _hudController;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         public void Start()
         {
             _hudController = new HudController(hudUI.rootVisualElement);
@@ -18,11 +19,19 @@ namespace UI.HUD
         public void HideInteractIcon()
         {
             _hudController.HideInteractIcon();
+            InteractionIconShowing = false;
         }
 
         public void ShowInteractIcon()
         {
             _hudController.ShowInteractIcon();
+            InteractionIconShowing = true;
+        }
+
+        public void UpdateInteractionIcon(string iconName)
+        {
+            var icon = Resources.Load<Texture2D>($"Icons/{iconName}");
+            _hudController.UpdateInteractIcon(icon);
         }
     }
 }

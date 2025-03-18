@@ -1,5 +1,4 @@
-﻿using System;
-using Constants;
+﻿using Constants;
 using Interact.Contexts;
 using UI.HUD;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Interact
         private HudManager _hud;
 
         private GameObject _currentlyAimedInteractable;
+        private IInteract _interact;
 
         private void Start()
         {
@@ -24,69 +24,47 @@ namespace Interact
         private void Update()
         {
             var origin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f));
-            //const float sphereCastRadius = .1f;
-        
             var dir = mainCamera.transform.forward;
             var ray = new Ray(origin, dir);
 
-            //if (!Physics.SphereCast(sphereRay, sphereCastRadius, out RaycastHit hit, maxInteractDistance)) return;
-            if (Physics.Raycast(ray, out RaycastHit hit, maxInteractDistance))
+            if (Physics.Raycast(ray, out var hit, maxInteractDistance))
             {
                 var hitGameObject = hit.transform.gameObject;
                 if (hitGameObject.CompareTag(TagConstants.InteractableTag))
                 {
-                    _hud.ShowInteractIcon();
+                    if (_currentlyAimedInteractable is not null && hitGameObject.GetInstanceID() == _currentlyAimedInteractable.GetInstanceID()) return;
+                        
+                    _interact = hitGameObject.GetComponent<IInteract>();
+                    if (_interact is null) return;
+                    
                     _currentlyAimedInteractable = hitGameObject;
+                    _hud.UpdateInteractionIcon(_interact.IconName);
+                    _hud.ShowInteractIcon();
                     return;
                 }
             }
+
+            if (!_hud.InteractionIconShowing) return;
+
             _hud.HideInteractIcon();
             _currentlyAimedInteractable = null;
         }
 
         public void Interact()
         {
-            // var origin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f));
-            // const float sphereCastRadius = .1f;
-            //
-            // var dir = mainCamera.transform.forward;
-            // var sphereRay = new Ray(origin, dir);
-            //
-            // if (!Physics.SphereCast(sphereRay, sphereCastRadius, out RaycastHit hit, maxInteractDistance)) return;
-            //
-            // var hitGameObject = hit.transform.gameObject;
-            // if (hitGameObject.CompareTag(TagConstants.InteractableTag))
-            // {
-            //     Debug.DrawRay(origin, dir * maxInteractDistance, Color.green, .1f);
-            //
-            //     var interact = hitGameObject.GetComponent<IInteract>();
-            //     var context = CreateInteractionContext(interact.GetInteractionType());
-            //     interact.Interact(context);
-            // }
-            // else
-            // {
-            //     Debug.DrawRay(origin, dir * maxInteractDistance, Color.red, .1f);
-            // }
             if (_currentlyAimedInteractable is null) return;
-            
-            var interact = _currentlyAimedInteractable.GetComponent<IInteract>();
-            var context = CreateInteractionContext(interact.GetInteractionType());
-            interact.Interact(context);
+            var context = CreateInteractionContext(_interact);
+            _interact.Interact(context);
         }
-
-        private IInteractionContext CreateInteractionContext(Type interactionType)
+        
+        private IInteractionContext CreateInteractionContext(IInteract interact)
         {
-            if (typeof(SpeechContext).IsAssignableFrom(interactionType))
+            return interact switch
             {
-                return new SpeechContext();
-            }
-
-            if (typeof(PickupContext).IsAssignableFrom(interactionType))
-            {
-                return new PickupContext(_inventorySystem);
-            }
-
-            return new NoContext();
+                IInteract<PickupContextBuilder> pickupInteraction => pickupInteraction.GetInteractionContext().AddInventoryContext(_inventorySystem),
+                IInteract<SpeechContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(),
+                _ => new NoContext()
+            };
         }
     }
 }

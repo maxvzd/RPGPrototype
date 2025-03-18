@@ -1,18 +1,33 @@
-﻿using System;
+﻿using Interact;
 using Interact.Contexts;
 using Items;
 using UnityEngine;
 
 namespace Interact
 {
-    public class InteractWithItem : MonoBehaviour, IInteract<PickupContext>
+    public class InteractWithItem : MonoBehaviour, IInteract<PickupContextBuilder>
     {
+        public string IconName => "hand-open";
+        
         private ItemProperties _itemProps;
 
         public void Start()
         {
             var itemBehaviour = GetComponent<ItemBehaviour>();
             _itemProps = itemBehaviour.Properties;
+        }
+
+        public PickupContextBuilder GetInteractionContext()
+        {
+            return new PickupContextBuilder();
+        }
+
+        public void Interact(IInteractionContext context)
+        {
+            if (context is PickupContext pickupContext)
+            {
+                Interact(pickupContext);
+            }
         }
         
         private void Interact(PickupContext interactionContext)
@@ -22,12 +37,13 @@ namespace Interact
                 Destroy(gameObject); 
             }
         }
+    }
+}
 
-        public Type GetInteractionType() => typeof(PickupContext);
-        
-        public void Interact(IInteractionContext context)
-        {
-            Interact(context as PickupContext);
-        }
+public class PickupContextBuilder : IContextBuilder
+{
+    public PickupContext AddInventoryContext(Inventory inventory)
+    {
+        return new PickupContext(inventory);
     }
 }
