@@ -1,5 +1,6 @@
 using Combat;
 using Constants;
+using Interact;
 using UI.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
