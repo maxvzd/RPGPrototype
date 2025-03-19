@@ -1,4 +1,5 @@
 ﻿using System;
+using Items;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
@@ -18,6 +19,7 @@ namespace UI.Inventory
         private void Start()
         {
             _inventoryController = new InventoryController(inventoryUI.rootVisualElement);
+            
             _inventory = GetComponent<global::Inventory>();
             HideUI();
         }
@@ -48,16 +50,29 @@ namespace UI.Inventory
             UiShown?.Invoke(this, EventArgs.Empty);
         }
 
-        public void ToggleUI()
+        public bool ToggleUI()
         {
             if (_uiIsHidden)
             {
                 ShowUI();
+                Debug.Log("Show");
             }
             else
             {
                 HideUI();
+                Debug.Log("Hide");
             }
+
+            return !_uiIsHidden;
+        }
+
+        public void DropSelectedItem()
+        {
+            var item = _inventoryController.CurrentlyHoveredItem;
+            if (item is null) return;
+            
+            _inventory.RemoveItem(item);
+            _inventoryController.PopulateItems(_inventory.Items);
         }
     }
 }

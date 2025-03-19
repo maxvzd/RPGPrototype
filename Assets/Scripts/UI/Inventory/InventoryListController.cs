@@ -8,8 +8,10 @@ namespace UI.Inventory
 {
     public class InventoryListController
     {
-        private MultiColumnListView _listView;
-        
+        private readonly MultiColumnListView _listView;
+
+        public int CurrentlyHoveredIndex { get; private set; } = -1;
+
         public InventoryListController(MultiColumnListView listView)
         {
             _listView = listView;
@@ -28,12 +30,29 @@ namespace UI.Inventory
                     iconContainer.style.backgroundImage = listOfViewModels[i].InventoryIcon;
                 }
             }; 
-            _listView.columns["Name"].bindCell = (element, i) => SetTextInDisplayLabel(listOfViewModels[i].Name, element); 
-            _listView.columns["Weight"].bindCell = (element, i) => SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element); 
-            
-            _listView.fixedItemHeight = 95;
+            _listView.columns["Name"].bindCell = (element, i) =>
+            {
+                SetTextInDisplayLabel(listOfViewModels[i].Name, element);
+                BindToHoverEvents(element, i);
+            }; 
+            _listView.columns["Weight"].bindCell = (element, i) => SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element);
+
+            _listView.fixedItemHeight = 40;
         }
-        
+
+        private void BindToHoverEvents(VisualElement element, int index)
+        {
+            element.RegisterCallback<PointerEnterEvent>(evt =>
+            {
+                CurrentlyHoveredIndex = index;
+            });
+            
+            element.RegisterCallback<PointerLeaveEvent>(evt =>
+            {
+                CurrentlyHoveredIndex = -1;
+            });
+        }
+
         private static void SetTextInDisplayLabel(string text, VisualElement root)
         {
             var label = root.Q<Label>(InventoryUIConstants.DisplayLabel);

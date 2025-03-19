@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Constants;
 using Items;
 using UnityEngine.UIElements;
@@ -7,32 +8,21 @@ namespace UI.Inventory
 {
     public class InventoryController
     {
+        public ItemProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
+        
         private readonly InventoryListController _listController;
-
+        private IReadOnlyList<ItemProperties> _items;
 
         public InventoryController(VisualElement root)
         {
             var inventoryListView = root.Q<MultiColumnListView>(InventoryUIConstants.InventoryItems);
              _listController = new InventoryListController(inventoryListView);
-             
-             
-             //_listController.ItemChanged += ListControllerOnItemChanged;
-            //
-            // InventoryTabController tabController = new InventoryTabController(root);
-            // tabController.TabSelected += TabControllerOnTabSelected;
-            //
-            // _itemInfoPanelController = new InventoryItemInfoPanelController(root);
-            // _itemInfoPanelController.RetrieveItemButtonClicked += RetrieveItemButtonClicked;
-            //
-            // _equipmentPanelController = new EquipmentPanelController(root);
-            // _equipmentPanelController.ItemUnequipped += ItemUnequipped;
-            //
-            // _items = new Dictionary<Guid, IItem>();
         }
 
         public void PopulateItems(IEnumerable<ItemProperties> items)
         {
-            _listController.PopulateInventoryList(items);
+            _items = items.ToList();
+            _listController.PopulateInventoryList(_items);
         }
     }
 }

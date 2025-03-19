@@ -9,5 +9,10 @@
         public static string Interact => "Interact";
         public static string Attack => "Attack";
         public static string Inventory => "Inventory";
+        public static string DropItem => "DropItem";
+
+
+        public static string PlayerActionMap => "Player";
+        public static string UIActionMap => "UI";
     }
 }

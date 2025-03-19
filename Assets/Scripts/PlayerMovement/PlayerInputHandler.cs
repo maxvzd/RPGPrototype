@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Combat;
 using Constants;
 using Interact;
@@ -26,8 +29,14 @@ namespace PlayerMovement
         private InputAction _raiseWeaponAction;
         private InputAction _interactAction;
         private InputAction _attackAction;
-        private InputAction _showInventoryAction;
-        
+        private InputAction _showInventoryPlayerAction;
+        private InputAction _showInventoryUIAction;
+        private InputAction _dropItemAction;
+
+        private Dictionary<InputAction, Action> _wasPerformedActions;
+        private Dictionary<InputAction, Action> _wasPressedActions;
+        private Dictionary<InputAction, Action> _wasCompletedActions;
+
         public void Start()
         {
             _movement = GetComponent<ActorMovement>();
@@ -38,16 +47,16 @@ namespace PlayerMovement
             _playerAttack = fpArms.GetComponent<PlayerAttack>();
             _inventoryUIManager = GetComponent<InventoryUIManager>();
             
-            _inventoryUIManager.UiShown += (sender, args) =>
-            {
-                _input.actions.Disable();
-                _showInventoryAction.Enable();
-            };
-            
-            _inventoryUIManager.UiHidden += (sender, args) =>
-            {
-                _input.actions.Enable();
-            };
+            // _inventoryUIManager.UiShown += (sender, args) =>
+            // {
+            //     _input.actions.Disable();
+            //     _showInventoryPlayerAction.Enable();
+            // };
+            //
+            // _inventoryUIManager.UiHidden += (sender, args) =>
+            // {
+            //     _input.actions.Enable();
+            // };
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
@@ -56,7 +65,31 @@ namespace PlayerMovement
             _raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
             _interactAction = _input.actions[InputConstants.Interact];
             _attackAction = _input.actions[InputConstants.Attack];
-            _showInventoryAction = _input.actions[InputConstants.Inventory];
+            _showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
+            
+            _showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
+            _dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
+
+            _input.SwitchCurrentActionMap(InputConstants.PlayerActionMap);
+            
+            _wasPerformedActions = new Dictionary<InputAction, Action>
+            {
+                {_raiseWeaponAction, () => { _armSwap.SwitchArms(); _sheathe.SheatheWeapon(); }},
+                {_interactAction, () => { _armSwap.SwitchArms(); _interactionSystem.Interact(); }},
+                {_showInventoryPlayerAction, ToggleUi},
+                {_showInventoryUIAction, ToggleUi},
+                {_dropItemAction, () => { _inventoryUIManager.DropSelectedItem(); }},
+            };
+            
+            _wasCompletedActions = new Dictionary<InputAction, Action>
+            {
+                {_attackAction, () => {_playerAttack.ReleaseAttack();}},
+            };
+            
+            _wasPressedActions = new Dictionary<InputAction, Action>
+            {
+                {_attackAction, () => {_playerAttack.HoldAttack();}},
+            };
         }
 
         public void Update()
@@ -70,31 +103,30 @@ namespace PlayerMovement
             _movement.ChangeSpeed(_increaseSpeedAction.ReadValue<float>() * 0.1f);
             _cameraLook.TiltCamera(movementInput.x);
 
-            if (_raiseWeaponAction.WasCompletedThisFrame())
+            foreach (var action in 
+                     _wasPerformedActions.Where(action => action.Key.WasPerformedThisFrame()))
             {
-                _armSwap.SwitchArms();
-                _sheathe.SheatheWeapon();
-            }
-
-            if (_interactAction.WasCompletedThisFrame())
-            {
-                _interactionSystem.Interact();
-            }
-
-            if (_attackAction.WasPressedThisFrame())
-            {
-                _playerAttack.HoldAttack();
-            }
-
-            if (_attackAction.WasReleasedThisFrame())
-            {
-                _playerAttack.ReleaseAttack();
+                action.Value.Invoke();
             }
             
-            if (_showInventoryAction.WasPerformedThisFrame())
+            foreach (var action in 
+                     _wasPressedActions.Where(action => action.Key.WasPressedThisFrame()))
             {
-                _inventoryUIManager.ToggleUI();
+                action.Value.Invoke();
             }
+            
+            foreach (var action in 
+                     _wasCompletedActions.Where(action => action.Key.WasCompletedThisFrame()))
+            {
+                action.Value.Invoke();
+            }
+        }
+
+        private void ToggleUi()
+        {
+            Debug.Log("Toggling");
+            var isInventoryUIShowing = _inventoryUIManager.ToggleUI();
+            _input.SwitchCurrentActionMap(isInventoryUIShowing ? InputConstants.UIActionMap : InputConstants.PlayerActionMap);
         }
     }
 }
