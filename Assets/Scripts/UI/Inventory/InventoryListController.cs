@@ -35,13 +35,19 @@ namespace UI.Inventory
                 {
                     iconContainer.style.backgroundImage = listOfViewModels[i].InventoryIcon;
                 }
+                
+                BindToHoverEvents(element, i);
             }; 
             _listView.columns["Name"].bindCell = (element, i) =>
             {
                 SetTextInDisplayLabel(listOfViewModels[i].Name, element);
                 BindToHoverEvents(element, i);
             }; 
-            _listView.columns["Weight"].bindCell = (element, i) => SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element);
+            _listView.columns["Weight"].bindCell = (element, i) =>
+            {
+                SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element);
+                BindToHoverEvents(element, i);
+            };
 
             _listView.fixedItemHeight = 40;
         }
