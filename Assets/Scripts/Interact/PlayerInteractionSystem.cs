@@ -1,5 +1,6 @@
 ﻿using Constants;
 using Interact.Contexts;
+using Items;
 using UI.HUD;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace Interact
             _hud = GetComponent<HudManager>();
         }
 
+        //Debug.DrawRay(origin, dir * maxInteractDistance, Color.red);
         private void Update()
         {
             var origin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f));
@@ -33,8 +35,7 @@ namespace Interact
                 if (hitGameObject.CompareTag(TagConstants.InteractableTag))
                 {
                     if (_currentlyAimedInteractable is not null && hitGameObject.GetInstanceID() == _currentlyAimedInteractable.GetInstanceID()) return;
-                        
-                    _interact = hitGameObject.GetComponent<IInteract>();
+                    _interact = hitGameObject.transform.root.GetComponent<IInteract>();
                     if (_interact is null) return;
                     
                     _currentlyAimedInteractable = hitGameObject;

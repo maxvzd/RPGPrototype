@@ -11,12 +11,12 @@ namespace Interact.Contexts
             _playerInventorySystem = playerInventorySystem;
         }
 
-        public bool AddItem(ItemProperties item)
+        public bool AddItem(ItemInstanceProperties item)
         {
             return _playerInventorySystem.AddItem(item);
         }
         
-        public bool RemoveItem(ItemProperties item)
+        public bool RemoveItem(ItemInstanceProperties item)
         {
             return _playerInventorySystem.RemoveItem(item);
         }

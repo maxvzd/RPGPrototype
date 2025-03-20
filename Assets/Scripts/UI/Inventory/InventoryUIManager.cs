@@ -14,13 +14,13 @@ namespace UI.Inventory
 
         public EventHandler UiShown;
         public EventHandler UiHidden;
-        private global::Inventory _inventory;
+        private global::Items.Inventory _inventory;
 
         private void Start()
         {
             _inventoryController = new InventoryController(inventoryUI.rootVisualElement);
             
-            _inventory = GetComponent<global::Inventory>();
+            _inventory = GetComponent<global::Items.Inventory>();
             HideUI();
         }
 
@@ -55,12 +55,10 @@ namespace UI.Inventory
             if (_uiIsHidden)
             {
                 ShowUI();
-                Debug.Log("Show");
             }
             else
             {
                 HideUI();
-                Debug.Log("Hide");
             }
 
             return !_uiIsHidden;
@@ -68,11 +66,13 @@ namespace UI.Inventory
 
         public void DropSelectedItem()
         {
-            var item = _inventoryController.CurrentlyHoveredItem;
-            if (item is null) return;
+            var instance = _inventoryController.CurrentlyHoveredItem;
+            if (instance is null) return;
             
-            _inventory.RemoveItem(item);
+            _inventory.RemoveItem(instance);
+            
             _inventoryController.PopulateItems(_inventory.Items);
+            _inventoryController.ResetCurrentlyHovered();
         }
     }
 }

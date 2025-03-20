@@ -8,10 +8,10 @@ namespace UI.Inventory
 {
     public class InventoryController
     {
-        public ItemProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
+        public ItemInstanceProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
         
         private readonly InventoryListController _listController;
-        private IReadOnlyList<ItemProperties> _items;
+        private IReadOnlyList<ItemInstanceProperties> _items;
 
         public InventoryController(VisualElement root)
         {
@@ -19,10 +19,15 @@ namespace UI.Inventory
              _listController = new InventoryListController(inventoryListView);
         }
 
-        public void PopulateItems(IEnumerable<ItemProperties> items)
+        public void PopulateItems(IEnumerable<ItemInstanceProperties> items)
         {
             _items = items.ToList();
             _listController.PopulateInventoryList(_items);
+        }
+
+        public void ResetCurrentlyHovered()
+        {
+            _listController.ResetCurrentlyHovered();
         }
     }
 }

@@ -26,12 +26,6 @@ namespace PlayerMovement
         private InputAction _moveAction;
         private InputAction _increaseSpeedAction;
         private InputAction _lookAction;
-        private InputAction _raiseWeaponAction;
-        private InputAction _interactAction;
-        private InputAction _attackAction;
-        private InputAction _showInventoryPlayerAction;
-        private InputAction _showInventoryUIAction;
-        private InputAction _dropItemAction;
 
         private Dictionary<InputAction, Action> _wasPerformedActions;
         private Dictionary<InputAction, Action> _wasPressedActions;
@@ -47,48 +41,37 @@ namespace PlayerMovement
             _playerAttack = fpArms.GetComponent<PlayerAttack>();
             _inventoryUIManager = GetComponent<InventoryUIManager>();
             
-            // _inventoryUIManager.UiShown += (sender, args) =>
-            // {
-            //     _input.actions.Disable();
-            //     _showInventoryPlayerAction.Enable();
-            // };
-            //
-            // _inventoryUIManager.UiHidden += (sender, args) =>
-            // {
-            //     _input.actions.Enable();
-            // };
-
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
             _increaseSpeedAction = _input.actions[InputConstants.ChangeSpeed];
             _lookAction = _input.actions[InputConstants.Look];
-            _raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
-            _interactAction = _input.actions[InputConstants.Interact];
-            _attackAction = _input.actions[InputConstants.Attack];
-            _showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
+            var raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
+            var interactAction = _input.actions[InputConstants.Interact];
+            var attackAction = _input.actions[InputConstants.Attack];
+            var showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
             
-            _showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
-            _dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
+            var showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
+            var dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
 
             _input.SwitchCurrentActionMap(InputConstants.PlayerActionMap);
             
             _wasPerformedActions = new Dictionary<InputAction, Action>
             {
-                {_raiseWeaponAction, () => { _armSwap.SwitchArms(); _sheathe.SheatheWeapon(); }},
-                {_interactAction, () => { _armSwap.SwitchArms(); _interactionSystem.Interact(); }},
-                {_showInventoryPlayerAction, ToggleUi},
-                {_showInventoryUIAction, ToggleUi},
-                {_dropItemAction, () => { _inventoryUIManager.DropSelectedItem(); }},
+                {raiseWeaponAction, () => { _armSwap.SwitchArms(); _sheathe.SheatheWeapon(); }},
+                {interactAction, () => { _interactionSystem.Interact(); }},
+                {showInventoryPlayerAction, ToggleUi},
+                {showInventoryUIAction, ToggleUi},
+                {dropItemAction, () => { _inventoryUIManager.DropSelectedItem(); }},
             };
             
             _wasCompletedActions = new Dictionary<InputAction, Action>
             {
-                {_attackAction, () => {_playerAttack.ReleaseAttack();}},
+                {attackAction, () => {_playerAttack.ReleaseAttack();}},
             };
             
             _wasPressedActions = new Dictionary<InputAction, Action>
             {
-                {_attackAction, () => {_playerAttack.HoldAttack();}},
+                {attackAction, () => {_playerAttack.HoldAttack();}},
             };
         }
 
@@ -124,7 +107,6 @@ namespace PlayerMovement
 
         private void ToggleUi()
         {
-            Debug.Log("Toggling");
             var isInventoryUIShowing = _inventoryUIManager.ToggleUI();
             _input.SwitchCurrentActionMap(isInventoryUIShowing ? InputConstants.UIActionMap : InputConstants.PlayerActionMap);
         }

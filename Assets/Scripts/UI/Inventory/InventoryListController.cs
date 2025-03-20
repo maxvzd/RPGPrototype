@@ -16,10 +16,16 @@ namespace UI.Inventory
         {
             _listView = listView;
         }
-
-        public void PopulateInventoryList(IEnumerable<ItemProperties> model)
+        
+        
+        public void ResetCurrentlyHovered()
         {
-            var listOfViewModels = model.Select(x => new ItemViewModel(x)).ToList();
+            CurrentlyHoveredIndex = -1;
+        }
+
+        public void PopulateInventoryList(IEnumerable<ItemInstanceProperties> model)
+        {
+            var listOfViewModels = model.Select(x => new ItemViewModel(x.Item)).ToList();
             
             _listView.itemsSource = listOfViewModels;
             _listView.columns["Icon"].bindCell = (element, i) =>
@@ -49,7 +55,7 @@ namespace UI.Inventory
             
             element.RegisterCallback<PointerLeaveEvent>(evt =>
             {
-                CurrentlyHoveredIndex = -1;
+                ResetCurrentlyHovered();
             });
         }
 

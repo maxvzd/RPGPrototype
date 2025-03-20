@@ -9,12 +9,12 @@ namespace Interact
     {
         public string IconName => "hand-open";
         
-        private ItemProperties _itemProps;
+        private ItemInstanceProperties _itemProps;
 
         public void Start()
         {
             var itemBehaviour = GetComponent<ItemBehaviour>();
-            _itemProps = itemBehaviour.Properties;
+            _itemProps = itemBehaviour.InstanceProperties;
         }
 
         public PickupContextBuilder GetInteractionContext()
