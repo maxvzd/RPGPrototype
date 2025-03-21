@@ -1,20 +1,22 @@
 ﻿using Interact;
 using Interact.Contexts;
 using Items;
+using Items.Behaviours;
+using Items.InstancePropertiesClasses;
 using UnityEngine;
 
 namespace Interact
 {
     public class InteractWithItem : MonoBehaviour, IInteract<PickupContextBuilder>
     {
-        public string IconName => "hand-open";
+        private  InstanceProperties _itemProps;
         
-        private ItemInstanceProperties _itemProps;
+        public string IconName => "hand-open";
 
         public void Start()
         {
-            var itemBehaviour = GetComponent<ItemBehaviour>();
-            _itemProps = itemBehaviour.InstanceProperties;
+            var itemBehaviour = GetComponent<ItemBehaviourBase>();
+            _itemProps = itemBehaviour.GetBaseInstance();
         }
 
         public PickupContextBuilder GetInteractionContext()

@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Items
+namespace Items.Properties
 {
-    [CreateAssetMenu(menuName = "Items/item")]
+    [CreateAssetMenu(menuName = "Items/Item")]
     [Serializable]
     public class ItemProperties : ScriptableObject
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Items.InstancePropertiesClasses;
 using UnityEngine;
 
 namespace Items
@@ -7,11 +8,11 @@ namespace Items
     {
         private const float WEIGHT_LIMIT = 10;
         private float _currentWeight = 0;
-        private readonly List<ItemInstanceProperties> _items = new();
+        private readonly List<InstanceProperties> _items = new();
 
-        public IEnumerable<ItemInstanceProperties> Items => _items;
+        public IEnumerable<InstanceProperties> Items => _items;
     
-        public bool AddItem(ItemInstanceProperties instance)
+        public bool AddItem(InstanceProperties instance)
         {
             if (!(_currentWeight + instance.Item.Weight <= WEIGHT_LIMIT))
             {
@@ -19,12 +20,26 @@ namespace Items
                 return false;
             }
 
+            // Instance persistence test
+            // if (instance is ItemInstanceProperties itemInstance)
+            // {
+            //     Debug.Log($"Before: {itemInstance.MyMessage}");
+            //     itemInstance.SetMessage();
+            //     Debug.Log($"After: {itemInstance.MyMessage}");
+            // }
+            // if (instance is WeaponInstanceProperties itemInstance)
+            // {
+            //     Debug.Log($"Before: {itemInstance.Durability}");
+            //     itemInstance.Degrade();
+            //     Debug.Log($"After: {itemInstance.Durability}");
+            // }
+            
             _currentWeight += instance.Item.Weight;
             _items.Add(instance);
             return true;
         }
     
-        public bool RemoveItem(ItemInstanceProperties instance)
+        public bool RemoveItem(InstanceProperties instance)
         {
             if (!_items.Exists(x => x == instance)) return false;
         
@@ -33,7 +48,17 @@ namespace Items
             
             var currTransform = transform;
             var positionToSpawnAt = currTransform.position + currTransform.forward * 0.5f + currTransform.up * 1.5f;
-            ItemSpawner.Instance.SpawnItem(instance, positionToSpawnAt, Quaternion.identity);
+            ItemSpawner.SpawnItem(instance, positionToSpawnAt, Quaternion.identity);
+            
+            // Instance persistence test
+            // if (instance is ItemInstanceProperties itemInstance)
+            // {
+            //     Debug.Log($"Retrieved from invent: {itemInstance.MyMessage}");
+            // }
+            // if (instance is WeaponInstanceProperties itemInstance)
+            // {
+            //     Debug.Log($"Retrieved from invent: {itemInstance.Durability}");
+            // }
             
             return true;
         }

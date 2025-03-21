@@ -1,4 +1,5 @@
 ﻿using Items;
+using Items.InstancePropertiesClasses;
 
 namespace Interact.Contexts
 {
@@ -11,12 +12,12 @@ namespace Interact.Contexts
             _playerInventorySystem = playerInventorySystem;
         }
 
-        public bool AddItem(ItemInstanceProperties item)
+        public bool AddItem(InstanceProperties item)
         {
             return _playerInventorySystem.AddItem(item);
         }
         
-        public bool RemoveItem(ItemInstanceProperties item)
+        public bool RemoveItem(InstanceProperties item)
         {
             return _playerInventorySystem.RemoveItem(item);
         }

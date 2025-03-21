@@ -2,6 +2,8 @@
 using System.Linq;
 using Constants;
 using Items;
+using Items.InstancePropertiesClasses;
+using Items.Properties;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory
@@ -23,7 +25,7 @@ namespace UI.Inventory
             CurrentlyHoveredIndex = -1;
         }
 
-        public void PopulateInventoryList(IEnumerable<ItemInstanceProperties> model)
+        public void PopulateInventoryList(IEnumerable<InstanceProperties> model)
         {
             var listOfViewModels = model.Select(x => new ItemViewModel(x.Item)).ToList();
             

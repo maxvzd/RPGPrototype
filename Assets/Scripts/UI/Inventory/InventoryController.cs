@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Constants;
-using Items;
+using Items.InstancePropertiesClasses;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory
 {
     public class InventoryController
     {
-        public ItemInstanceProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
+        public  InstanceProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
         
         private readonly InventoryListController _listController;
-        private IReadOnlyList<ItemInstanceProperties> _items;
+        private IReadOnlyList<InstanceProperties> _items;
 
         public InventoryController(VisualElement root)
         {
@@ -19,7 +19,7 @@ namespace UI.Inventory
              _listController = new InventoryListController(inventoryListView);
         }
 
-        public void PopulateItems(IEnumerable<ItemInstanceProperties> items)
+        public void PopulateItems(IEnumerable<InstanceProperties> items)
         {
             _items = items.ToList();
             _listController.PopulateInventoryList(_items);

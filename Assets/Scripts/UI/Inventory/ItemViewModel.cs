@@ -1,4 +1,5 @@
 ﻿using Items;
+using Items.Properties;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -8,6 +9,7 @@ namespace UI.Inventory
         
         public string Name { get; }
         public string Description { get; }
+        //TODO
         public Texture2D InventoryIcon { get; }
         public float Weight { get; }
 
