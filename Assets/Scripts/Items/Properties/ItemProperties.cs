@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items.Properties
 {
@@ -11,12 +12,12 @@ namespace Items.Properties
         [SerializeField] private string itemName;
         [SerializeField] private string description;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private ItemType type;
+        [FormerlySerializedAs("type")] [SerializeField] private ItemType[] types;
         
         public float Weight => weight;
         public string ItemName => itemName;
         public string Description => description;
         public GameObject Prefab => prefab;
-        public ItemType Type => type;
+        public ItemType[] Types => types;
     }
 }

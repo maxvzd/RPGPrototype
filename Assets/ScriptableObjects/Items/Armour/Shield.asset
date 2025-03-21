@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Shield
   description: 
   prefab: {fileID: 4910571517386588335, guid: d3274da25cd61904e84eba0e1bafdfea, type: 3}
+  types: 01000000
   damageThreshold: 1
   damageResistance: 0.3

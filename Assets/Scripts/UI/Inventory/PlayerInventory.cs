@@ -38,7 +38,7 @@ namespace UI.Inventory
             for (var i = 0; i < _inventory.Items.Count; i++)
             {
                 var item = _inventory.Items[i];
-                if (_playerEquipment.EquippedItems.Contains(item.InstanceId))
+                if (_playerEquipment.IsItemEquipped(item))
                 {
                     selectedIndices.Add(i);
                 }
@@ -90,7 +90,7 @@ namespace UI.Inventory
 
             if (_inventory.RemoveItem(instance))
             {
-                if (_playerEquipment.UnEquipItem(instance.InstanceId))
+                if (_playerEquipment.UnEquipItem(instance))
                 {
                     SetSelectedIndices();
                 }

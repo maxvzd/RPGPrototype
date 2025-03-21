@@ -6,7 +6,7 @@ namespace Items
 {
     public class Inventory : MonoBehaviour
     {
-        private const float WEIGHT_LIMIT = 10;
+        private const float WEIGHT_LIMIT = 500;
         private float _currentWeight = 0;
         private readonly List<InstanceProperties> _items = new();
 

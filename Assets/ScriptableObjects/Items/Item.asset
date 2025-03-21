@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Cubie 1
   description: peepee
   prefab: {fileID: 5653112605811741020, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
+  types: 09000000
