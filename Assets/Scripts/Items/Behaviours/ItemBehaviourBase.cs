@@ -6,7 +6,7 @@ namespace Items.Behaviours
 {
     public abstract class ItemBehaviourBase : MonoBehaviour
     {
-        public abstract ItemProperties GetBaseProperties();
+        //public abstract ItemProperties GetBaseProperties();
         public abstract InstanceProperties GetBaseInstance();
         public abstract void InitializeInstance(InstanceProperties instance);
     }
@@ -17,10 +17,10 @@ namespace Items.Behaviours
     {
         [SerializeField] protected ItemBase<T1, T2> item;
 
-        public T1 ItemProperties => item.ItemProperties;
+        //public T1 ItemProperties => item.ItemProperties;
         public T2 ItemInstanceProperties => item.InstanceProperties;
         
-        public override ItemProperties GetBaseProperties() => ItemProperties;
+        //public override ItemProperties GetBaseProperties() => ItemProperties;
         public override InstanceProperties GetBaseInstance() => ItemInstanceProperties;
 
         public override void InitializeInstance(InstanceProperties instance)
@@ -43,7 +43,8 @@ namespace Items.Behaviours
         
         private void Start()
         {
-            ItemInstanceProperties.SetItemProperties(ItemProperties);
+            //ItemInstanceProperties.SetItemProperties(ItemProperties);
+            ItemInstanceProperties.SetItemProperties(ItemInstanceProperties.GetItemProperties());
         }
     }
 }

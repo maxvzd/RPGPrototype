@@ -11,10 +11,12 @@ namespace Items.Properties
         [SerializeField] private string itemName;
         [SerializeField] private string description;
         [SerializeField] private GameObject prefab;
+        [SerializeField] private ItemType type;
         
         public float Weight => weight;
         public string ItemName => itemName;
         public string Description => description;
         public GameObject Prefab => prefab;
+        public ItemType Type => type;
     }
 }

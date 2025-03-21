@@ -28,7 +28,7 @@ namespace UI.Inventory
 
         public void PopulateInventoryList(IEnumerable<InstanceProperties> model)
         {
-            var listOfViewModels = model.Select(x => new ItemViewModel(x.Item)).ToList();
+            var listOfViewModels = model.Select(x => new ItemViewModel(x.BaseItemProperties)).ToList();
             
             _listView.itemsSource = listOfViewModels;
             _listView.columns["Icon"].bindCell = (element, i) =>

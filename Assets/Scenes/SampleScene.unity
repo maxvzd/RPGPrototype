@@ -648,7 +648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9780333, y: 0, z: 0, w: 0.20844881}
+  m_LocalRotation: {x: 0.9789477, y: 0, z: 0, w: 0.20411125}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1299,6 +1299,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4673071709817341062, guid: d3274da25cd61904e84eba0e1bafdfea, type: 3}
+      propertyPath: item.instanceProperties.itemProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: da2acc6f38a0f4d479fd2546d6f0f2b6, type: 2}
     - target: {fileID: 4910571517386588335, guid: d3274da25cd61904e84eba0e1bafdfea, type: 3}
       propertyPath: m_Name
       value: SK_Shield
@@ -1808,6 +1812,10 @@ PrefabInstance:
       propertyPath: item.instanceProperties.myMessage
       value: unset
       objectReference: {fileID: 0}
+    - target: {fileID: 4526412026947553965, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
+      propertyPath: item.instanceProperties.itemProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c889e3550b28824ab55d20b485359e6, type: 2}
     - target: {fileID: 5653112605811741020, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
       propertyPath: m_Name
       value: Cube (1)
@@ -1915,8 +1923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemProperties: {fileID: 0}
     instanceProperties:
+      itemProperties: {fileID: 0}
       myMessage: 
 --- !u!4 &1353598352
 Transform:
@@ -1963,9 +1971,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 16.395805
+  hourOfDay: 16.42967
   sunTransform: {fileID: 410087041}
-  time: 16:24
+  time: 16:26
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -5376,6 +5384,10 @@ PrefabInstance:
       propertyPath: item.instanceProperties.myMessage
       value: unset
       objectReference: {fileID: 0}
+    - target: {fileID: 4526412026947553965, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
+      propertyPath: item.instanceProperties.itemProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c889e3550b28824ab55d20b485359e6, type: 2}
     - target: {fileID: 5653112605811741020, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
       propertyPath: m_Name
       value: Cube (2)
@@ -5578,6 +5590,10 @@ PrefabInstance:
       propertyPath: item.instanceProperties.myMessage
       value: unset
       objectReference: {fileID: 0}
+    - target: {fileID: 4526412026947553965, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
+      propertyPath: item.instanceProperties.itemProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: a3f2f8346471f2e429d1700ecba3f5ba, type: 2}
     - target: {fileID: 5653112605811741020, guid: 2dd76e5d3069acd4ea1f9cd2d6de09ca, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -5779,6 +5795,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 2180530237848942734, guid: df5b0afa93fff2a4ba58871a0ae74326, type: 3}
+      propertyPath: item.instanceProperties.concreteItem
+      value: 
+      objectReference: {fileID: 11400000, guid: cd2cc8c89e9ec9140be6177f067a81ae, type: 2}
+    - target: {fileID: 2180530237848942734, guid: df5b0afa93fff2a4ba58871a0ae74326, type: 3}
+      propertyPath: item.instanceProperties.itemProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: cd2cc8c89e9ec9140be6177f067a81ae, type: 2}
     - target: {fileID: 4738020411158719381, guid: df5b0afa93fff2a4ba58871a0ae74326, type: 3}
       propertyPath: itemProperties
       value: 

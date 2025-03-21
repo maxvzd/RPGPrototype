@@ -15,13 +15,23 @@ namespace Items.Equipment
         {
             if (_equippedItems.Contains(instance.InstanceId))
             {
-                _equippedItems.Remove(instance.InstanceId);
+                UnEquipItem(instance.InstanceId);
             }
             else
             {
                 if (instance is not IEquipment) return;
-                _equippedItems.Add(instance.InstanceId);
+                EquipItem(instance.InstanceId);
             }
+        }
+
+        private void EquipItem(Guid guid)
+        {
+            _equippedItems.Add(guid);
+        }
+
+        private void UnEquipItem(Guid guid)
+        {
+            _equippedItems.Remove(guid);
         }
     }
 }

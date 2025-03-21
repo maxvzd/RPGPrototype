@@ -14,9 +14,9 @@ namespace Items
     
         public bool AddItem(InstanceProperties instance)
         {
-            if (!(_currentWeight + instance.Item.Weight <= WEIGHT_LIMIT))
+            if (!(_currentWeight + instance.BaseItemProperties.Weight <= WEIGHT_LIMIT))
             {
-                Debug.Log($"Couldn't add {instance.Item.ItemName} as it's too heavy, Current weight: {_currentWeight}");
+                Debug.Log($"Couldn't add {instance.BaseItemProperties.ItemName} as it's too heavy, Current weight: {_currentWeight}");
                 return false;
             }
 
@@ -34,7 +34,7 @@ namespace Items
             //     Debug.Log($"After: {itemInstance.Durability}");
             // }
             
-            _currentWeight += instance.Item.Weight;
+            _currentWeight += instance.BaseItemProperties.Weight;
             _items.Add(instance);
             return true;
         }
@@ -43,7 +43,7 @@ namespace Items
         {
             if (!_items.Exists(x => x == instance)) return false;
         
-            _currentWeight -= instance.Item.Weight;
+            _currentWeight -= instance.BaseItemProperties.Weight;
             _items.Remove(instance);
             
             var currTransform = transform;
