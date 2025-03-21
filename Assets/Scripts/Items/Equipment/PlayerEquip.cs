@@ -13,9 +13,9 @@ namespace Items.Equipment
 
         public void ActivateItem(InstanceProperties instance)
         {
-            if (_equippedItems.Contains(instance.InstanceId))
+            if (UnEquipItem(instance.InstanceId))
             {
-                UnEquipItem(instance.InstanceId);
+                
             }
             else
             {
@@ -24,14 +24,14 @@ namespace Items.Equipment
             }
         }
 
-        private void EquipItem(Guid guid)
+        private bool EquipItem(Guid guid)
         {
-            _equippedItems.Add(guid);
+            return _equippedItems.Add(guid);
         }
 
-        private void UnEquipItem(Guid guid)
+        public bool UnEquipItem(Guid guid)
         {
-            _equippedItems.Remove(guid);
+            return _equippedItems.Contains(guid) && _equippedItems.Remove(guid);
         }
     }
 }

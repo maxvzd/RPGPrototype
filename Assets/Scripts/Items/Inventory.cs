@@ -46,10 +46,6 @@ namespace Items
             _currentWeight -= instance.BaseItemProperties.Weight;
             _items.Remove(instance);
             
-            var currTransform = transform;
-            var positionToSpawnAt = currTransform.position + currTransform.forward * 0.5f + currTransform.up * 1.5f;
-            ItemSpawner.SpawnItem(instance, positionToSpawnAt, Quaternion.identity);
-            
             // Instance persistence test
             // if (instance is ItemInstanceProperties itemInstance)
             // {
