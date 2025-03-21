@@ -1,27 +1,44 @@
-﻿using System;
-using Items;
+﻿using System.Collections.Generic;
+using Items.Equipment;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
 namespace UI.Inventory
 {
-    public class InventoryUIManager : MonoBehaviour
+    public class PlayerInventory : MonoBehaviour
     {
         [SerializeField] private UIDocument inventoryUI;
         private InventoryController _inventoryController;
         private bool _uiIsHidden;
-
-        public EventHandler UiShown;
-        public EventHandler UiHidden;
         private global::Items.Inventory _inventory;
+        private PlayerEquip _playerEquipment;
 
         private void Start()
         {
             _inventoryController = new InventoryController(inventoryUI.rootVisualElement);
+            _inventoryController.ItemClicked += OnItemClicked;
             
             _inventory = GetComponent<global::Items.Inventory>();
+            _playerEquipment = GetComponent<PlayerEquip>();
             HideUI();
+        }
+
+        private void OnItemClicked(object sender, int e)
+        {
+            _playerEquipment.ActivateItem(_inventory.Items[e]);
+
+            var selectedIndices = new List<int>();
+            for (var i = 0; i < _inventory.Items.Count; i++)
+            {
+                var item = _inventory.Items[i];
+                if (_playerEquipment.EquippedItems.Contains(item.InstanceId))
+                {
+                    selectedIndices.Add(i);
+                }
+            }
+
+            _inventoryController.SetSelectedItems(selectedIndices);
         }
 
         private void HideUI()
@@ -32,8 +49,6 @@ namespace UI.Inventory
             Cursor.lockState = CursorLockMode.Locked;
             inventoryUI.rootVisualElement.style.display = DisplayStyle.None;
             _uiIsHidden = true;
-
-            UiHidden?.Invoke(this, EventArgs.Empty);
         }
 
         private void ShowUI()
@@ -47,7 +62,6 @@ namespace UI.Inventory
 
             inventoryUI.rootVisualElement.style.display = DisplayStyle.Flex;
             _uiIsHidden = false;
-            UiShown?.Invoke(this, EventArgs.Empty);
         }
 
         public bool ToggleUI()

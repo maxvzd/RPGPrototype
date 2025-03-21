@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72117f39141547d1bb474e36f172287f, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: f96a6cbc18d44b45a2a936991d9feddc, type: 3}
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  weight: 5
-  itemName: Sword
+  weight: 3
+  itemName: Shield
   description: 
-  prefab: {fileID: 910118552060707013, guid: df5b0afa93fff2a4ba58871a0ae74326, type: 3}
+  prefab: {fileID: 4910571517386588335, guid: d3274da25cd61904e84eba0e1bafdfea, type: 3}
+  damageThreshold: 1
+  damageResistance: 0.3

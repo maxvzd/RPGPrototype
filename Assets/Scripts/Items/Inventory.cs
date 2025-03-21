@@ -10,7 +10,7 @@ namespace Items
         private float _currentWeight = 0;
         private readonly List<InstanceProperties> _items = new();
 
-        public IEnumerable<InstanceProperties> Items => _items;
+        public IReadOnlyList<InstanceProperties> Items => _items;
     
         public bool AddItem(InstanceProperties instance)
         {

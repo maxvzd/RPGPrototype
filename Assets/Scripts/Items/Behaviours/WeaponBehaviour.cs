@@ -11,9 +11,5 @@ namespace Items.Behaviours
         {
             return item.GetSerializable();
         }
-        private void Start()
-        {
-            ItemInstanceProperties.SetItemProperties(ItemProperties);
-        }
     }
 }

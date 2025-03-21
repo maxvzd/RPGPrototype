@@ -20,7 +20,7 @@ namespace PlayerMovement
         private SheatheManager _sheathe;
         private PlayerAttack _playerAttack;
         private PlayerInteractionSystem _interactionSystem;
-        private InventoryUIManager _inventoryUIManager;
+        private PlayerInventory _inventoryUIManager;
 
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -39,7 +39,7 @@ namespace PlayerMovement
             _sheathe = fpArms.GetComponent<SheatheManager>();
             _interactionSystem = GetComponent<PlayerInteractionSystem>();
             _playerAttack = fpArms.GetComponent<PlayerAttack>();
-            _inventoryUIManager = GetComponent<InventoryUIManager>();
+            _inventoryUIManager = GetComponent<PlayerInventory>();
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Constants;
-using Items;
 using Items.InstancePropertiesClasses;
-using Items.Properties;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory
@@ -13,12 +12,14 @@ namespace UI.Inventory
         private readonly MultiColumnListView _listView;
 
         public int CurrentlyHoveredIndex { get; private set; } = -1;
+        public EventHandler<int> ItemClicked;
 
         public InventoryListController(MultiColumnListView listView)
         {
             _listView = listView;
+            _listView.selectionType = SelectionType.None;
+            _listView.RegisterCallback<MouseDownEvent>(OnItemClicked);
         }
-        
         
         public void ResetCurrentlyHovered()
         {
@@ -38,23 +39,23 @@ namespace UI.Inventory
                     iconContainer.style.backgroundImage = listOfViewModels[i].InventoryIcon;
                 }
                 
-                BindToHoverEvents(element, i);
+                BindToEvents(element, i);
             }; 
             _listView.columns["Name"].bindCell = (element, i) =>
             {
                 SetTextInDisplayLabel(listOfViewModels[i].Name, element);
-                BindToHoverEvents(element, i);
+                BindToEvents(element, i);
             }; 
             _listView.columns["Weight"].bindCell = (element, i) =>
             {
                 SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element);
-                BindToHoverEvents(element, i);
+                BindToEvents(element, i);
             };
 
             _listView.fixedItemHeight = 40;
         }
 
-        private void BindToHoverEvents(VisualElement element, int index)
+        private void BindToEvents(VisualElement element, int index)
         {
             element.RegisterCallback<PointerEnterEvent>(evt =>
             {
@@ -66,6 +67,25 @@ namespace UI.Inventory
                 ResetCurrentlyHovered();
             });
         }
+        
+        private void OnItemClicked(MouseDownEvent evt)
+        {
+            if (evt.button != (int)MouseButton.LeftMouse) return;
+
+            var clickedRow = evt.target as VisualElement;
+            
+            while (clickedRow != null && !clickedRow.ClassListContains("unity-multi-column-view__row-container"))
+            {
+                clickedRow = clickedRow.parent;
+            }
+
+            if (clickedRow == null) return;
+
+            var rowIndex = clickedRow.parent.IndexOf(clickedRow);
+            ItemClicked?.Invoke(this, rowIndex);
+
+            evt.StopPropagation();
+        }
 
         private static void SetTextInDisplayLabel(string text, VisualElement root)
         {
@@ -74,6 +94,11 @@ namespace UI.Inventory
             {
                 label.text = text;
             }
+        }
+
+        public void SetSelectedItems(IEnumerable<int> selectedIndices)
+        {
+            _listView.SetSelection(selectedIndices);
         }
     }
 }

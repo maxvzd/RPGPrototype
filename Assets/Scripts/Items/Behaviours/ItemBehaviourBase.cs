@@ -40,5 +40,10 @@ namespace Items.Behaviours
         {
             item.SetItemInstanceProperties(instance);
         }
+        
+        private void Start()
+        {
+            ItemInstanceProperties.SetItemProperties(ItemProperties);
+        }
     }
 }

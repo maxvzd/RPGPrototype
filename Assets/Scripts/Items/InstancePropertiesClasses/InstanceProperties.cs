@@ -1,4 +1,5 @@
-﻿using Items.Properties;
+﻿using System;
+using Items.Properties;
 
 namespace Items.InstancePropertiesClasses
 {
@@ -6,6 +7,7 @@ namespace Items.InstancePropertiesClasses
     {
         public abstract bool IsInstanceTypeInitialised { get; }
         public abstract ItemProperties Item { get; }
+        public Guid InstanceId { get; } = Guid.NewGuid();
     }
     
     public abstract class InstanceProperties<T> : InstanceProperties where T : ItemProperties
