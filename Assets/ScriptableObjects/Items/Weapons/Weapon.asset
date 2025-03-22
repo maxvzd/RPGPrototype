@@ -17,4 +17,6 @@ MonoBehaviour:
   description: 
   prefab: {fileID: 910118552060707013, guid: df5b0afa93fff2a4ba58871a0ae74326, type: 3}
   types: 0000000001000000
-  damage: 10
+  sheathPositions:
+  - {fileID: 11400000, guid: d79faa0c9e664cc49a554b786c31d23f, type: 2}
+  - {fileID: 11400000, guid: 7084bad753dd46c40a060f2047d473c6, type: 2}

@@ -4,6 +4,7 @@ using System.Linq;
 using Combat;
 using Constants;
 using Interact;
+using Items.Equipment;
 using UI.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,7 +18,7 @@ namespace PlayerMovement
         private ActorMovement _movement;
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
-        private SheatheManager _sheathe;
+        private WeaponPositionManager _weaponPosition;
         private PlayerAttack _playerAttack;
         private PlayerInteractionSystem _interactionSystem;
         private PlayerInventory _inventoryUIManager;
@@ -36,7 +37,7 @@ namespace PlayerMovement
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
             _armSwap = fpArms.GetComponent<FirstPersonCameraSwap>();
-            _sheathe = fpArms.GetComponent<SheatheManager>();
+            _weaponPosition = fpArms.GetComponent<WeaponPositionManager>();
             _interactionSystem = GetComponent<PlayerInteractionSystem>();
             _playerAttack = fpArms.GetComponent<PlayerAttack>();
             _inventoryUIManager = GetComponent<PlayerInventory>();
@@ -57,7 +58,7 @@ namespace PlayerMovement
             
             _wasPerformedActions = new Dictionary<InputAction, Action>
             {
-                {raiseWeaponAction, () => { _armSwap.SwitchArms(); _sheathe.SheatheWeapon(); }},
+                {raiseWeaponAction, () => { _armSwap.SwitchArms(); _weaponPosition.SheatheWeapon(); }},
                 {interactAction, () => { _interactionSystem.Interact(); }},
                 {showInventoryPlayerAction, ToggleUi},
                 {showInventoryUIAction, ToggleUi},

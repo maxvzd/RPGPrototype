@@ -10,7 +10,7 @@ namespace Items.Equipment
         bool RemoveItem(Guid guid);
         bool HasEmptySlots();
         bool Contains(Guid guid);
-        void RemoveFirstItem();
+        Guid GetFirstItem();
     }
 
     public class NullEquipmentSlot : IEquipmentSlot
@@ -19,7 +19,7 @@ namespace Items.Equipment
         public bool RemoveItem(Guid guid) => false;
         public bool HasEmptySlots() => false;
         public bool Contains(Guid guid) => false;
-        public void RemoveFirstItem() { }
+        public Guid GetFirstItem() => Guid.Empty;
     }
     
     public class EquipmentSlot : IEquipmentSlot
@@ -36,14 +36,6 @@ namespace Items.Equipment
         public bool RemoveItem(Guid guid) => _items.Remove(guid);
         public bool Contains(Guid guid) => _items.Contains(guid);
         public bool HasEmptySlots() => _items.Count < _maxNumberOfItemsInSlot;
-
-        public void RemoveFirstItem()
-        {
-            var first = _items.First();
-
-            _items.Remove(first);
-        }
-        
-
+        public Guid GetFirstItem() => _items.FirstOrDefault();
     }
 }

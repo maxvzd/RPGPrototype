@@ -65,7 +65,7 @@ PrefabInstance:
       addedObject: {fileID: 3125748085544369596}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 611f86d0a5027fc45b2d2434bd12e353, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4673071709817341062}
+      addedObject: {fileID: 3624041682598515853}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 611f86d0a5027fc45b2d2434bd12e353, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2720469485481591500}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ee611ff3b548238466b8414521a7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4673071709817341062
+--- !u!114 &3624041682598515853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,12 +99,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4910571517386588335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44f27ea38671488894e0633767a65643, type: 3}
+  m_Script: {fileID: 11500000, guid: e82297cc7ee2456aa2b28013b801d8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemProperties: {fileID: 11400000, guid: da2acc6f38a0f4d479fd2546d6f0f2b6, type: 2}
     instanceProperties:
+      itemProperties: {fileID: 11400000, guid: 0db71ff566bd50f45bc9f92f6cdc31cb, type: 2}
       durability:
         maxDurability: 10
         currentDurability: 5

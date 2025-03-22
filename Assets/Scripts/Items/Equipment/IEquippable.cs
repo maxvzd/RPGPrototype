@@ -1,6 +1,6 @@
 ﻿namespace Items.Equipment
 {
-    public interface IEquipment
+    public interface IEquippable
     {
     }
 }

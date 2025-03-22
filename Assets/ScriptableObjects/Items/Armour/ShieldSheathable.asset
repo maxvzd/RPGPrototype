@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab88d63635254998a62b52c756ff5eb5, type: 3}
+  m_Name: ShieldSheathable
+  m_EditorClassIdentifier: 
+  weight: 3
+  itemName: Shield
+  description: 
+  prefab: {fileID: 4910571517386588335, guid: d3274da25cd61904e84eba0e1bafdfea, type: 3}
+  types: 01000000
+  damageThreshold: 1
+  damageResistance: 0.3
+  sheathPositions:
+  - {fileID: 11400000, guid: f69445d8b71af7d419de134cf1fee9fa, type: 2}

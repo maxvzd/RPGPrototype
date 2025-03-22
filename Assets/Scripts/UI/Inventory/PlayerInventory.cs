@@ -13,7 +13,7 @@ namespace UI.Inventory
         private InventoryController _inventoryController;
         private bool _uiIsHidden;
         private global::Items.Inventory _inventory;
-        private PlayerEquip _playerEquipment;
+        private EquippedSlotManager _playerEquipped;
 
         private void Start()
         {
@@ -21,13 +21,13 @@ namespace UI.Inventory
             _inventoryController.ItemClicked += OnItemClicked;
             
             _inventory = GetComponent<global::Items.Inventory>();
-            _playerEquipment = GetComponent<PlayerEquip>();
+            _playerEquipped = GetComponent<EquippedSlotManager>();
             HideUI();
         }
 
         private void OnItemClicked(object sender, int e)
         {
-            _playerEquipment.ActivateItem(_inventory.Items[e]);
+            _playerEquipped.ActivateItem(_inventory.Items[e]);
 
             SetSelectedIndices();
         }
@@ -38,7 +38,7 @@ namespace UI.Inventory
             for (var i = 0; i < _inventory.Items.Count; i++)
             {
                 var item = _inventory.Items[i];
-                if (_playerEquipment.IsItemEquipped(item))
+                if (_playerEquipped.IsItemEquipped(item))
                 {
                     selectedIndices.Add(i);
                 }
@@ -90,7 +90,7 @@ namespace UI.Inventory
 
             if (_inventory.RemoveItem(instance))
             {
-                if (_playerEquipment.UnEquipItem(instance))
+                if (_playerEquipped.UnEquipItem(instance.InstanceId))
                 {
                     SetSelectedIndices();
                 }

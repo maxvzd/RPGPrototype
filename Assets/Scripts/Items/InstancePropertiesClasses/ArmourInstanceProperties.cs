@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Items.InstancePropertiesClasses
 {
     [Serializable]
-    public class ArmourInstanceProperties : InstanceProperties<ArmourProperties>, IDurability, IEquipment
+    public abstract class ArmourInstanceProperties<T> : InstanceProperties<T>, IDurability where T : ArmourProperties
     {
         [SerializeField] private Durability durability;
 
@@ -16,5 +16,11 @@ namespace Items.InstancePropertiesClasses
         {
             durability = newDurability;
         }
+    }
+    
+    [Serializable]
+    public class ArmourInstanceProperties : ArmourInstanceProperties<ArmourProperties>, IDurability, IEquippable
+    {
+        
     }
 }

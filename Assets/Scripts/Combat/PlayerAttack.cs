@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Items.Equipment;
 using UnityEngine;
 
 namespace Combat
@@ -8,7 +9,7 @@ namespace Combat
     {
         [SerializeField] private float attackOpportunityWindow;
 
-        private SheatheManager _sheatheManager;
+        private WeaponPositionManager _weaponPositionManager;
         private FpArmsAnimationEventHandler _animationEventHandler;
 
         private int _attackCounter;
@@ -25,7 +26,7 @@ namespace Combat
 
         public void HoldAttack()
         {
-            if (_sheatheManager.IsWeaponSheathed) return;
+            if (_weaponPositionManager.IsWeaponSheathed) return;
 
             SetIsLeftMouseHeld(true);
             
@@ -37,7 +38,7 @@ namespace Combat
         
         public void ReleaseAttack()
         {
-            if (_sheatheManager.IsWeaponSheathed) return;
+            if (_weaponPositionManager.IsWeaponSheathed) return;
 
             SetIsLeftMouseHeld(false);
 
@@ -68,7 +69,7 @@ namespace Combat
         
         private void Start()
         {
-            _sheatheManager = GetComponent<SheatheManager>();
+            _weaponPositionManager = GetComponent<WeaponPositionManager>();
             _animationEventHandler = GetComponent<FpArmsAnimationEventHandler>();
             _animationEventHandler.ReadyToAttack += ReadyToAttack;
             _animationEventHandler.SwingFinished += SwingFinished;
@@ -79,7 +80,7 @@ namespace Combat
 
         private void Update()
         {
-            if (_sheatheManager.IsWeaponSheathed) return;
+            if (_weaponPositionManager.IsWeaponSheathed) return;
 
             if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
             {

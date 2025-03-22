@@ -7,7 +7,6 @@ public class MatchRotation : MonoBehaviour
     [SerializeField] private bool matchY;
     [SerializeField] private bool matchZ;
 
-    // Update is called once per frame
     private void Update()
     {
         var rotation = transform.eulerAngles;

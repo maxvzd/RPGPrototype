@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9dfdd3446149b893e4c661a65df83b, type: 3}
+  m_Name: SwordOnHand
+  m_EditorClassIdentifier: 
+  type: 0
+  sheathedPosition: {x: -0.0009592645, y: 0.00134, z: -0.00118}
+  sheathedRotation: {x: -166.61, y: 233.991, z: -360.98}
+  wieldedPosition: {x: -0.00102, y: 0.00028, z: -0.00025}
+  wieldedRotation: {x: -94.689, y: -218.36, z: 200.585}
