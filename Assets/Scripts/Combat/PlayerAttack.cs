@@ -10,7 +10,7 @@ namespace Combat
         [SerializeField] private float attackOpportunityWindow;
 
         private WeaponPositionManager _weaponPositionManager;
-        private FpArmsAnimationEventHandler _animationEventHandler;
+        private PlayerAnimationEventListener _animationEventHandler;
 
         private int _attackCounter;
         private Vector2 _movementInput;
@@ -70,7 +70,7 @@ namespace Combat
         private void Start()
         {
             _weaponPositionManager = GetComponent<WeaponPositionManager>();
-            _animationEventHandler = GetComponent<FpArmsAnimationEventHandler>();
+            _animationEventHandler = GetComponent<PlayerAnimationEventListener>();
             _animationEventHandler.ReadyToAttack += ReadyToAttack;
             _animationEventHandler.SwingFinished += SwingFinished;
 

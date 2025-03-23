@@ -36,19 +36,22 @@ namespace Combat
 
         public void TransitionToIdle()
         {
-            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.3f, -1, 0f, 0);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.3f, 1, 0f, 0);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.3f, 2, 0f, 0);
         }
 
         public void TransitionAttackStateToState(AttackDirection attackDirection)
         {
             var state = _chargeAttacks[attackDirection];
-            _animator.CrossFadeInFixedTime(state, 0.2f, -1, 0f, 0.5f);
+            _animator.CrossFadeInFixedTime(state, 0.2f, 1, 0f, 0.5f);
+            _animator.CrossFadeInFixedTime(state, 0.2f, 2, 0f, 0.5f);
         }
 
         public void TransitionToHoldState(AttackDirection attackDirection)
         {
             var state = _holdAttacks[attackDirection];
-            _animator.CrossFadeInFixedTime(state, 0.3f, -1, 0, 0);
+            _animator.CrossFadeInFixedTime(state, 0.3f, 1, 0, 0);
+            _animator.CrossFadeInFixedTime(state, 0.3f, 2, 0, 0);
         }
 
         public void SetShouldReleaseAttack(bool shouldReleaseAttack)
@@ -60,10 +63,5 @@ namespace Combat
         {
             _animator.SetBool(AnimatorConstants.IsLeftMouseButtonDown, isLeftMouseButtonDown);
         }
-        //
-        // public bool IsCurrentAnimatorState(int animatorHash)
-        // {
-        //     return _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == animatorHash;
-        // }
     }
 }

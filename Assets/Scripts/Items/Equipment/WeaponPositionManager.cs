@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Constants;
+using FirstPerson;
 using Items.Equipment.Sheathing;
 using PlayerMovement;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Items.Equipment
 
         private Animator _animator;
         private bool _isWeaponSheathed = true;
-        private FpArmsAnimationEventHandler _animationEventHandler;
+        private PlayerAnimationEventListener _animationEventHandler;
         private bool IsWeaponEquipped => _weaponPositions is not null && _weaponPositions.Any(x => !x.Value.IsEmpty);
         private Guid _equippedInstance;
         private IReadOnlyDictionary<ItemType, SocketMap> _weaponPositions;
@@ -22,20 +23,25 @@ namespace Items.Equipment
         [SerializeField] private Transform rightHandSocket;
         [SerializeField] private Transform leftHandSocket;
         [SerializeField] private Transform sheathedSocket;
+        private RotateArms _armRotator;
 
         public void Start()
         {
             _animator = GetComponent<Animator>();
-            _animationEventHandler = GetComponent<FpArmsAnimationEventHandler>();
+            _animationEventHandler = GetComponent<PlayerAnimationEventListener>();
             _animationEventHandler.WeaponSheathed += WeaponSheathed;
             _animationEventHandler.WeaponUnSheathed += WeaponSheathed;
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
-            UpdateWeaponPosition();
+            
             _weaponPositions = new Dictionary<ItemType, SocketMap>
             {
-                { ItemType.Weapon, new SocketMap(Guid.Empty, rightHandSocket, sheathedSocket, null, null, LayerConstants.FirstPersonRightArmMesh) },
-                { ItemType.Offhand, new SocketMap(Guid.Empty, leftHandSocket, sheathedSocket, null, null, LayerConstants.FirstPersonLeftArmMesh) }
+                { ItemType.Weapon, new SocketMap(Guid.Empty, rightHandSocket, sheathedSocket, null, null) },
+                { ItemType.Offhand, new SocketMap(Guid.Empty, leftHandSocket, sheathedSocket, null, null) }
             };
+
+            _armRotator = GetComponent<RotateArms>();
+            
+            UpdateWeaponPosition();
         }
 
         private void WeaponSheathed(object sender, EventArgs e)
@@ -45,7 +51,11 @@ namespace Items.Equipment
 
         public void SheatheWeapon()
         {
+            if (!IsWeaponEquipped) return;
+            
             _isWeaponSheathed = !_isWeaponSheathed;
+            _armRotator.ShouldRotateArmsWithCamera = !_isWeaponSheathed;
+            
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
         }
 
@@ -103,16 +113,14 @@ namespace Items.Equipment
             private readonly Transform _sheathedSocket;
             private GameObject _item;
             private SheathedItemPositions _sheathePosition;
-            private readonly string _layerName;
 
-            public SocketMap(Guid instanceId, Transform wieldedSocket, Transform sheathedSocket, GameObject item, SheathedItemPositions sheathePosition, string layerName)
+            public SocketMap(Guid instanceId, Transform wieldedSocket, Transform sheathedSocket, GameObject item, SheathedItemPositions sheathePosition)
             {
                 _instanceId = instanceId;
                 _wieldedSocket = wieldedSocket;
                 _sheathedSocket = sheathedSocket;
                 _item = item;
                 _sheathePosition = sheathePosition;
-                _layerName = layerName;
             }
 
             public void EquipItem(Guid id, GameObject item, SheathedItemPositions sheathePosition)
@@ -134,7 +142,7 @@ namespace Items.Equipment
             public void UnsheatheItem()
             {
                 if (IsEmpty) return;
-                SetItemPosition(_layerName, _wieldedSocket, _sheathePosition.WieldedPosition, _sheathePosition.WieldedRotation);
+                SetItemPosition(LayerConstants.VisibleInFirstPerson, _wieldedSocket, _sheathePosition.WieldedPosition, _sheathePosition.WieldedRotation);
             }
 
             public void SheatheItem()

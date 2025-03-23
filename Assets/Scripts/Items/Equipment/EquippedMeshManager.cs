@@ -8,8 +8,13 @@ namespace Items.Equipment
 {
     public class EquippedMeshManager : MonoBehaviour
     {
-        [SerializeField] private WeaponPositionManager weaponPositionManager;
         private Dictionary<Guid, GameObject> _equippedInstances = new();
+        private WeaponPositionManager _weaponPositionManager;
+
+        private void Start()
+        {
+            _weaponPositionManager = GetComponent<WeaponPositionManager>();
+        }
 
         public void EquipWeapon(InstanceProperties weapon, ItemType toSlot)
         {
@@ -21,7 +26,7 @@ namespace Items.Equipment
             var rb = weaponTransform.GetComponent<Rigidbody>();
             rb.isKinematic = true;
         
-            weaponPositionManager.EquipWeapon(
+            _weaponPositionManager.EquipWeapon(
                 weapon.InstanceId,
                 weaponTransform,
                 sheathable.SheathPositions,
@@ -32,7 +37,7 @@ namespace Items.Equipment
         {
             if (!_equippedInstances.Remove(instanceId, out var weaponGameObject)) return false;
 
-            weaponPositionManager.UnEquipWeapon(instanceId);
+            _weaponPositionManager.UnEquipWeapon(instanceId);
             Destroy(weaponGameObject);
             return true;
         }

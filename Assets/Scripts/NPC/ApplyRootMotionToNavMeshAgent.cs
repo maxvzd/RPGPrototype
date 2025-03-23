@@ -1,4 +1,5 @@
-﻿using PlayerMovement;
+﻿using Constants;
+using PlayerMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,7 @@ namespace NPC
 
             _animator = GetComponent<Animator>();
             _animator.applyRootMotion = true;
+            _animator.SetBool(AnimatorConstants.WeaponSheathed, true);
 
             _actorMovement = GetComponent<ActorMovement>();
         }

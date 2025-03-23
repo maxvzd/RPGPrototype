@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Combat;
 using Constants;
+using FirstPerson;
 using Interact;
 using Items.Equipment;
 using UI.Inventory;
@@ -13,8 +14,6 @@ namespace PlayerMovement
 {
     public class PlayerInputHandler : MonoBehaviour
     {
-        [SerializeField] private Transform fpArms;
-
         private ActorMovement _movement;
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
@@ -36,10 +35,10 @@ namespace PlayerMovement
         {
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
-            _armSwap = fpArms.GetComponent<FirstPersonCameraSwap>();
-            _weaponPosition = fpArms.GetComponent<WeaponPositionManager>();
+            _armSwap = GetComponent<FirstPersonCameraSwap>();
+            _weaponPosition = GetComponent<WeaponPositionManager>();
             _interactionSystem = GetComponent<PlayerInteractionSystem>();
-            _playerAttack = fpArms.GetComponent<PlayerAttack>();
+            _playerAttack = GetComponent<PlayerAttack>();
             _inventoryUIManager = GetComponent<PlayerInventory>();
             
             _input = GetComponent<PlayerInput>();

@@ -7,7 +7,6 @@ public class MoveToObject : MonoBehaviour
     [SerializeField] private bool moveZ;
     [SerializeField] private Transform moveToTarget;
 
-    // Update is called once per frame
     public void Update()
     {
         var position = transform.position;
