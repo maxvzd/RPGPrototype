@@ -16,25 +16,30 @@ namespace Combat
         private Vector2 _movementInput;
 
         private bool _isLeftMouseHeld;
-        private AttackDirection _currentAttackDirection;
         private bool _isReadyToRelease;
+        private bool _isSwingFinished = true;
+        private bool _isWeaponRaised = false;
+        
+        private AttackDirection _currentAttackDirection;
 
         private CombatAnimationStateMachineManager _combatAnimationHandler;
         private Coroutine _waitForPlayerClickRoutine;
-        private bool _swingFinished = true;
         private const int MAX_COMBO_COUNT = 3;
+
+        public bool IsWeaponRaised => _isWeaponRaised;
 
         public void HoldAttack()
         {
             if (_weaponPositionManager.IsWeaponSheathed) return;
-            if (!_swingFinished) return;
+            if (!_isSwingFinished) return;
             
             SetIsLeftMouseHeld(true);
             ResetReadyToRelease();
             TransitionToChargeState();
+            _isWeaponRaised = true;
 
             //if (_attackCounter > 0) return; //Ignore while comboing
-            
+
             //ResetReadyToRelease();
             //TransitionToAttackState();
         }
@@ -118,7 +123,7 @@ namespace Combat
         private void ReadyToAttack(object sender, EventArgs e)
         {
             _isReadyToRelease = true;
-            _swingFinished = false;
+            _isSwingFinished = false;
 
             //if (_attackCounter > 0)
             //{
@@ -128,7 +133,8 @@ namespace Combat
         
         private void SwingFinished(object sender, EventArgs e)
         {
-            _swingFinished = true;
+            _isSwingFinished = true;
+            _isWeaponRaised = false;
             //if (_attackCounter == 0) //Combo has ended and been reset
             //{
                 _combatAnimationHandler.TransitionToIdle();
@@ -193,7 +199,8 @@ namespace Combat
         private void EndCombo()
         {
             //_attackCounter = 0;
-            _swingFinished = true;
+            _isSwingFinished = true;
+            _isWeaponRaised = false;
             _currentAttackDirection = AttackDirection.None;
         }
     }

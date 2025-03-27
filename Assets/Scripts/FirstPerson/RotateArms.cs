@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Combat;
 using UnityEngine;
 
 namespace FirstPerson
@@ -11,11 +12,13 @@ namespace FirstPerson
         [SerializeField] private List<AnimationOffset> offsets;
         [SerializeField] private float angleToStopTurningArms;
         private Animator _animator;
+        private PlayerAttack _attackManager;
         public bool ShouldRotateArmsWithCamera { get; set; }
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _attackManager = GetComponent<PlayerAttack>();
         }
     
         private void OnAnimatorIK(int layerIndex)
@@ -35,14 +38,14 @@ namespace FirstPerson
             var targetRotation = objectToMatch.localEulerAngles;
 
             //Just limit the rotation??
-            if (targetRotation.x > angleToStopTurningArms && targetRotation.x < 180)
+            if (targetRotation.x > angleToStopTurningArms && targetRotation.x < 180 && !_attackManager.IsWeaponRaised)
             {
+                Debug.Log("Limiting");
                 targetRotation.x = angleToStopTurningArms;
             }
-            
             currentRotation.y -= targetRotation.x;
             
-            //Blend between two targets
+            //or blend between two targets?
             // var blendFactor = 1f;
             // if (targetRotation.x < 180)
             // {
