@@ -1142,7 +1142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &51659503
 Transform:
   m_ObjectHideFlags: 0
@@ -3941,7 +3941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &186040098
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -4522,7 +4522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &222005584
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -12064,7 +12064,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 306502904}
+  m_Mesh: {fileID: 1953577381}
 --- !u!33 &370718174
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -13318,7 +13318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6087741, y: 0, z: 0, w: 0.79334366}
+  m_LocalRotation: {x: 0.6097335, y: 0, z: 0, w: 0.7926065}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -25196,7 +25196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &991487910
 Transform:
   m_ObjectHideFlags: 0
@@ -33020,9 +33020,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 11.000122
+  hourOfDay: 11.009365
   sunTransform: {fileID: 410087041}
-  time: 11:00
+  time: 11:01
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -38483,6 +38483,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 1720577456005422020, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
+      propertyPath: angleToStopTurningArms
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2518399482172142874, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
       propertyPath: inventoryUI
       value: 
@@ -39149,7 +39153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1639446619
 Transform:
   m_ObjectHideFlags: 0

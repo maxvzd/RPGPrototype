@@ -12,7 +12,7 @@ namespace Combat
         private WeaponPositionManager _weaponPositionManager;
         private PlayerAnimationEventListener _animationEventHandler;
 
-        private int _attackCounter;
+        //private int _attackCounter;
         private Vector2 _movementInput;
 
         private bool _isLeftMouseHeld;
@@ -21,19 +21,22 @@ namespace Combat
 
         private CombatAnimationStateMachineManager _combatAnimationHandler;
         private Coroutine _waitForPlayerClickRoutine;
-        private bool _swingFinished;
+        private bool _swingFinished = true;
         private const int MAX_COMBO_COUNT = 3;
 
         public void HoldAttack()
         {
             if (_weaponPositionManager.IsWeaponSheathed) return;
-
+            if (!_swingFinished) return;
+            
             SetIsLeftMouseHeld(true);
-            
-            if (_attackCounter > 0) return; //Ignore while comboing
-            
             ResetReadyToRelease();
-            TransitionToAttackState();
+            TransitionToChargeState();
+
+            //if (_attackCounter > 0) return; //Ignore while comboing
+            
+            //ResetReadyToRelease();
+            //TransitionToAttackState();
         }
         
         public void ReleaseAttack()
@@ -45,13 +48,13 @@ namespace Combat
             if (_isReadyToRelease)
             {
                 _combatAnimationHandler.SetShouldReleaseAttack(true);
-                _attackCounter++;
-                StopWaitForPlayerClickRoutine();
+                //_attackCounter++;
+                //StopWaitForPlayerClickRoutine();
 
-                if (_attackCounter > MAX_COMBO_COUNT - 1)
-                {
-                    EndCombo();
-                }
+                // if (_attackCounter > MAX_COMBO_COUNT - 1)
+                // {
+                //     EndCombo();
+                // }
             }
             else
             {
@@ -78,29 +81,29 @@ namespace Combat
             _currentAttackDirection = AttackDirection.None;
         }
 
-        private void Update()
-        {
-            if (_weaponPositionManager.IsWeaponSheathed) return;
-
-            if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
-            {
-                ResetReadyToRelease();
-                TransitionToAttackState();
-            }
-
-            if (_isLeftMouseHeld && _attackCounter == 0)
-            {
-                TransitionToHoldState();
-            }
-        }
+        // private void Update()
+        // {
+        //     if (_weaponPositionManager.IsWeaponSheathed) return;
+        //
+        //     // if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
+        //     // {
+        //     //     ResetReadyToRelease();
+        //     //     TransitionToAttackState();
+        //     // }
+        //
+        //     if (_isLeftMouseHeld)//&& _attackCounter == 0)
+        //     {
+        //         TransitionToHoldState();
+        //     }
+        // }
         
-        private void TransitionToAttackState()
+        private void TransitionToChargeState()
         {
             var attackDirection = GetAttackDirection();
             if (_currentAttackDirection == attackDirection) return;
 
             _currentAttackDirection = attackDirection;
-            _combatAnimationHandler.TransitionAttackStateToState(_currentAttackDirection);
+            _combatAnimationHandler.TransitionToChargeState(_currentAttackDirection);
         }
 
         private void TransitionToHoldState()
@@ -117,19 +120,19 @@ namespace Combat
             _isReadyToRelease = true;
             _swingFinished = false;
 
-            if (_attackCounter > 0)
-            {
-                StartWaitForPlayerClickRoutine();
-            }
+            //if (_attackCounter > 0)
+            //{
+                //StartWaitForPlayerClickRoutine();
+            //}
         }
         
         private void SwingFinished(object sender, EventArgs e)
         {
             _swingFinished = true;
-            if (_attackCounter == 0) //Combo has ended and been reset
-            {
+            //if (_attackCounter == 0) //Combo has ended and been reset
+            //{
                 _combatAnimationHandler.TransitionToIdle();
-            }
+            //}
         }
 
         #region Coroutines
@@ -189,8 +192,8 @@ namespace Combat
 
         private void EndCombo()
         {
-            _attackCounter = 0;
-            _swingFinished = false;
+            //_attackCounter = 0;
+            _swingFinished = true;
             _currentAttackDirection = AttackDirection.None;
         }
     }

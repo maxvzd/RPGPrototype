@@ -40,7 +40,7 @@ namespace Combat
             _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, 0.3f, 2, 0f, 0);
         }
 
-        public void TransitionAttackStateToState(AttackDirection attackDirection)
+        public void TransitionToChargeState(AttackDirection attackDirection)
         {
             var state = _chargeAttacks[attackDirection];
             _animator.CrossFadeInFixedTime(state, 0.2f, 1, 0f, 0.5f);

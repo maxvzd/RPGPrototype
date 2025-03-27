@@ -35,21 +35,20 @@ namespace FirstPerson
             var targetRotation = objectToMatch.localEulerAngles;
 
             //Just limit the rotation??
-            // if (targetRotation.x > angleToStopTurningArms && targetRotation.x < 180)
-            // {
-            //     targetRotation.x = angleToStopTurningArms;
-            // }
-            //
-            // currentRotation.y -= targetRotation.x;
+            if (targetRotation.x > angleToStopTurningArms && targetRotation.x < 180)
+            {
+                targetRotation.x = angleToStopTurningArms;
+            }
+            
+            currentRotation.y -= targetRotation.x;
             
             //Blend between two targets
-            var blendFactor = 1f;
-            if (targetRotation.x < 180)
-            {
-                blendFactor = Mathf.Clamp01((angleToStopTurningArms - targetRotation.x) / angleToStopTurningArms);
-            }
-
-            currentRotation.y = Mathf.Lerp(currentRotation.y, currentRotation.y - targetRotation.x, blendFactor);
+            // var blendFactor = 1f;
+            // if (targetRotation.x < 180)
+            // {
+            //     blendFactor = Mathf.Clamp01((angleToStopTurningArms - targetRotation.x) / angleToStopTurningArms);
+            // }
+            //currentRotation.y = Mathf.Lerp(currentRotation.y, currentRotation.y - targetRotation.x, blendFactor);
 
             var offset = offsets.First(x => x.Bone == bone).Offset;
             _animator.SetBoneLocalRotation(bone, Quaternion.Euler(currentRotation + offset));
