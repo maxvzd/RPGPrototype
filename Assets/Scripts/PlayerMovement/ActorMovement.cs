@@ -11,9 +11,11 @@ namespace PlayerMovement
         private Animator _animator;
         private Vector2 _smoothedInput;
         private Vector2 _smoothInputVelocity;
+        private bool _isMovementKeyDown;
 
         public bool ActorIsMoving => Mathf.Abs(_smoothedInput.x) > 0.1f || Mathf.Abs(_smoothedInput.y) > 0.1f;
         public Vector3 Direction => new(_smoothedInput.y, 0, _smoothedInput.x);
+        public bool IsMovementKeysDown => _isMovementKeyDown;
 
         public void Start()
         {
@@ -27,6 +29,9 @@ namespace PlayerMovement
 
         public void Move(Vector2 movement)
         {
+            _isMovementKeyDown = movement.x != 0 || movement.y != 0;
+            
+            
             if (movement.y > 0)
             {
                 movement *= _movementSpeed;
