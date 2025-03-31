@@ -10,5 +10,6 @@
         public static string IgnoreRaycast => "Ignore Raycast";
         public static string Water => "Water";
         public static string Ui => "UI";
+        public static string Player => "Player";
     }
 }

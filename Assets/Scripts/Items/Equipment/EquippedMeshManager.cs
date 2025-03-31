@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Constants;
 using Items.Equipment.Sheathing;
 using Items.InstancePropertiesClasses;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace Items.Equipment
             weaponTransform.transform.localScale *= 1f; //have to do this cause I fucked up the scale
             var rb = weaponTransform.GetComponent<Rigidbody>();
             rb.isKinematic = true;
+            rb.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
         
             _weaponPositionManager.EquipWeapon(
                 weapon.InstanceId,

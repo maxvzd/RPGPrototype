@@ -40,7 +40,6 @@ namespace FirstPerson
             //Just limit the rotation??
             if (targetRotation.x > angleToStopTurningArms && targetRotation.x < 180 && !_attackManager.IsWeaponRaised)
             {
-                Debug.Log("Limiting");
                 targetRotation.x = angleToStopTurningArms;
             }
             currentRotation.y -= targetRotation.x;
