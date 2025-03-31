@@ -1,60 +1,53 @@
 using Constants;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 namespace PlayerMovement
 {
     public class JumpBehaviour : MonoBehaviour
     {
         [SerializeField] private float jumpHeight = 2f;
+        [SerializeField] private float verticalLength = 10f;
         private Grounded _grounded;
         private Animator _animator;
-        private CharacterController _charController;
-        private Vector3 _velocity;
-        private const float GRAVITY = 9.81f;
 
-        private bool _wasGroundedLastFrame;
-        private bool _leftGround;
-
-        private Vector3 _velocityAtJump;
-
-        private bool IsGrounded => _grounded.IsGrounded;
+        private Rigidbody _rb;
+        private ActorMovement _movement;
+        private bool _isGrounded;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
             _grounded = GetComponent<Grounded>();
-            _charController = GetComponent<CharacterController>();
+            
+            _grounded.IsGrounded += (sender, args) =>
+            {
+                _animator.applyRootMotion = true;
+                _isGrounded = true;
+            };
+            
+            _grounded.IsNotGrounded += (sender, args) =>
+            {
+                _animator.applyRootMotion = false;
+                _isGrounded = false;
+            };
+            
+            _rb = GetComponent<Rigidbody>();
+            _movement = GetComponent<ActorMovement>();
         }
 
         public void Jump()
         {
-            if (!IsGrounded) return;
+            if (!_isGrounded) return;
 
-            _velocity.y = Mathf.Sqrt(jumpHeight * GRAVITY);
             _animator.SetTrigger(AnimatorConstants.JumpTrigger);
-        }
-
-        private void Update()
-        {
-            if (_wasGroundedLastFrame && !IsGrounded)
-            {
-                var animatorVelocity = _animator.velocity;
-                _velocity.x = animatorVelocity.x * 1.5f;
-                _velocity.z = animatorVelocity.z * 1.5f;
-            }
-
-            if (!_wasGroundedLastFrame && IsGrounded)
-            {
-                _velocity.x = 0f;
-                _velocity.z = 0f;
-            }
             
-            _velocity.y -= GRAVITY * Time.deltaTime;
-            _velocity.y = Mathf.Clamp(_velocity.y, 0, float.MaxValue);
+            var currentTransform = transform;
+            var forward = currentTransform.forward * _movement.Direction.x * verticalLength;
+            var right = currentTransform.right * _movement.Direction.z * verticalLength;
+            var up = currentTransform.up;
             
-            _charController.Move(_velocity * Time.deltaTime);
-            _wasGroundedLastFrame = _grounded.IsGrounded;
+            _rb.AddForce(up * jumpHeight, ForceMode.Impulse);
+            _rb.linearVelocity = forward + right;
         }
     }
 }
