@@ -22,10 +22,10 @@ namespace NPC
 
         private void Update()
         {
-            if (_npcController.IsIdle)
-            {
-                CalculateDecision(availableActions, _npcController, new GenericContext());
-            }
+            //if (_npcController.IsIdle)
+            //{
+                //CalculateDecision(availableActions, _npcController, new GenericContext());
+            //}
         }
 
         public void DecideSpeechInteractionWithPlayer()

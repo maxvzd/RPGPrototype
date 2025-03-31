@@ -795,8 +795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToMatch: {fileID: 7520509550173862448}
   matchX: 1
-  matchY: 0
-  matchZ: 0
+  matchY: 1
+  matchZ: 1
 --- !u!1 &3089217463169743124
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8246440142475941526}
   - component: {fileID: 4746103203302211486}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: B-head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2019,7 +2019,8 @@ GameObject:
   - component: {fileID: 1925173044961823103}
   - component: {fileID: 1652839122637853571}
   - component: {fileID: 7612640963182135094}
-  m_Layer: 0
+  - component: {fileID: 3253097425455087951}
+  m_Layer: 12
   m_Name: 'Player '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2063,7 +2064,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -2748,8 +2749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34daaaf49561b54fb8f2c7e9843daf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 100
-  verticalLength: 10
+  jumpHeight: 350
+  verticalLength: 1.3
 --- !u!54 &1652839122637853571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2800,6 +2801,23 @@ CapsuleCollider:
   m_Height: 1.77
   m_Direction: 1
   m_Center: {x: 0, y: 0.89, z: 0}
+--- !u!114 &3253097425455087951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327105009001861201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fdca36775c1114281c1ec165cbff33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepHeight: 0.3
+  detectionDepth: 0.3
+  heightOffset: 0.05
+  stepHeightTolerance: 0.05
+  upForce: 0.03
 --- !u!1 &6506407998267710773
 GameObject:
   m_ObjectHideFlags: 0
