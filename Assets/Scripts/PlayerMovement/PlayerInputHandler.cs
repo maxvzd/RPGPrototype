@@ -21,6 +21,7 @@ namespace PlayerMovement
         private PlayerAttack _playerAttack;
         private PlayerInteractionSystem _interactionSystem;
         private PlayerInventory _inventoryUIManager;
+        private JumpBehaviour _jumper;
 
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -40,6 +41,7 @@ namespace PlayerMovement
             _interactionSystem = GetComponent<PlayerInteractionSystem>();
             _playerAttack = GetComponent<PlayerAttack>();
             _inventoryUIManager = GetComponent<PlayerInventory>();
+            _jumper = GetComponent<JumpBehaviour>();
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
@@ -48,8 +50,8 @@ namespace PlayerMovement
             var raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
             var interactAction = _input.actions[InputConstants.Interact];
             var attackAction = _input.actions[InputConstants.Attack];
+            var jumpAction = _input.actions[InputConstants.Jump];
             var showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
-            
             var showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
             var dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
 
@@ -62,6 +64,7 @@ namespace PlayerMovement
                 {showInventoryPlayerAction, ToggleUi},
                 {showInventoryUIAction, ToggleUi},
                 {dropItemAction, () => { _inventoryUIManager.DropSelectedItem(); }},
+                {jumpAction, () => { _jumper.Jump(); }},
             };
             
             _wasCompletedActions = new Dictionary<InputAction, Action>

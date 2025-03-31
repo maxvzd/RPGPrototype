@@ -10,6 +10,7 @@
         public static string Attack => "Attack";
         public static string Inventory => "Inventory";
         public static string DropItem => "DropItem";
+        public static string Jump => "Jump";
 
 
         public static string PlayerActionMap => "Player";

@@ -9,18 +9,16 @@ namespace Constants
         public static readonly int WeaponSheathed = Animator.StringToHash("WeaponSheathed");
         public static readonly int TurnRightTrigger = Animator.StringToHash("TurnRightTrigger");
         public static readonly int TurnLeftTrigger = Animator.StringToHash("TurnLeftTrigger");
+        public static readonly int JumpTrigger = Animator.StringToHash("JumpTrigger");
         public static readonly int IsLeftMouseButtonDown = Animator.StringToHash("IsLeftMouseButtonDown");
         public static readonly int AttackSpeedModifier = Animator.StringToHash("AttackSpeedModifier");
         public static readonly int RaiseWeaponSpeedModifier = Animator.StringToHash("RaiseWeaponSpeedModifier");
-        //public static readonly int AttackDirection = Animator.StringToHash("AttackDirection");
-        //public static readonly int HasPlayerClicked = Animator.StringToHash("HasPlayerClicked");
         public static readonly int ShouldReleaseAttack = Animator.StringToHash("ShouldReleaseAttack");
         public static readonly int HoldAttackStabState = Animator.StringToHash("HoldAttackStab");
         public static readonly int HoldAttackLeftState = Animator.StringToHash("HoldAttackLeft");
         public static readonly int HoldAttackRightState = Animator.StringToHash("HoldAttackRight");
         public static readonly int HoldAttackDownState = Animator.StringToHash("HoldAttackDown");
-        public static readonly int AttackFinishedState = Animator.StringToHash("AttackFinished");
-        //public static readonly int ShouldReturnToReadyState = Animator.StringToHash("ShouldReturnToReadyState");
+        public static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
 
         public static readonly int ChargeAttackRightState = Animator.StringToHash("ChargeAttackRight");
         public static readonly int ChargeAttackLeftState = Animator.StringToHash("ChargeAttackLeft");
