@@ -25,8 +25,10 @@ namespace Items.Equipment
             _equippedInstances.Add(weapon.InstanceId, weaponTransform);
             weaponTransform.transform.localScale *= 1f; //have to do this cause I fucked up the scale
             var rb = weaponTransform.GetComponent<Rigidbody>();
+            var c = weaponTransform.GetComponent<Collider>();
             rb.isKinematic = true;
             rb.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
+            c.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
         
             _weaponPositionManager.EquipWeapon(
                 weapon.InstanceId,
