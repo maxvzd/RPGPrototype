@@ -1,6 +1,7 @@
 ﻿using Interact;
 using Interact.Contexts;
 using NPC;
+using NPC.UtilityBaseClasses.Contexts;
 using UnityEngine;
 
 namespace Interact
@@ -23,23 +24,23 @@ namespace Interact
 
         public void Interact(IInteractionContext context)
         {
-            if (context is SpeechContext speechContext)
+            if (context is SpeechInteractionContext speechContext)
             {
                 Interact(speechContext);
             }
         }
         
-        private void Interact(SpeechContext interactionContext)
+        private void Interact(SpeechInteractionContext interactionContext)
         {
-            _npc.DecideSpeechInteractionWithPlayer();
+            //_npc.CalculateNewDecision<SpeechConsiderationContext>();
         }
     }
 }
 
 public class SpeechContextBuilder : IContextBuilder
 {
-    public SpeechContext Build()
+    public SpeechInteractionContext Build()
     {
-        return new SpeechContext();
+        return new SpeechInteractionContext();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NPC.Scheduling
 {
@@ -8,7 +7,7 @@ namespace NPC.Scheduling
     {
         [SerializeField] [Range(0, 23)] private int hour;
         [SerializeField] [Range(0, 60)] private int minute;
-        [FormerlySerializedAs("scheduledScheduledActivity")] [FormerlySerializedAs("activity")] [SerializeField] private ScheduledActivity scheduledActivity;
+        [SerializeField] private ScheduledActivity scheduledActivity;
 
         public int Hour => hour;
         public int Minute => minute;

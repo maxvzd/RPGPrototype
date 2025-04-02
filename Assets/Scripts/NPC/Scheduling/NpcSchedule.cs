@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace NPC.Scheduling
 {
@@ -6,8 +7,13 @@ namespace NPC.Scheduling
     {
         [SerializeField] private ScheduleItem[] activities;
 
-        private int _currentActivity;
+        private ScheduledActivity _currentActivity;
         private NpcController _npcController;
+
+        public ScheduledActivity CurrentActivity => _currentActivity;
+
+        private bool _isNpcFollowingSchedule;
+        
 
         private void Start()
         {
@@ -15,17 +21,27 @@ namespace NPC.Scheduling
             _npcController = GetComponent<NpcController>();
         }
 
+        public void FollowSchedule()
+        {
+            _isNpcFollowingSchedule = true;
+        }
+
+        public void StopFollowingSchedule()
+        {
+            _isNpcFollowingSchedule = false;
+        }
+
         private void WorldTimeOnTimeUpdated(int hour, int minute)
         {
-            var currentActivity = activities[_currentActivity];
-            if (hour >= currentActivity.Hour && minute >= currentActivity.Minute)
+            var scheduleItem = activities.FirstOrDefault(x => x.Hour == hour && x.Minute == minute);
+            if (scheduleItem is not null)
             {
-                currentActivity.Activity.Execute(_npcController);
-                _currentActivity++;
-                if (_currentActivity >= activities.Length)
-                {
-                    _currentActivity = 0;
-                }
+                _currentActivity = scheduleItem.Activity;
+            }
+
+            if (_currentActivity is not null && _isNpcFollowingSchedule)
+            {
+                _currentActivity.Execute(_npcController);
             }
         }
     }

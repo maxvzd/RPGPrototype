@@ -3,11 +3,11 @@ using Interact;
 
 namespace NPC.UtilityBaseClasses.Contexts
 {
-    public class SpeechContext : IConsiderationContext, IInteractionContext
+    public class SpeechConsiderationContext : IConsiderationContext, IInteractionContext
     {
         public float Disposition { get; }
         
-        public SpeechContext(float disposition)
+        public SpeechConsiderationContext(float disposition)
         {
             Disposition = disposition;
         }

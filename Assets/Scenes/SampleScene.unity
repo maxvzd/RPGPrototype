@@ -9225,7 +9225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6978554, y: 0, z: 0, w: 0.7162387}
+  m_LocalRotation: {x: 0.70379823, y: 0, z: 0, w: 0.7103999}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31307,9 +31307,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 11.900693
+  hourOfDay: 11.964338
   sunTransform: {fileID: 410087041}
-  time: 11:54
+  time: 11:58
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -50515,6 +50515,14 @@ PrefabInstance:
       propertyPath: solvers.spine.bones.Array.data[1].solverPosition.z
       value: -2.367306
       objectReference: {fileID: 0}
+    - target: {fileID: 5343773556984519115, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
+      propertyPath: availableActions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343773556984519115, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
+      propertyPath: 'availableActions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d1f5f2e584f66b4f97ba6d0fc2e21ba, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

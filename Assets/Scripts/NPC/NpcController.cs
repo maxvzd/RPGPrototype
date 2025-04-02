@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using NPC.Scheduling;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,23 +9,29 @@ namespace NPC
     public class NpcController : MonoBehaviour
     {
         private NavMeshAgent _navMeshAgent;
-        private IEnumerator _currentCoroutine;
+        private Coroutine _currentCoroutine;
         private SocialStats _socialStats;
-        
-        public bool IsIdle { get; private set; } = true;
-        public float Disposition => _socialStats.Disposition;
+        private NpcSchedule _schedule;
 
-        private void Start()
-        {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _socialStats = GetComponent<SocialStats>();
-        }
+        public EventHandler ReachedDestination;
+        public float Disposition => _socialStats.Disposition;
 
         public void MoveToDestination(Vector3 destination)
         {
-            IsIdle = false;
+            if (_navMeshAgent.destination == destination) return;
+            
             _navMeshAgent.destination = destination;
-            StartStopCoroutine(CheckRemainingDistanceCoroutine());
+            StartDistanceCoroutine();
+        }
+        
+        public void FollowSchedule()
+        {
+            _schedule.FollowSchedule();
+        }
+        
+        public void StopFollowingSchedule()
+        {
+            _schedule.StopFollowingSchedule();
         }
 
         public void StopMoving()
@@ -31,14 +39,19 @@ namespace NPC
             _navMeshAgent.isStopped = !_navMeshAgent.isStopped;
         }
 
-        private void StartStopCoroutine(IEnumerator coroutine)
+        private void StopDistanceCoroutine()
         {
             if (_currentCoroutine is not null)
             {
                 StopCoroutine(_currentCoroutine);
+                _currentCoroutine = null;
             }
-            _currentCoroutine = coroutine;
-            StartCoroutine(_currentCoroutine);
+        }
+
+        private void StartDistanceCoroutine()
+        {
+            StopDistanceCoroutine();
+            _currentCoroutine = StartCoroutine(CheckRemainingDistanceCoroutine());
         }
 
         private IEnumerator CheckRemainingDistanceCoroutine()
@@ -47,7 +60,14 @@ namespace NPC
             {
                 yield return new WaitForEndOfFrame();
             }
-            IsIdle = true;
+            ReachedDestination?.Invoke(this, EventArgs.Empty);
+        }
+        
+        private void Start()
+        {
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _socialStats = GetComponent<SocialStats>();
+            _schedule = GetComponent<NpcSchedule>();
         }
     }
 }

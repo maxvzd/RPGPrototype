@@ -15,19 +15,19 @@ namespace NPC.UtilityBaseClasses
         {
             if (considerations is null || considerations.Length == 0) return 0;
             
-            float score = 1f;
+            var score = 1f;
             foreach (var consideration in considerations)
             {
-                float considerationScore = consideration.Score(context);
+                var considerationScore = consideration.Score(context);
                 score *= considerationScore;
 
                 if (score == 0) return 0;
             }
 
             // Averaging scheme of overall score
-            float originalScore = score;
-            float modFactor = 1f - 1f / considerations.Length;
-            float makeupValue = (1 - originalScore) * modFactor;
+            var originalScore = score;
+            var modFactor = 1f - 1f / considerations.Length;
+            var makeupValue = (1 - originalScore) * modFactor;
             score = originalScore + (makeupValue * originalScore);
             return score;
         }
