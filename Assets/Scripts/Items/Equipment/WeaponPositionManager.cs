@@ -24,6 +24,7 @@ namespace Items.Equipment
         [SerializeField] private Transform leftHandSocket;
         [SerializeField] private Transform sheathedSocket;
         private RotateArms _armRotator;
+        private FirstPersonCameraSwap _armSwap;
 
         public void Start()
         {
@@ -32,6 +33,8 @@ namespace Items.Equipment
             _animationEventHandler.WeaponSheathed += WeaponSheathed;
             _animationEventHandler.WeaponUnSheathed += WeaponSheathed;
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
+            
+            _armSwap = GetComponent<FirstPersonCameraSwap>();
             
             _weaponPositions = new Dictionary<ItemType, SocketMap>
             {
@@ -55,6 +58,7 @@ namespace Items.Equipment
             
             _isWeaponSheathed = !_isWeaponSheathed;
             _armRotator.ShouldRotateArmsWithCamera = !_isWeaponSheathed;
+            _armSwap.SwitchArms();
             
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
         }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hour: 12
   minute: 0
-  scheduledActivity: {fileID: 11400000, guid: 244855550865b8043abcfff473ccd79f, type: 2}
+  scheduledActivity: {fileID: 11400000, guid: bbd82e0cd00b06b47884aab5cb3ba7ad, type: 2}
