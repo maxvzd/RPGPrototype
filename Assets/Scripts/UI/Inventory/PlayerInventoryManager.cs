@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Items;
 using Items.Equipment;
 using UnityEngine;
@@ -7,13 +8,16 @@ using Cursor = UnityEngine.Cursor;
 
 namespace UI.Inventory
 {
-    public class PlayerInventory : MonoBehaviour
+    public class PlayerInventoryManager : MonoBehaviour
     {
         [SerializeField] private UIDocument inventoryUI;
         private InventoryController _inventoryController;
         private bool _uiIsHidden;
         private global::Items.Inventory _inventory;
         private EquippedSlotManager _playerEquipped;
+        
+        public EventHandler UiShown;
+        public EventHandler UiHidden;
 
         private void Start()
         {
@@ -46,7 +50,7 @@ namespace UI.Inventory
             _inventoryController.SetSelectedItems(selectedIndices);
         }
 
-        private void HideUI()
+        public void HideUI()
         {
             if (_uiIsHidden) return;
 
@@ -54,9 +58,10 @@ namespace UI.Inventory
             Cursor.lockState = CursorLockMode.Locked;
             inventoryUI.rootVisualElement.style.display = DisplayStyle.None;
             _uiIsHidden = true;
+            UiHidden?.Invoke(this, EventArgs.Empty);
         }
 
-        private void ShowUI()
+        public void ShowUI()
         {
             if (!_uiIsHidden) return;
 
@@ -67,20 +72,7 @@ namespace UI.Inventory
 
             inventoryUI.rootVisualElement.style.display = DisplayStyle.Flex;
             _uiIsHidden = false;
-        }
-
-        public bool ToggleUI()
-        {
-            if (_uiIsHidden)
-            {
-                ShowUI();
-            }
-            else
-            {
-                HideUI();
-            }
-
-            return !_uiIsHidden;
+            UiShown?.Invoke(this, EventArgs.Empty);
         }
 
         public void DropSelectedItem()

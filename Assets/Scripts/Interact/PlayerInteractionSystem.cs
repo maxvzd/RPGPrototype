@@ -1,6 +1,7 @@
 ﻿using Constants;
 using Interact.Contexts;
 using Items;
+using UI.Dialogue;
 using UI.HUD;
 using UnityEngine;
 
@@ -15,11 +16,13 @@ namespace Interact
 
         private GameObject _currentlyAimedInteractable;
         private IInteract _interact;
+        private DialogueManager _dialogueManager;
 
         private void Start()
         {
             _inventorySystem = GetComponent<Inventory>();
             _hud = GetComponent<HudManager>();
+            _dialogueManager = GetComponent<DialogueManager>();
         }
 
         //Debug.DrawRay(origin, dir * maxInteractDistance, Color.red);
@@ -63,7 +66,7 @@ namespace Interact
             return interact switch
             {
                 IInteract<PickupContextBuilder> pickupInteraction => pickupInteraction.GetInteractionContext().AddInventoryContext(_inventorySystem),
-                IInteract<SpeechContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(),
+                IInteract<SpeechContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(_dialogueManager),
                 _ => new NoContext()
             };
         }

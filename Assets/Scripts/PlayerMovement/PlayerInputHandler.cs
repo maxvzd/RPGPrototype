@@ -6,6 +6,7 @@ using Constants;
 using FirstPerson;
 using Interact;
 using Items.Equipment;
+using UI.Dialogue;
 using UI.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,6 @@ namespace PlayerMovement
         private CameraLook _cameraLook;
         private FirstPersonCameraSwap _armSwap;
         private PlayerAttack _playerAttack;
-        private PlayerInventory _inventoryUIManager;
 
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -28,7 +28,7 @@ namespace PlayerMovement
         private Dictionary<InputAction, Action> _wasPerformedActions;
         private Dictionary<InputAction, Action> _wasPressedActions;
         private Dictionary<InputAction, Action> _wasCompletedActions;
-
+        
         public void Start()
         {
             _movement = GetComponent<ActorMovement>();
@@ -36,7 +36,8 @@ namespace PlayerMovement
             var weaponPosition = GetComponent<WeaponPositionManager>();
             var interactionSystem = GetComponent<PlayerInteractionSystem>();
             _playerAttack = GetComponent<PlayerAttack>();
-            _inventoryUIManager = GetComponent<PlayerInventory>();
+            var inventoryUIManager = GetComponent<PlayerInventoryManager>();
+            var dialogueManager = GetComponent<DialogueManager>();
             var jumper = GetComponent<JumpBehaviour>();
 
             _input = GetComponent<PlayerInput>();
@@ -57,9 +58,14 @@ namespace PlayerMovement
             {
                 { raiseWeaponAction, () => { weaponPosition.SheatheWeapon(); } },
                 { interactAction, () => { interactionSystem.Interact(); } },
-                { showInventoryPlayerAction, ToggleUi },
-                { showInventoryUIAction, ToggleUi },
-                { dropItemAction, () => { _inventoryUIManager.DropSelectedItem(); } },
+                { showInventoryPlayerAction, inventoryUIManager.ShowUI },
+                { showInventoryUIAction, () =>
+                    {
+                        inventoryUIManager.HideUI();
+                        dialogueManager.HideUI();
+                    }
+                },
+                { dropItemAction, () => { inventoryUIManager.DropSelectedItem(); } },
                 { jumpAction, () => { jumper.Jump(); } },
             };
 
@@ -72,6 +78,11 @@ namespace PlayerMovement
             {
                 { attackAction, () => { _playerAttack.HoldAttack(); } },
             };
+
+            inventoryUIManager.UiHidden += EnableRegularActions;
+            inventoryUIManager.UiShown += EnableUiActions;
+            dialogueManager.UiHidden += EnableRegularActions;
+            dialogueManager.UiShown += EnableUiActions;
         }
 
         public void Update()
@@ -104,10 +115,14 @@ namespace PlayerMovement
             }
         }
 
-        private void ToggleUi()
+        private void EnableUiActions(object sender, EventArgs e)
         {
-            var isInventoryUIShowing = _inventoryUIManager.ToggleUI();
-            _input.SwitchCurrentActionMap(isInventoryUIShowing ? InputConstants.UIActionMap : InputConstants.PlayerActionMap);
+            _input.SwitchCurrentActionMap(InputConstants.UIActionMap);
+        }
+
+        private void EnableRegularActions(object sender, EventArgs e)
+        {
+            _input.SwitchCurrentActionMap(InputConstants.PlayerActionMap);
         }
     }
 }

@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="DialogueDownAlignment" style="flex-grow: 1; align-content: flex-end; justify-content: flex-end;">
+        <engine:VisualElement name="DialogueContainer" style="flex-grow: 1; bottom: 50px; max-width: 75%; max-height: 35%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; left: 50px; align-content: auto; align-self: stretch; align-items: stretch; flex-direction: column;">
+            <engine:ListView name="DialogueListView" item-template="project://database/Assets/UI/Dialogue/DialogueItemTemplate.uxml?fileID=9197481963319205126&amp;guid=55e0087736fc459459279bf2dacb1761&amp;type=3#DialogueItemTemplate" style="flex-grow: 1;" />
+            <engine:VisualElement name="ButtonContainer" style="flex-grow: 0; align-self: flex-end;">
+                <engine:Button text="X" name="CloseButton" style="width: 50px; height: 50px;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

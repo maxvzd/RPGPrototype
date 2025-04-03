@@ -20,7 +20,7 @@ namespace NPC
         {
             _npcController = GetComponent<NpcController>();
             _npcController.ReachedDestination += ActionExecuted;
-            CalculateNewDecision<GenericContext>();
+            //CalculateNewDecision<GenericContext>();
         }
 
         public void CalculateNewDecision<T>() where T : IConsiderationContext
@@ -36,7 +36,7 @@ namespace NPC
 
         private IConsiderationContext GenerateContext(Type t)
         {
-            return t switch
+            return t switch 
             {
                 not null when t == typeof(SpeechConsiderationContext) => new SpeechConsiderationContext(_npcController.Disposition),
                 _ => new GenericContext()
@@ -45,8 +45,8 @@ namespace NPC
 
         private void ActionExecuted(object sender, EventArgs e)
         {
-            _npcController.StopFollowingSchedule();
-            CalculateNewDecision<GenericContext>();
+            //_npcController.StopFollowingSchedule();
+            //CalculateNewDecision<GenericContext>();
         }
 
         private static NpcAction DecideBestAction(IEnumerable<NpcAction> actions, IConsiderationContext context)
