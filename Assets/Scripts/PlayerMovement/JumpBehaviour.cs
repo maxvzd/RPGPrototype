@@ -46,8 +46,8 @@ namespace PlayerMovement
             var right = currentTransform.right * _movement.Direction.z * verticalLength;
             var up = currentTransform.up;
             
-            _rb.AddForce(up * jumpHeight, ForceMode.Impulse);
-            _rb.linearVelocity = forward + right;
+            _rb.AddForce(up * jumpHeight , ForceMode.Impulse);
+            _rb.linearVelocity += forward + right;
         }
     }
 }
