@@ -33,9 +33,8 @@ namespace Interact
         
         private void Interact(SpeechInteractionContext interactionContext)
         {
-            interactionContext.StartDialogue();
-            //_npc.CalculateNewDecision<SpeechConsiderationContext>();
-
+            //interactionContext.StartDialogue();
+            _npc.CalculateNewDecision<SpeechConsiderationContext>();
         }
     }
 }

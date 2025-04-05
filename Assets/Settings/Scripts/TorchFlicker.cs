@@ -19,14 +19,18 @@ public class TorchFlicker : MonoBehaviour
         StartCoroutine(LightChanger());
 
     }
+
     
+
     IEnumerator LightChanger()
     {
         while (flicker)
         {
-            noise = Random.Range(0f, 1f);
+            noise = Random.RandomRange(0f, 1f);
             _light.intensity = Mathf.Lerp(minValue, maxValue, noise);
             yield return new WaitForSeconds(timeRate);
         }
+      
+        
     }
 }
