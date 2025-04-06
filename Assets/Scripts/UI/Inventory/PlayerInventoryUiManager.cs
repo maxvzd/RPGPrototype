@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Items;
 using Items.Equipment;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
 
 namespace UI.Inventory
 {
-    public class PlayerInventoryManager : MonoBehaviour
+    public class PlayerInventoryUiManager : BaseUIManager
     {
-        [SerializeField] private UIDocument inventoryUI;
         private InventoryController _inventoryController;
-        private bool _uiIsHidden;
         private global::Items.Inventory _inventory;
         private EquippedSlotManager _playerEquipped;
-        
-        public EventHandler UiShown;
-        public EventHandler UiHidden;
 
         private void Start()
         {
-            _inventoryController = new InventoryController(inventoryUI.rootVisualElement);
+            _inventoryController = new InventoryController(uiDocument.rootVisualElement);
             _inventoryController.ItemClicked += OnItemClicked;
             
             _inventory = GetComponent<global::Items.Inventory>();
@@ -50,31 +42,6 @@ namespace UI.Inventory
             _inventoryController.SetSelectedItems(selectedIndices);
         }
 
-        public void HideUI()
-        {
-            if (_uiIsHidden) return;
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            inventoryUI.rootVisualElement.style.display = DisplayStyle.None;
-            _uiIsHidden = true;
-            UiHidden?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void ShowUI()
-        {
-            if (!_uiIsHidden) return;
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-
-            _inventoryController.PopulateItems(_inventory.Items);
-
-            inventoryUI.rootVisualElement.style.display = DisplayStyle.Flex;
-            _uiIsHidden = false;
-            UiShown?.Invoke(this, EventArgs.Empty);
-        }
-
         public void DropSelectedItem()
         {
             var instance = _inventoryController.CurrentlyHoveredItem;
@@ -93,6 +60,11 @@ namespace UI.Inventory
             
             _inventoryController.PopulateItems(_inventory.Items);
             _inventoryController.ResetCurrentlyHovered();
+        }
+
+        protected override void PopulateItems()
+        {
+            _inventoryController.PopulateItems(_inventory.Items);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace UI.Inventory
         public void PopulateItems(IEnumerable<InstanceProperties> items)
         {
             _items = items.ToList();
-            _listController.PopulateInventoryList(_items);
+            _listController.SetupInventoryList(_items);
         }
 
         public void ResetCurrentlyHovered()

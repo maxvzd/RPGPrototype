@@ -1,8 +1,7 @@
-﻿using Interact;
+﻿using Interact.ContextBuilders;
 using Interact.Contexts;
 using NPC;
 using NPC.UtilityBaseClasses.Contexts;
-using UI.Dialogue;
 using UnityEngine;
 
 namespace Interact
@@ -36,13 +35,5 @@ namespace Interact
             //interactionContext.StartDialogue();
             _npc.CalculateNewDecision<SpeechConsiderationContext>();
         }
-    }
-}
-
-public class SpeechContextBuilder : IContextBuilder
-{
-    public SpeechInteractionContext Build(DialogueManager dialogueManager)
-    {
-        return new SpeechInteractionContext(dialogueManager);
     }
 }

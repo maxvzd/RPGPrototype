@@ -1,6 +1,5 @@
-﻿using Interact;
+﻿using Interact.ContextBuilders;
 using Interact.Contexts;
-using Items;
 using Items.Behaviours;
 using Items.InstancePropertiesClasses;
 using UnityEngine;
@@ -39,13 +38,5 @@ namespace Interact
                 Destroy(gameObject); 
             }
         }
-    }
-}
-
-public class PickupContextBuilder : IContextBuilder
-{
-    public PickupContext AddInventoryContext(Inventory inventory)
-    {
-        return new PickupContext(inventory);
     }
 }

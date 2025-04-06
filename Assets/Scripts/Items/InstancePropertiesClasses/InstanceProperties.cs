@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Items.InstancePropertiesClasses
 {
+    [Serializable]
     public abstract class InstanceProperties
     {
         public abstract bool IsInstanceTypeInitialised { get; }

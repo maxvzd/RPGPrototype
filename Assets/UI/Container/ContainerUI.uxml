@@ -1,0 +1,23 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-start; align-content: flex-start; align-items: stretch; align-self: stretch;">
+        <engine:VisualElement name="ContainerInventory" style="flex-grow: 1; flex-direction: column; margin-top: 50px; margin-right: 50px; margin-bottom: 50px; margin-left: 50px; width: 35%;">
+            <engine:MultiColumnListView name="ContainerInventoryItems" style="align-content: center; justify-content: center; align-self: stretch; -unity-text-align: middle-left; flex-grow: 1;">
+                <engine:Columns reorderable="false" resizable="false">
+                    <engine:Column name="Icon" optional="false" resizable="false" max-width="95px" min-width="95px" width="95px" title="Icon" cell-template="project://database/Assets/UI/Inventory/ListViewIconTemplate.uxml?fileID=9197481963319205126&amp;guid=570263557e8f1f64ebc32a5d75dc316b&amp;type=3#ListViewIconTemplate" />
+                    <engine:Column name="Name" title="Name" optional="false" stretchable="true" cell-template="project://database/Assets/UI/Inventory/ListViewLabelTemplate.uxml?fileID=9197481963319205126&amp;guid=58b0f35875b70ee47a97963774db61d7&amp;type=3#ListViewLabelTemplate" />
+                    <engine:Column name="Weight" title="Weight" optional="false" stretchable="true" cell-template="project://database/Assets/UI/Inventory/ListViewLabelTemplate.uxml?fileID=9197481963319205126&amp;guid=58b0f35875b70ee47a97963774db61d7&amp;type=3#ListViewLabelTemplate" width="95px" max-width="95px" />
+                </engine:Columns>
+            </engine:MultiColumnListView>
+        </engine:VisualElement>
+        <engine:VisualElement name="PlayerInventory" style="flex-grow: 1; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 35%; margin-top: 50px; margin-right: 50px; margin-bottom: 50px; margin-left: 50px;">
+            <engine:MultiColumnListView name="PlayerInventoryItems" style="align-content: center; justify-content: center; align-self: stretch; -unity-text-align: middle-left; flex-grow: 1;">
+                <engine:Columns reorderable="false" resizable="false">
+                    <engine:Column name="Icon" optional="false" resizable="false" max-width="95px" min-width="95px" width="95px" title="Icon" cell-template="project://database/Assets/UI/Inventory/ListViewIconTemplate.uxml?fileID=9197481963319205126&amp;guid=570263557e8f1f64ebc32a5d75dc316b&amp;type=3#ListViewIconTemplate" />
+                    <engine:Column name="Name" title="Name" optional="false" stretchable="true" cell-template="project://database/Assets/UI/Inventory/ListViewLabelTemplate.uxml?fileID=9197481963319205126&amp;guid=58b0f35875b70ee47a97963774db61d7&amp;type=3#ListViewLabelTemplate" />
+                    <engine:Column name="Weight" title="Weight" optional="false" stretchable="true" cell-template="project://database/Assets/UI/Inventory/ListViewLabelTemplate.uxml?fileID=9197481963319205126&amp;guid=58b0f35875b70ee47a97963774db61d7&amp;type=3#ListViewLabelTemplate" width="95px" max-width="95px" />
+                </engine:Columns>
+            </engine:MultiColumnListView>
+        </engine:VisualElement>
+        <engine:VisualElement name="Empty" style="flex-grow: 1; width: 30%;" />
+    </engine:VisualElement>
+</engine:UXML>

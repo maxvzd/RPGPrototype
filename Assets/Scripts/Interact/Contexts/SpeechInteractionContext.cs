@@ -20,7 +20,8 @@ namespace Interact.Contexts
                 options.Add($"This is option: {i}");
             }
             
-            _dialogueManager.ShowUI(options);
+            _dialogueManager.PopulateDialogueOptions(options);
+            _dialogueManager.ShowUI();
         }
     }
 }

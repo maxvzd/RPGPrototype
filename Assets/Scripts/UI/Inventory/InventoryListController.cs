@@ -14,6 +14,8 @@ namespace UI.Inventory
         public int CurrentlyHoveredIndex { get; private set; } = -1;
         public EventHandler<int> ItemClicked;
 
+        private List<ItemViewModel> _items;
+
         public InventoryListController(MultiColumnListView listView)
         {
             _listView = listView;
@@ -26,29 +28,29 @@ namespace UI.Inventory
             CurrentlyHoveredIndex = -1;
         }
 
-        public void PopulateInventoryList(IEnumerable<InstanceProperties> model)
+        public void SetupInventoryList(IEnumerable<InstanceProperties> model)
         {
-            var listOfViewModels = model.Select(x => new ItemViewModel(x.BaseItemProperties)).ToList();
+            SetItems(model);
             
-            _listView.itemsSource = listOfViewModels;
             _listView.columns["Icon"].bindCell = (element, i) =>
             {
                 var iconContainer = element.Q<VisualElement>(InventoryUIConstants.IconElement);
                 if (iconContainer is not null)
                 {
-                    iconContainer.style.backgroundImage = listOfViewModels[i].InventoryIcon;
+                    iconContainer.style.backgroundImage = _items[i].InventoryIcon;
                 }
-                
                 BindToEvents(element, i);
             }; 
+            
             _listView.columns["Name"].bindCell = (element, i) =>
             {
-                SetTextInDisplayLabel(listOfViewModels[i].Name, element);
+                SetTextInDisplayLabel(_items[i].Name, element);
                 BindToEvents(element, i);
             }; 
+            
             _listView.columns["Weight"].bindCell = (element, i) =>
             {
-                SetTextInDisplayLabel(listOfViewModels[i].Weight.ToString("F"), element);
+                SetTextInDisplayLabel(_items[i].Weight.ToString("F"), element);
                 BindToEvents(element, i);
             };
 
@@ -99,6 +101,13 @@ namespace UI.Inventory
         public void SetSelectedItems(IEnumerable<int> selectedIndices)
         {
             _listView.SetSelection(selectedIndices);
+        }
+
+        public void SetItems(IEnumerable<InstanceProperties> items)
+        {
+            _items = items.Select(x => new ItemViewModel(x.BaseItemProperties)).ToList();
+            _listView.itemsSource = _items;
+            _listView.RefreshItems();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Constants;
+using Interact.ContextBuilders;
 using Interact.Contexts;
 using Items;
+using UI.Container;
 using UI.Dialogue;
 using UI.HUD;
 using UnityEngine;
@@ -17,12 +19,14 @@ namespace Interact
         private GameObject _currentlyAimedInteractable;
         private IInteract _interact;
         private DialogueManager _dialogueManager;
+        private ContainerUiManager _containerUiManager;
 
         private void Start()
         {
             _inventorySystem = GetComponent<Inventory>();
             _hud = GetComponent<HudManager>();
             _dialogueManager = GetComponent<DialogueManager>();
+            _containerUiManager = GetComponent<ContainerUiManager>();
         }
 
         //Debug.DrawRay(origin, dir * maxInteractDistance, Color.red);
@@ -65,8 +69,9 @@ namespace Interact
         {
             return interact switch
             {
-                IInteract<PickupContextBuilder> pickupInteraction => pickupInteraction.GetInteractionContext().AddInventoryContext(_inventorySystem),
+                IInteract<PickupContextBuilder> pickupInteraction => pickupInteraction.GetInteractionContext().Build(_inventorySystem),
                 IInteract<SpeechContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(_dialogueManager),
+                IInteract<ContainerContextBuilder> containerInteraction => containerInteraction.GetInteractionContext().Build(_containerUiManager, _inventorySystem, _currentlyAimedInteractable),
                 _ => new NoContext()
             };
         }

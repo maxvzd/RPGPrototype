@@ -1,50 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
+﻿using System.Collections.Generic;
 
 namespace UI.Dialogue
 {
-    public class DialogueManager : MonoBehaviour
+    public class DialogueManager : BaseUIManager
     {
-        private bool _uiIsHidden;
-        [SerializeField] private UIDocument dialogueUi;
         private DialogueController _controller;
-
-        public EventHandler UiShown;
-        public EventHandler UiHidden;
+        private IEnumerable<string> _dialogueOptions;
 
         private void Start()
         {
-            _controller = new DialogueController(dialogueUi.rootVisualElement);
+            _controller = new DialogueController(uiDocument.rootVisualElement);
             _controller.RequestClose += (sender, args) => HideUI();
             HideUI();
+            _dialogueOptions = new List<string>();
         }
 
-        public void HideUI()
+        //TODO Get rid of state
+        public void PopulateDialogueOptions(IEnumerable<string> options)
         {
-            if (_uiIsHidden) return;
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            dialogueUi.rootVisualElement.style.display = DisplayStyle.None;
-            _uiIsHidden = true;
-            UiHidden?.Invoke(this, EventArgs.Empty);
+            _dialogueOptions = options;
         }
 
-        public void ShowUI(IEnumerable<string> options)
+        protected override void PopulateItems()
         {
-            if (!_uiIsHidden) return;
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-            
-            _controller.PopulateDialogueOptions(options);
-
-            dialogueUi.rootVisualElement.style.display = DisplayStyle.Flex;
-            _uiIsHidden = false;
-            UiShown?.Invoke(this, EventArgs.Empty);
+            _controller.PopulateDialogueOptions(_dialogueOptions);
         }
     }
 }

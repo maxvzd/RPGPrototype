@@ -6,6 +6,7 @@ using Constants;
 using FirstPerson;
 using Interact;
 using Items.Equipment;
+using UI.Container;
 using UI.Dialogue;
 using UI.Inventory;
 using UnityEngine;
@@ -36,8 +37,9 @@ namespace PlayerMovement
             var weaponPosition = GetComponent<WeaponPositionManager>();
             var interactionSystem = GetComponent<PlayerInteractionSystem>();
             _playerAttack = GetComponent<PlayerAttack>();
-            var inventoryUIManager = GetComponent<PlayerInventoryManager>();
+            var inventoryUIManager = GetComponent<PlayerInventoryUiManager>();
             var dialogueManager = GetComponent<DialogueManager>();
+            var containerManager = GetComponent<ContainerUiManager>();
             var jumper = GetComponent<JumpBehaviour>();
 
             _input = GetComponent<PlayerInput>();
@@ -63,6 +65,7 @@ namespace PlayerMovement
                     {
                         inventoryUIManager.HideUI();
                         dialogueManager.HideUI();
+                        containerManager.HideUI();
                     }
                 },
                 { dropItemAction, () => { inventoryUIManager.DropSelectedItem(); } },
@@ -83,6 +86,8 @@ namespace PlayerMovement
             inventoryUIManager.UiShown += EnableUiActions;
             dialogueManager.UiHidden += EnableRegularActions;
             dialogueManager.UiShown += EnableUiActions;
+            containerManager.UiHidden += EnableRegularActions;
+            containerManager.UiShown += EnableUiActions;
         }
 
         public void Update()
