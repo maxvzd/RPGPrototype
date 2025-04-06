@@ -15,7 +15,7 @@ namespace UI.Inventory
         {
             _inventoryController = new InventoryController(uiDocument.rootVisualElement);
             _inventoryController.ItemClicked += OnItemClicked;
-            
+
             _inventory = GetComponent<global::Items.Inventory>();
             _playerEquipped = GetComponent<EquippedSlotManager>();
             HideUI();
@@ -39,6 +39,7 @@ namespace UI.Inventory
                     selectedIndices.Add(i);
                 }
             }
+
             _inventoryController.SetSelectedItems(selectedIndices);
         }
 
@@ -49,15 +50,12 @@ namespace UI.Inventory
 
             if (_inventory.RemoveItem(instance))
             {
-                if (_playerEquipped.UnEquipItem(instance.InstanceId))
-                {
-                    SetSelectedIndices();
-                }
+                SetSelectedIndices();
                 var currTransform = transform;
                 var positionToSpawnAt = currTransform.position + currTransform.forward * 0.5f + currTransform.up * 1.5f;
                 ItemSpawner.SpawnItem(instance, positionToSpawnAt, Quaternion.identity);
             }
-            
+
             _inventoryController.PopulateItems(_inventory.Items);
             _inventoryController.ResetCurrentlyHovered();
         }
