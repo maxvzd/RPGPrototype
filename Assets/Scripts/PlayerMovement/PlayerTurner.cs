@@ -17,8 +17,6 @@ namespace PlayerMovement
         private bool _isTurning;
         private static int _bodyShouldFollowCameraRegister;
 
-        //public List<bool> BodyShouldFollowCamera { get; set; } = false;
-
         public void Start()
         {
             _animator = GetComponent<Animator>();
