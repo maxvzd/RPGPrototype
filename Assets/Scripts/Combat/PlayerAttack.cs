@@ -86,21 +86,21 @@ namespace Combat
             _currentAttackDirection = AttackDirection.None;
         }
 
-        // private void Update()
-        // {
-        //     if (_weaponPositionManager.IsWeaponSheathed) return;
-        //
-        //     // if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
-        //     // {
-        //     //     ResetReadyToRelease();
-        //     //     TransitionToAttackState();
-        //     // }
-        //
-        //     if (_isLeftMouseHeld)//&& _attackCounter == 0)
-        //     {
-        //         TransitionToHoldState();
-        //     }
-        // }
+        private void Update()
+        {
+            if (_weaponPositionManager.IsWeaponSheathed) return;
+        
+            // if (_attackCounter is > 0 and < MAX_COMBO_COUNT && _swingFinished)
+            // {
+            //     ResetReadyToRelease();
+            //     TransitionToAttackState();
+            // }
+        
+            if (_isLeftMouseHeld)//&& _attackCounter == 0)
+            {
+                TransitionToChargeState();
+            }
+        }
         
         private void TransitionToChargeState()
         {
