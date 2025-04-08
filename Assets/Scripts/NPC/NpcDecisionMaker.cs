@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPC.Scheduling;
 using NPC.UtilityBaseClasses;
 using NPC.UtilityBaseClasses.Contexts;
 using UnityEngine;
@@ -19,20 +20,32 @@ namespace NPC
         private void Start()
         {
             _npcController = GetComponent<NpcController>();
-            _npcController.ReachedDestination += ActionExecuted;
-            //CalculateNewDecision<GenericContext>();
+            CalculateNewDecision<GenericContext>();
         }
 
         public void CalculateNewDecision<T>() where T : IConsiderationContext
         {
-            if (!availableActions.Any()) return;
+            if (!availableActions.Any(x => x is not null)) return;
             
             var context = GenerateContext(typeof(T));
-            
+
+            // if (_currentAction is not null)
+            // {
+            //     _currentAction.EventExecuted -= EventExecuted;
+            // }
+
             _currentAction = DecideBestAction(availableActions, context);
+            
+            //_currentAction.EventExecuted += EventExecuted;
             
             _currentAction.Execute(_npcController);
         }
+
+        // private void EventExecuted(object sender, EventArgs e)
+        // {
+        //     Debug.Log("Gonna figure out what to do next....");
+        //     CalculateNewDecision<GenericContext>();
+        // }
 
         private IConsiderationContext GenerateContext(Type t)
         {
@@ -41,12 +54,6 @@ namespace NPC
                 not null when t == typeof(SpeechConsiderationContext) => new SpeechConsiderationContext(_npcController.Disposition),
                 _ => new GenericContext()
             };
-        }
-
-        private void ActionExecuted(object sender, EventArgs e)
-        {
-            //_npcController.StopFollowingSchedule();
-            //CalculateNewDecision<GenericContext>();
         }
 
         private static NpcAction DecideBestAction(IEnumerable<NpcAction> actions, IConsiderationContext context)
@@ -58,6 +65,17 @@ namespace NPC
                 scores.Add(action,score);
             }
             return scores.OrderByDescending(x => x.Value).First().Key;
+        }
+
+        public void ScheduleItem(ScheduleItem scheduleItem)
+        {
+            availableActions.Add(scheduleItem.Action);
+            CalculateNewDecision<GenericContext>();
+        }
+        
+        public void UnScheduleItem(ScheduleItem scheduleItem)
+        {
+            availableActions.Remove(scheduleItem.Action);
         }
     }
 }

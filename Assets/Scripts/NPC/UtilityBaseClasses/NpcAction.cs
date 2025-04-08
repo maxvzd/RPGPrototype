@@ -8,6 +8,8 @@ namespace NPC.UtilityBaseClasses
     {
         [SerializeField] private string actionId;
         [SerializeField] private ConsiderationBase[] considerations;
+
+        //public EventHandler EventExecuted;
         
         public abstract void Execute(NpcController npcController);
         

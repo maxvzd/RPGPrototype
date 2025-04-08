@@ -1,17 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using NPC.UtilityBaseClasses;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NPC.Scheduling
 {
-    [CreateAssetMenu(menuName = "NPC/Scheduling/Schedule Item")]
-    public class ScheduleItem : ScriptableObject
+    [Serializable]
+    public class ScheduleItem
     {
         [SerializeField] [Range(0, 23)] private int hour;
         [SerializeField] [Range(0, 60)] private int minute;
-        [SerializeField] private ScheduledActivity scheduledActivity;
+        [FormerlySerializedAs("scheduledActivity")] [SerializeField] private NpcAction scheduledAction;
 
         public int Hour => hour;
         public int Minute => minute;
-        public ScheduledActivity Activity => scheduledActivity;
-
+        public NpcAction Action => scheduledAction;
     }
 }

@@ -854,10 +854,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
 --- !u!43 &306502904
 Mesh:
   m_ObjectHideFlags: 0
@@ -1411,7 +1419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.71676177, y: 0, z: 0, w: 0.69731814}
+  m_LocalRotation: {x: 0.70080495, y: 0, z: 0, w: 0.713353}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1583,10 +1591,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
 --- !u!1 &550862023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,10 +5404,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 12
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 12
+    minute: 10
+    scheduledAction: {fileID: 0}
+  - hour: 12
+    minute: 20
+    scheduledAction: {fileID: 0}
+  - hour: 12
+    minute: 30
+    scheduledAction: {fileID: 0}
 --- !u!1 &1138218418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1906077499979288351, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
@@ -5410,10 +5434,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 12
+    minute: 0
+    scheduledAction: {fileID: 11400000, guid: a79e311931b0e244d87ba96ea35a63f0, type: 2}
+  - hour: 12
+    minute: 10
+    scheduledAction: {fileID: 11400000, guid: 5e8ce03652691ce4d8b30b236290d7e7, type: 2}
+  - hour: 12
+    minute: 20
+    scheduledAction: {fileID: 11400000, guid: 2a11a140b772edf49ab57ed711b2d7d6, type: 2}
+  - hour: 12
+    minute: 30
+    scheduledAction: {fileID: 11400000, guid: 1b9eecc14f9788b4d9fd2d3f828ff994, type: 2}
 --- !u!1 &1184949280
 GameObject:
   m_ObjectHideFlags: 0
@@ -6075,10 +6107,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
 --- !u!1001 &1308666941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9265,9 +9305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 12.105036
+  hourOfDay: 11.932216
   sunTransform: {fileID: 410087041}
-  time: 12:06
+  time: 11:56
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -10063,10 +10103,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activities:
-  - {fileID: 11400000, guid: bebbe8e0616af3b47ae4f24d0759559f, type: 2}
-  - {fileID: 11400000, guid: e82db62c21b9e3e4ba5503cf339e420e, type: 2}
-  - {fileID: 11400000, guid: a331128ec992b0c46840c2ccc76c20f0, type: 2}
-  - {fileID: 11400000, guid: 2f3e4c77f1f308a45a940ea84af8865a, type: 2}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
+  - hour: 0
+    minute: 0
+    scheduledAction: {fileID: 0}
 --- !u!1 &1636404289
 GameObject:
   m_ObjectHideFlags: 0
@@ -14058,7 +14106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5343773556984519115, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
       propertyPath: availableActions.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5343773556984519115, guid: 34fc24df2e21e8543a86d5fa559c4ef6, type: 3}
       propertyPath: 'availableActions.Array.data[0]'

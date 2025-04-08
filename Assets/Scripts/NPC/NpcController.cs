@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using NPC.Scheduling;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +10,6 @@ namespace NPC
         private NavMeshAgent _navMeshAgent;
         private Coroutine _currentCoroutine;
         private SocialStats _socialStats;
-        private NpcSchedule _schedule;
 
         public EventHandler ReachedDestination;
         public float Disposition => _socialStats.Disposition;
@@ -22,16 +20,6 @@ namespace NPC
             
             _navMeshAgent.destination = destination;
             StartDistanceCoroutine();
-        }
-        
-        public void FollowSchedule()
-        {
-            _schedule.FollowSchedule();
-        }
-        
-        public void StopFollowingSchedule()
-        {
-            _schedule.StopFollowingSchedule();
         }
 
         public void StopMoving()
@@ -56,10 +44,17 @@ namespace NPC
 
         private IEnumerator CheckRemainingDistanceCoroutine()
         {
+            while (_navMeshAgent.pathPending)
+            {
+                yield return null;
+            }
+            
             while (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance)
             {
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
+            
+            Debug.Log("I've reached position");
             ReachedDestination?.Invoke(this, EventArgs.Empty);
         }
         
@@ -67,7 +62,6 @@ namespace NPC
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _socialStats = GetComponent<SocialStats>();
-            _schedule = GetComponent<NpcSchedule>();
         }
     }
 }
