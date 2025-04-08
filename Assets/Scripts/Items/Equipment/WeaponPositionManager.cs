@@ -33,9 +33,9 @@ namespace Items.Equipment
             _animationEventHandler.WeaponSheathed += WeaponSheathed;
             _animationEventHandler.WeaponUnSheathed += WeaponSheathed;
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
-            
+
             _armSwap = GetComponent<FirstPersonCameraSwap>();
-            
+
             _weaponPositions = new Dictionary<ItemType, SocketMap>
             {
                 { ItemType.Weapon, new SocketMap(Guid.Empty, rightHandSocket, sheathedSocket, null, null) },
@@ -43,7 +43,7 @@ namespace Items.Equipment
             };
 
             _armRotator = GetComponent<RotateArms>();
-            
+
             UpdateWeaponPosition();
         }
 
@@ -55,11 +55,19 @@ namespace Items.Equipment
         public void SheatheWeapon()
         {
             if (!IsWeaponEquipped) return;
-            
+
             _isWeaponSheathed = !_isWeaponSheathed;
             _armRotator.ShouldRotateArmsWithCamera = !_isWeaponSheathed;
             _armSwap.SwitchArms();
-            
+
+            if (_isWeaponSheathed)
+            {
+                PlayerTurner.BodyShouldFollowCameraUnRegister();
+            }
+            else
+            {
+                PlayerTurner.BodyShouldFollowCameraRegister();
+            }
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
         }
 
@@ -92,7 +100,6 @@ namespace Items.Equipment
             if (!IsWeaponEquipped) return;
             if (!_isWeaponSheathed)
             {
-                PlayerTurner.BodyShouldFollowCameraRegister();
                 foreach (var value in _weaponPositions)
                 {
                     value.Value.UnsheatheItem();
@@ -100,7 +107,6 @@ namespace Items.Equipment
             }
             else
             {
-                PlayerTurner.BodyShouldFollowCameraUnRegister();
                 foreach (var value in _weaponPositions)
                 {
                     value.Value.SheatheItem();

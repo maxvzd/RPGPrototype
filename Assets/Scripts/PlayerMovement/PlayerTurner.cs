@@ -34,11 +34,13 @@ namespace PlayerMovement
         public static void BodyShouldFollowCameraRegister()
         {
             _bodyShouldFollowCameraRegister++;
+            Debug.Log($"Registering! Total: {_bodyShouldFollowCameraRegister}");
         }
 
         public static void BodyShouldFollowCameraUnRegister()
         {
             _bodyShouldFollowCameraRegister = Mathf.Clamp(_bodyShouldFollowCameraRegister - 1, 0, int.MaxValue);
+            Debug.Log($"UnRegistering! Total: {_bodyShouldFollowCameraRegister}");
         }
         
         public void Update()
@@ -56,7 +58,7 @@ namespace PlayerMovement
             }
             else if(!_isTurning)
             {
-                float angleBetweenCameraAndBody = mainCamera.eulerAngles.y - transform.eulerAngles.y;
+                var angleBetweenCameraAndBody = mainCamera.eulerAngles.y - transform.eulerAngles.y;
                 if (angleBetweenCameraAndBody < 0)
                 {
                     angleBetweenCameraAndBody += 360;
