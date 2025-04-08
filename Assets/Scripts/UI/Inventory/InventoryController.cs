@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Constants;
 using Items.InstancePropertiesClasses;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory

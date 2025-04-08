@@ -63,6 +63,7 @@ namespace UI.Inventory
         protected override void PopulateItems()
         {
             _inventoryController.PopulateItems(_inventory.Items);
+            SetSelectedIndices();
         }
     }
 }
