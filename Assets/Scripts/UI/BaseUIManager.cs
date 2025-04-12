@@ -25,7 +25,7 @@ namespace UI
             UiHidden?.Invoke(this, EventArgs.Empty);
         }
         
-        public virtual void ShowUI()
+        public void ShowUI()
         {
             if (!_uiIsHidden) return;
 
