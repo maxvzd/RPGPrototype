@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a78c8623b54c82a5f2aa7ac5107bd0, type: 3}
-  m_Name: WalkTo00Action
+  m_Name: WalkTo5050Action
   m_EditorClassIdentifier: 
-  actionId: WalkAction
+  actionId: WalkAction5050
   considerations:
-  - {fileID: 11400000, guid: a3ee98d3990374f4b883b6fa9c6bc293, type: 2}
-  location: {x: 0, y: 0}
+  - {fileID: 11400000, guid: c6909f5c95c9b5f4b92675605c68cba1, type: 2}
+  destination: {x: 50, y: 50}

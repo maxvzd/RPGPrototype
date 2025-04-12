@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ed6dc322224509ae9464d81f8f679d, type: 3}
-  m_Name: Carry out Schedule
+  m_Script: {fileID: 11500000, guid: 4174eaed551842d0b8352d65a4f51a22, type: 3}
+  m_Name: PointOne
   m_EditorClassIdentifier: 
-  actionId: 
-  considerations:
-  - {fileID: 11400000, guid: a3ee98d3990374f4b883b6fa9c6bc293, type: 2}
+  value: 0.1

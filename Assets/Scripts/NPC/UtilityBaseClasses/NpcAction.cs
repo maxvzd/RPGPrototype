@@ -1,4 +1,5 @@
 ﻿using System;
+using NPC.Considerations;
 using UnityEngine;
 
 namespace NPC.UtilityBaseClasses
@@ -9,18 +10,18 @@ namespace NPC.UtilityBaseClasses
         [SerializeField] private string actionId;
         [SerializeField] private ConsiderationBase[] considerations;
 
-        //public EventHandler EventExecuted;
+        public string ActionId => actionId;
         
         public abstract void Execute(NpcController npcController);
         
-        public float CalculateScore(IConsiderationContext context)
+        public float CalculateScore(ConsiderationContextGenerator contextGenerator)
         {
             if (considerations is null || considerations.Length == 0) return 0;
             
             var score = 1f;
             foreach (var consideration in considerations)
             {
-                var considerationScore = consideration.Score(context);
+                var considerationScore = consideration.Score(contextGenerator);
                 score *= considerationScore;
 
                 if (score == 0) return 0;

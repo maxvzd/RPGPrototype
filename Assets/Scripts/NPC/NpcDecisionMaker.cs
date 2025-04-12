@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPC.Considerations;
 using NPC.Scheduling;
 using NPC.UtilityBaseClasses;
 using NPC.UtilityBaseClasses.Contexts;
@@ -16,25 +17,31 @@ namespace NPC
 
         public IEnumerable<NpcAction> AvailableActions => availableActions;
         private NpcAction _currentAction;
+
+        private ConsiderationContextGenerator _contextGenerator;
         
         private void Start()
         {
             _npcController = GetComponent<NpcController>();
-            CalculateNewDecision<GenericContext>();
+            
+            var socialStats = GetComponent<SocialStats>();
+
+            _contextGenerator = new ConsiderationContextGenerator(socialStats);
+            
+            CalculateNewDecision();
         }
 
-        public void CalculateNewDecision<T>() where T : IConsiderationContext
+        public void CalculateNewDecision()
         {
             if (!availableActions.Any(x => x is not null)) return;
             
-            var context = GenerateContext(typeof(T));
 
             // if (_currentAction is not null)
             // {
             //     _currentAction.EventExecuted -= EventExecuted;
             // }
 
-            _currentAction = DecideBestAction(availableActions, context);
+            _currentAction = DecideBestAction();
             
             //_currentAction.EventExecuted += EventExecuted;
             
@@ -47,30 +54,37 @@ namespace NPC
         //     CalculateNewDecision<GenericContext>();
         // }
 
-        private IConsiderationContext GenerateContext(Type t)
-        {
-            return t switch 
-            {
-                not null when t == typeof(SpeechConsiderationContext) => new SpeechConsiderationContext(_npcController.Disposition),
-                _ => new GenericContext()
-            };
-        }
-
-        private static NpcAction DecideBestAction(IEnumerable<NpcAction> actions, IConsiderationContext context)
+        private NpcAction DecideBestAction()
         {
             var scores = new Dictionary<NpcAction, float>();
-            foreach (var action in actions)
+            var instantActions = new List<NpcAction>();
+            foreach (var action in availableActions)
             {
-                var score = action.CalculateScore(context);
-                scores.Add(action,score);
+                var score = action.CalculateScore(_contextGenerator);
+                scores.TryAdd(action, score);
+                
+                if (action is InstantAction)
+                {
+                    instantActions.Add(action);
+                }
+            }
+
+            foreach (var instantAction in instantActions)
+            {
+                availableActions.Remove(instantAction);
             }
             return scores.OrderByDescending(x => x.Value).First().Key;
+        }
+
+        public void AddSpeechAction(IEnumerable<NpcAction> actions)
+        {
+            availableActions.AddRange(actions);
         }
 
         public void ScheduleItem(ScheduleItem scheduleItem)
         {
             availableActions.Add(scheduleItem.Action);
-            CalculateNewDecision<GenericContext>();
+            CalculateNewDecision();
         }
         
         public void UnScheduleItem(ScheduleItem scheduleItem)

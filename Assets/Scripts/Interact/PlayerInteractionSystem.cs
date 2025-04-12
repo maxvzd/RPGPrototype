@@ -70,7 +70,7 @@ namespace Interact
             return interact switch
             {
                 IInteract<PickupContextBuilder> pickupInteraction => pickupInteraction.GetInteractionContext().Build(_inventorySystem),
-                IInteract<SpeechContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(_dialogueManager),
+                IInteract<SpeechInteractionContextBuilder> speechInteraction => speechInteraction.GetInteractionContext().Build(),
                 IInteract<ContainerContextBuilder> containerInteraction => containerInteraction.GetInteractionContext().Build(_containerUiManager, _inventorySystem, _currentlyAimedInteractable),
                 _ => new NoContext()
             };

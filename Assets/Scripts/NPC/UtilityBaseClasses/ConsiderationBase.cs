@@ -1,4 +1,5 @@
 ﻿using System;
+using NPC.Considerations;
 using UnityEngine;
 
 namespace NPC.UtilityBaseClasses
@@ -7,6 +8,6 @@ namespace NPC.UtilityBaseClasses
     [Serializable]
     public abstract class ConsiderationBase : ScriptableObject
     {
-        public abstract float Score(IConsiderationContext context);
+        public abstract float Score(ConsiderationContextGenerator contextGenerator);
     }
 }

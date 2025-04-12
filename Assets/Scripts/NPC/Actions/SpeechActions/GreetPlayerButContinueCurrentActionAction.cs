@@ -4,7 +4,7 @@ using UnityEngine;
 namespace NPC.Actions.SpeechActions
 {
     [CreateAssetMenu(menuName = "NPC/Actions/Speech Actions/Greet player but continue current Action")]
-    public class GreetPlayerButContinueCurrentActionAction : NpcAction
+    public class GreetPlayerButContinueCurrentActionAction : InstantAction
     {
         public override void Execute(NpcController npcController)
         {

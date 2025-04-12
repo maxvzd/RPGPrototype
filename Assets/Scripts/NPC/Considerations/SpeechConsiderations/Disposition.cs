@@ -1,17 +1,17 @@
 ﻿using NPC.UtilityBaseClasses;
-using NPC.UtilityBaseClasses.Contexts;
 using UnityEngine;
 
 namespace NPC.Considerations.SpeechConsiderations
 {
     [CreateAssetMenu(menuName = "NPC/Considerations/Speech Considerations/Disposition")]
-    public class Disposition : Consideration<SpeechConsiderationContext>
+    public class Disposition : Consideration
     {
         [SerializeField] private AnimationCurve dispositionCurve; 
-        
-        public override float Score(SpeechConsiderationContext context)
+
+        public override float Score(ConsiderationContextGenerator contextGenerator)
         {
-            return dispositionCurve.Evaluate(context.Disposition);
+            var speechContext = contextGenerator.GetSpeechContext();
+            return dispositionCurve.Evaluate(speechContext.Disposition);
         }
     }
 }

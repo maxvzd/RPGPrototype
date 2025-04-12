@@ -1,12 +1,13 @@
-﻿using Interact.ContextBuilders;
+﻿using System.Collections.Generic;
+using Interact.ContextBuilders;
 using Interact.Contexts;
 using NPC;
-using NPC.UtilityBaseClasses.Contexts;
+using NPC.UtilityBaseClasses;
 using UnityEngine;
 
 namespace Interact
 {
-    public class InteractWithNpc : MonoBehaviour, IInteract<SpeechContextBuilder>
+    public class InteractWithNpc : MonoBehaviour, IInteract<SpeechInteractionContextBuilder>
     {
         public string IconName => "info-question";
         
@@ -17,9 +18,9 @@ namespace Interact
             _npc = GetComponent<NpcDecisionMaker>();
         }
         
-        public SpeechContextBuilder GetInteractionContext()
+        public SpeechInteractionContextBuilder GetInteractionContext()
         {
-            return new SpeechContextBuilder();
+            return new SpeechInteractionContextBuilder();
         }
 
         public void Interact(IInteractionContext context)
@@ -32,8 +33,15 @@ namespace Interact
         
         private void Interact(SpeechInteractionContext interactionContext)
         {
-            //interactionContext.StartDialogue();
-            _npc.CalculateNewDecision<SpeechConsiderationContext>();
+            var listOfActions = new List<NpcAction>
+            {
+                NpcActionsLoader.Instance.Actions["SpeechActionGreetStop"],
+                NpcActionsLoader.Instance.Actions["SpeechActionGreetContinue"],
+                NpcActionsLoader.Instance.Actions["SpeechActionIgnorePlayer"]
+            };
+
+            _npc.AddSpeechAction(listOfActions);
+            _npc.CalculateNewDecision();
         }
     }
 }

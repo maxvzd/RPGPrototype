@@ -26,9 +26,7 @@ namespace UI.Dialogue
 
         public void PopulateDialogueOptions(IEnumerable<string> options)
         {
-            Debug.Log("Setting items");
             _dialogueOptions = options.ToList();
-            
             _dialogueListView.itemsSource = _dialogueOptions;
             _dialogueListView.bindItem = (item, index) =>
             {
@@ -37,6 +35,11 @@ namespace UI.Dialogue
                 button.text = text;
             };
             _dialogueListView.RefreshItems();
+        }
+
+        public void InitDialogue(string dialogue)
+        {
+            Debug.Log(dialogue);
         }
     }
 }

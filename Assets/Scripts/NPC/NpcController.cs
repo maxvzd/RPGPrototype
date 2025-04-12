@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UI.Dialogue;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,10 +11,8 @@ namespace NPC
     {
         private NavMeshAgent _navMeshAgent;
         private Coroutine _currentCoroutine;
-        private SocialStats _socialStats;
 
         public EventHandler ReachedDestination;
-        public float Disposition => _socialStats.Disposition;
 
         public void MoveToDestination(Vector3 destination)
         {
@@ -61,7 +61,18 @@ namespace NPC
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _socialStats = GetComponent<SocialStats>();
+        }
+
+        public static void StartDialog(string dialogue)
+        {
+            var options = new List<string>();
+            for (var i = 0; i < 5; i++)
+            {
+                options.Add($"This is option: {i}");
+            }
+            
+            DialogueManager.Instance.PopulateDialogueOptions(dialogue, options);
+            DialogueManager.Instance.ShowUI();
         }
     }
 }
