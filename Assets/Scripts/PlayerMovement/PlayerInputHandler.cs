@@ -52,6 +52,7 @@ namespace PlayerMovement
             var jumpAction = _input.actions[InputConstants.Jump];
             var showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
             var showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
+            var hideInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Interact}"];
             var dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
 
             _input.SwitchCurrentActionMap(InputConstants.PlayerActionMap);
@@ -61,6 +62,7 @@ namespace PlayerMovement
                 { raiseWeaponAction, () => { weaponPosition.SheatheWeapon(); } },
                 { interactAction, () => { interactionSystem.Interact(); } },
                 { showInventoryPlayerAction, inventoryUIManager.ShowUI },
+                { hideInventoryUIAction, containerManager.HideUI },
                 { showInventoryUIAction, () =>
                     {
                         inventoryUIManager.HideUI();
