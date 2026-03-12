@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453ed0a9860f46ebba4a498dbb23e7f0, type: 3}
+  m_Name: Eat
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.EatAction
+  considerations:
+  - {fileID: 11400000, guid: f11d5cb81b83a364aa1b38de8e18cc4a, type: 2}
+  - {fileID: 11400000, guid: 875e3c1ad9efb0943ad4b6e6bd746916, type: 2}
+  - {fileID: 11400000, guid: c5d1e8dfe71677e43972159c60182093, type: 2}

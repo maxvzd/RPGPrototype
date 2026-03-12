@@ -28,7 +28,7 @@ namespace NPC
 
             _contextGenerator = new ConsiderationContextGenerator(socialStats);
             
-            CalculateNewDecision();
+            //CalculateNewDecision();
         }
 
         public void CalculateNewDecision()

@@ -62,7 +62,13 @@ namespace PlayerMovement
                 { raiseWeaponAction, () => { weaponPosition.SheatheWeapon(); } },
                 { interactAction, () => { interactionSystem.Interact(); } },
                 { showInventoryPlayerAction, inventoryUIManager.ShowUI },
-                { hideInventoryUIAction, containerManager.HideUI },
+                { hideInventoryUIAction, () =>
+                    {
+                        inventoryUIManager.HideUI();
+                        dialogueManager.HideUI();
+                        containerManager.HideUI();
+                    }
+                },
                 { showInventoryUIAction, () =>
                     {
                         inventoryUIManager.HideUI();

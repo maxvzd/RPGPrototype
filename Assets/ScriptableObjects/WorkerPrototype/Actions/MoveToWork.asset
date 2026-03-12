@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1acabed1284b34bab846825005c3de, type: 3}
+  m_Name: MoveToWork
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.MoveToWork
+  considerations:
+  - {fileID: 11400000, guid: 9309202b48ae0394cbfd7c7bf3817783, type: 2}
+  - {fileID: 11400000, guid: daef8b85aa96fb54487aa12e8c5abd0c, type: 2}
+  - {fileID: 11400000, guid: 5704fbd21ce9d474a9aab1aa0f503dbc, type: 2}
