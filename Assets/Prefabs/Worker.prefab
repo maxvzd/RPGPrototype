@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.061
+      value: 35.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.09
+      value: -0.00000008040843
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.393
+      value: -32.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -98,6 +98,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 754447575360254792}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6736438535953200689}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2132661108461513476}
   m_SourcePrefab: {fileID: 100100000, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
 --- !u!4 &107049387948034125 stripped
 Transform:
@@ -179,7 +185,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.4
-  m_Speed: 1.3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -276,13 +282,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 2.9727461, y: 2.2064059, z: -2.4046328}
+      IKPosition: {x: 35.371746, y: 0.11640594, z: -32.491634}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.8703414, y: 0.000059030244, z: 0.00009079001, w: 0.49244902}
-      bendNormal: {x: 0.02131545, y: 0.0003541702, z: -0.0038625544}
+      bendNormal: {x: 0.021315092, y: 0.00035420008, z: -0.0038629284}
       bone1:
         transform: {fileID: 1761092149565648416}
         weight: 1
@@ -320,13 +326,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 3.1492543, y: 2.2064059, z: -2.4046328}
+      IKPosition: {x: 35.548252, y: 0.11640582, z: -32.491634}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.87034047, y: -0.000060022943, z: -0.00009051379, w: 0.49245057}
-      bendNormal: {x: 0.021315817, y: -0.0003541424, z: 0.0038618923}
+      bendNormal: {x: 0.021315094, y: -0.0003541044, z: 0.0038598895}
       bone1:
         transform: {fileID: 5715694650940130532}
         weight: 1
@@ -364,13 +370,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 2.4718301, y: 3.4777706, z: -2.402825}
+      IKPosition: {x: 34.87083, y: 1.3877705, z: -32.489826}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.5305133, y: -0.46919176, z: 0.48693463, w: 0.51118463}
-      bendNormal: {x: -0.000016256332, y: 0.00016100939, z: -0.00029269242}
+      bendNormal: {x: -0.000016251612, y: 0.00016095873, z: -0.00029272967}
       bone1:
         transform: {fileID: 1404322176316885817}
         weight: 1
@@ -408,13 +414,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 3.65017, y: 3.4777706, z: -2.4028256}
+      IKPosition: {x: 36.049168, y: 1.3877705, z: -32.489826}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.5305131, y: 0.46919134, z: -0.48693457, w: 0.511185}
-      bendNormal: {x: -0.0000139676, y: -0.00012733921, z: 0.00029272024}
+      bendNormal: {x: -0.000013915145, y: -0.000126589, z: 0.00029272967}
       bone1:
         transform: {fileID: 4208944161762000730}
         weight: 1
@@ -452,7 +458,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 3.061, y: 3.316562, z: -2.367306}
+      IKPosition: {x: 35.46, y: 1.2265619, z: -32.454304}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
@@ -463,25 +469,25 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 1106160818333978891}
         weight: 1
-        solverPosition: {x: 3.061, y: 3.182846, z: -2.363853}
+        solverPosition: {x: 35.46, y: 1.0928459, z: -32.45085}
         solverRotation: {x: -0.012905732, y: -0, z: -0, w: 0.9999167}
         defaultLocalPosition: {x: -0, y: 0.12574437, z: 0.00000011940791}
         defaultLocalRotation: {x: -0.062152267, y: 0, z: -0, w: 0.99806666}
-        length: 0.13376045
+        length: 0.13376054
         sqrMag: 0
-        axis: {x: 0, y: 0.13376045, z: -0.0000007514383}
+        axis: {x: 0, y: 0.13376054, z: -0.000000033344072}
       - transform: {fileID: 7532897115559286781}
         weight: 1
-        solverPosition: {x: 3.061, y: 3.316562, z: -2.367306}
+        solverPosition: {x: 35.46, y: 1.2265619, z: -32.454304}
         solverRotation: {x: -0.03548753, y: -0, z: -0, w: 0.9993701}
         defaultLocalPosition: {x: -0, y: 0.13376056, z: -0.00000077390683}
         defaultLocalRotation: {x: -0.02258696, y: 0, z: -0, w: 0.9997449}
         length: 0
         sqrMag: 0
-        axis: {x: 0, y: 0.133624, z: 0.0060401936}
+        axis: {x: 0, y: 0.13362406, z: 0.006040916}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 3.061, y: 3.316562, z: 0.632694}
+      IKPosition: {x: 35.46, y: 1.2265619, z: -29.454304}
       IKPositionWeight: 0
       root: {fileID: 5139198779471048838}
       target: {fileID: 0}
@@ -591,7 +597,7 @@ MonoBehaviour:
       transform: {fileID: 5909078420226391181}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 3.061, y: 3.0577118, z: -2.3762279}
+      position: {x: 35.46, y: 0.9677119, z: -32.463226}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 5.6477895, y: -0, z: -0}
@@ -669,13 +675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cd302e17154101b28a15cca2b7f2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerBrain
-  availableActions:
-  - {fileID: 11400000, guid: 6e8c2b89192573247b3b0e02716f6a86, type: 2}
-  - {fileID: 11400000, guid: c5bed49bad4d2dc40903645cee97e177, type: 2}
-  - {fileID: 11400000, guid: e0348cb08c2671b4fbdc5aeb001fc3bd, type: 2}
-  - {fileID: 11400000, guid: 8142ef9110a5b394581e09fb6a35067a, type: 2}
-  - {fileID: 11400000, guid: 6ef3a4408acd9c044a55c1caa95962b3, type: 2}
-  - {fileID: 11400000, guid: ff758a7e6d3e4df469a1016fbd2e9a58, type: 2}
 --- !u!114 &754447575360254792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,13 +687,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b6c158bb05409293fa6df39fb542ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.WorkerStateBehaviour
-  state:
-    money: 100
-    energy: 100
-    hunger: 0
-    home: {fileID: 0}
-    food: {fileID: 0}
-    work: {fileID: 0}
+  money: 0
+  energy: 50
+  hunger: 0
+  home: {fileID: 0}
+  food: {fileID: 0}
+  work: {fileID: 0}
+--- !u!114 &6736438535953200689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483636823446940220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcacfc15f6c4f74806321810d024a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.WorkerController
+--- !u!114 &2132661108461513476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483636823446940220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988f12b9a9a409aaaae7a7c14792aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.WorkerBrain
+  availableActions:
+  - {fileID: 11400000, guid: 6e8c2b89192573247b3b0e02716f6a86, type: 2}
+  - {fileID: 11400000, guid: c5bed49bad4d2dc40903645cee97e177, type: 2}
+  - {fileID: 11400000, guid: e0348cb08c2671b4fbdc5aeb001fc3bd, type: 2}
+  - {fileID: 11400000, guid: 8142ef9110a5b394581e09fb6a35067a, type: 2}
+  - {fileID: 11400000, guid: 6ef3a4408acd9c044a55c1caa95962b3, type: 2}
+  - {fileID: 11400000, guid: ff758a7e6d3e4df469a1016fbd2e9a58, type: 2}
 --- !u!4 &5715694650940130532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8103495863266946167, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace NPC.WorkerPrototyping.Actions
@@ -7,18 +8,10 @@ namespace NPC.WorkerPrototyping.Actions
     [Serializable]
     public class EatAction : WorkerAction
     {
-        private WorkerController _controller;
-        
-        public override void Execute(Guid id)
+        public override IEnumerator Execute(Guid id)
         {
-            _controller = WorkerEntities.Workers[id].Controller;
-            _controller.ActionFinished += OnActionFinished;
-            _controller.Eat();
-        }
-        
-        private void OnActionFinished(object sender, EventArgs e)
-        {
-            _controller.ActionFinished -= OnActionFinished;
+            var controller = WorkerEntities.Workers[id].Controller;
+            yield return controller.Eat();
             FireActionFinished();
         }
     }

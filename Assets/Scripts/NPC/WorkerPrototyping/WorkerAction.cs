@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace NPC.WorkerPrototyping
@@ -9,7 +10,7 @@ namespace NPC.WorkerPrototyping
         [SerializeField] private WorkerConsiderationBase[] considerations;
         public event EventHandler ActionFinished;
         
-        public abstract void Execute(Guid id);
+        public abstract IEnumerator Execute(Guid id);
         
         public float CalculateScore(Guid id)
         {

@@ -5,10 +5,6 @@ namespace NPC.WorkerPrototyping
 {
     public class WorkerState : MonoBehaviour
     {
-        //[SerializeField] private WorkerState state;
-
-        //public WorkerState State => state;
-        
         [SerializeField] private float money;
         [SerializeField] private float energy;
         [SerializeField] private float hunger;

@@ -5,8 +5,6 @@ namespace NPC.WorkerPrototyping
 {
     public class WorkerBehaviour : MonoBehaviour
     {
-        [SerializeField] private WorkerAction[] availableActions = Array.Empty<WorkerAction>();
-        
         private WorkerEntity _workerEntity;
 
         private void Start()
@@ -15,8 +13,10 @@ namespace NPC.WorkerPrototyping
             
             var workerState = GetComponent<WorkerState>();
             var workerController = GetComponent<WorkerController>();
+            var workerBrain = GetComponent<WorkerBrain>();
+            workerBrain.Init(id);
             
-            _workerEntity = WorkerEntity.Create(id, workerState, new WorkerBrain(id, availableActions), workerController);
+            _workerEntity = WorkerEntity.Create(id, workerState, workerBrain, workerController);
              WorkerEntities.Register(_workerEntity);
             _workerEntity.Brain.CalculateNewDecision();
         }
