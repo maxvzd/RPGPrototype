@@ -15,7 +15,7 @@ namespace NPC.WorkerPrototyping
 
         public void Start()
         {
-            var worker = GetComponent<WorkerBehaviour>();
+            var worker = GetComponent<Entity>();
             Id = worker.Id;
             
             StartCoroutine(CalculateNewDecision());

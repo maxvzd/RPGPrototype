@@ -20,6 +20,8 @@ namespace NPC.WorkerPrototyping
             State = state;
             Brain = brain;
             Controller = controller;
+            
+            WorkerEntities.Register(this);
         }
 
     }

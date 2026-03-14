@@ -10,14 +10,14 @@ namespace NPC.WorkerPrototyping
 
         private void Awake()
         {
-            Id = Guid.NewGuid();
+            var entity = GetComponent<Entity>();
+            Id = entity.Id;
             
             var workerState = GetComponent<WorkerState>();
             var workerController = GetComponent<WorkerController>();
             var workerBrain = GetComponent<WorkerBrain>();
             
             _workerEntity = WorkerEntity.Create(Id, workerState, workerBrain, workerController);
-             WorkerEntities.Register(_workerEntity);
         }
     }
 }
