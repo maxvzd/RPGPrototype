@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,31 +9,26 @@ namespace NPC.WorkerPrototyping
     public class WorkerBrain : MonoBehaviour
     {
         [SerializeField] private WorkerAction[] availableActions = Array.Empty<WorkerAction>();
+        
         private WorkerAction _currentAction;
         private Guid Id { get; set; }
 
-        public void Init(Guid id)
+        public void Start()
         {
-            Id = id;
+            var worker = GetComponent<WorkerBehaviour>();
+            Id = worker.Id;
+            
+            StartCoroutine(CalculateNewDecision());
         }
 
-        public void CalculateNewDecision()
+        private IEnumerator CalculateNewDecision()
         {
-            if (!availableActions.Any(x => x is not null)) return;
-
-            if (_currentAction is not null)
+            if (!availableActions.Any(x => x is not null)) yield break;
+            while (true)
             {
-                _currentAction.ActionFinished -= ActionFinished;
+                _currentAction = DecideBestAction();
+                yield return _currentAction.Execute(Id);
             }
-
-            _currentAction = DecideBestAction();
-            _currentAction.ActionFinished += ActionFinished;
-            StartCoroutine(_currentAction.Execute(Id));
-        }
-
-        private void ActionFinished(object sender, EventArgs e)
-        {
-            CalculateNewDecision();
         }
 
         private WorkerAction DecideBestAction()

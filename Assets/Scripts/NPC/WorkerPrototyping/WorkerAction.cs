@@ -5,10 +5,9 @@ using UnityEngine;
 namespace NPC.WorkerPrototyping
 {
     [Serializable]
-    public abstract class WorkerAction : ScriptableObject//, IWorkerAction
+    public abstract class WorkerAction : ScriptableObject
     {
         [SerializeField] private WorkerConsiderationBase[] considerations;
-        public event EventHandler ActionFinished;
         
         public abstract IEnumerator Execute(Guid id);
         
@@ -31,11 +30,6 @@ namespace NPC.WorkerPrototyping
             var makeupValue = (1 - originalScore) * modFactor;
             score = originalScore + (makeupValue * originalScore);
             return score;
-        }
-        
-        protected void FireActionFinished()
-        {
-            ActionFinished?.Invoke(this, EventArgs.Empty);
         }
     }
 }

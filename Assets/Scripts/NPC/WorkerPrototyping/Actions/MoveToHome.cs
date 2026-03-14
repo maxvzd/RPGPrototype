@@ -14,7 +14,6 @@ namespace NPC.WorkerPrototyping.Actions
             var destination = WorkerEntities.Workers[id].State.Home.position;
             var controller = WorkerEntities.Workers[id].Controller;
             yield return controller.MoveToGameObject(destination);
-            FireActionFinished();
         }
     }
 }

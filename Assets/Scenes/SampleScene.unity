@@ -1482,7 +1482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7031413, y: 0, z: 0, w: 0.7110502}
+  m_LocalRotation: {x: 0.70315677, y: 0, z: 0, w: 0.71103483}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3265,7 +3265,7 @@ GameObject:
   - component: {fileID: 1017177599}
   - component: {fileID: 1017177598}
   - component: {fileID: 1017177597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Work
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6699,6 +6699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker
       objectReference: {fileID: 0}
+    - target: {fileID: 5483636823446940220, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6782,7 +6786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 11.957276
+  hourOfDay: 11.957443
   sunTransform: {fileID: 410087041}
   time: 11:57
 --- !u!4 &1367038837
@@ -6812,7 +6816,7 @@ GameObject:
   - component: {fileID: 1407733118}
   - component: {fileID: 1407733117}
   - component: {fileID: 1407733116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7637,7 +7641,7 @@ GameObject:
   - component: {fileID: 1520157434}
   - component: {fileID: 1520157433}
   - component: {fileID: 1520157432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}

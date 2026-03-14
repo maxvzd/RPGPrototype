@@ -12,7 +12,6 @@ namespace NPC.WorkerPrototyping.Actions
         {
             var controller = WorkerEntities.Workers[id].Controller;
             yield return controller.Eat();
-            FireActionFinished();
         }
     }
 }
