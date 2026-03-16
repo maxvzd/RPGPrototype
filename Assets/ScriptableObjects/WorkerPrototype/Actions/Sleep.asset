@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Sleep
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.SleepAction
   considerations:
-  - {fileID: 11400000, guid: 46d23bd759b2f3545a7f9f96c4b16861, type: 2}
   - {fileID: 11400000, guid: 9d4799ea42b6acc4dbd7d919d172fca1, type: 2}

@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.MoveToHome
   considerations:
   - {fileID: 11400000, guid: 8f618d6643215da4e83d619df8fd40cd, type: 2}
-  - {fileID: 11400000, guid: 46d23bd759b2f3545a7f9f96c4b16861, type: 2}

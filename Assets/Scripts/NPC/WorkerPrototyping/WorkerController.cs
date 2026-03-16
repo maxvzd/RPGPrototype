@@ -4,15 +4,15 @@ using UnityEngine.AI;
 
 namespace NPC.WorkerPrototyping
 {
-    public class WorkerController : MonoBehaviour
+    public class WorkerController
     {
-        private NavMeshAgent _navMeshAgent;
-        private WorkerState _state;
+        private readonly NavMeshAgent _navMeshAgent;
+        private readonly WorkerState _state;
 
-        public void Awake()
+        public WorkerController(NavMeshAgent agent, WorkerState state)
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _state = GetComponent<WorkerState>();
+            _navMeshAgent = agent;
+            _state = state;
         }
 
         public IEnumerator MoveToGameObject(Vector3 destination)

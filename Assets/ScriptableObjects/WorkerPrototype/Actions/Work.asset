@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.WorkAction
   considerations:
   - {fileID: 11400000, guid: 51ed1b907276dda4d8898a5cfe4f2904, type: 2}
-  - {fileID: 11400000, guid: 5704fbd21ce9d474a9aab1aa0f503dbc, type: 2}
-  - {fileID: 11400000, guid: daef8b85aa96fb54487aa12e8c5abd0c, type: 2}

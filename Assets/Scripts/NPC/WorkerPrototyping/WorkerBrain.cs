@@ -2,44 +2,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NPC.WorkerPrototyping.Utilities;
 using UnityEngine;
 
 namespace NPC.WorkerPrototyping
 {
-    public class WorkerBrain : MonoBehaviour
+    public class WorkerBrain
     {
-        [SerializeField] private WorkerAction[] availableActions = Array.Empty<WorkerAction>();
+        public EventHandler<IEnumerator> ExecuteCoroutine;
         
-        private WorkerAction _currentAction;
-        private Guid Id { get; set; }
+        private readonly List<WorkerGoal> _workerGoals;
+        
+        private Guid Id { get; }
+
+
+        public WorkerBrain(Guid id, IEnumerable<WorkerGoal> workerGoals)
+        {
+            Id = id;
+            _workerGoals = workerGoals.ToList();
+        }
+
+        private IEnumerator Run()
+        {
+            while (true)
+            {
+                if (!_workerGoals.Any(x => x is not null)) yield break;
+                var goal = DecideBestGoal(_workerGoals);
+                yield return goal.ExecuteActions(Id);
+            }
+        }
 
         public void Start()
         {
-            var worker = GetComponent<Entity>();
-            Id = worker.Id;
-            
-            StartCoroutine(CalculateNewDecision());
+            ExecuteCoroutine?.Invoke(this, Run());
+        }
+        
+        private WorkerGoal DecideBestGoal(IEnumerable<WorkerGoal> actions)
+        {
+            return UtilityAiUtilities.Evaluate(actions, Id);
         }
 
-        private IEnumerator CalculateNewDecision()
+        public void SpottedEntity(Guid id)
         {
-            if (!availableActions.Any(x => x is not null)) yield break;
-            while (true)
-            {
-                _currentAction = DecideBestAction();
-                yield return _currentAction.Execute(Id);
-            }
-        }
-
-        private WorkerAction DecideBestAction()
-        {
-            var scores = new Dictionary<WorkerAction, float>();
-            foreach (var action in availableActions)
-            {
-                var score = action.CalculateScore(Id);
-                scores.TryAdd(action, score);
-            }
-            return scores.OrderByDescending(x => x.Value).First().Key;
+            //Load new goal
         }
     }
 }

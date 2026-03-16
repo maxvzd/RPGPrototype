@@ -12,6 +12,7 @@ namespace NPC.WorkerPrototyping
         [SerializeField] private Transform food;
         [SerializeField] private Transform work;
         private NavMeshAgent _agent;
+        private SocialStats _socialStats;
 
         public float Money => money; 
         public float Energy => energy; 
@@ -20,7 +21,14 @@ namespace NPC.WorkerPrototyping
         public Transform Home => home; 
         public Transform Food => food; 
         public Transform Work => work;
+        public float Disposition => _socialStats.Disposition;
         
+        
+        public void Awake()
+        {
+            _agent = GetComponent<NavMeshAgent>();
+            _socialStats = GetComponent<SocialStats>();
+        }
 
         public bool IsAtDestination(Vector3 destination)
         {
@@ -59,11 +67,6 @@ namespace NPC.WorkerPrototyping
         public void RemoveHunger(float hungerAmount)
         {
             hunger -= hungerAmount;
-        }
-
-        public void Awake()
-        {
-            _agent = GetComponent<NavMeshAgent>();
         }
     }
 }

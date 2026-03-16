@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.MoveToFood
   considerations:
   - {fileID: 11400000, guid: 6c6e3c402121c964b9387c1791c9048d, type: 2}
-  - {fileID: 11400000, guid: f11d5cb81b83a364aa1b38de8e18cc4a, type: 2}
-  - {fileID: 11400000, guid: c5d1e8dfe71677e43972159c60182093, type: 2}

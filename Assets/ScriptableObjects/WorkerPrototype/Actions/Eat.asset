@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: Eat
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.EatAction
   considerations:
-  - {fileID: 11400000, guid: f11d5cb81b83a364aa1b38de8e18cc4a, type: 2}
   - {fileID: 11400000, guid: 875e3c1ad9efb0943ad4b6e6bd746916, type: 2}
-  - {fileID: 11400000, guid: c5d1e8dfe71677e43972159c60182093, type: 2}

@@ -1843,7 +1843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70933926, y: 0, z: 0, w: 0.70486724}
+  m_LocalRotation: {x: 0.7107964, y: 0, z: 0, w: 0.7033978}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3433,11 +3433,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6859911588959465621, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: _disposition
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7506811637061872703, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_Radius
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6736438535953200689, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+    - {fileID: 2132661108461513476, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3706,7 +3712,9 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2132661108461513476, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+    - {fileID: 6736438535953200689, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7032,7 +7040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.pelvis.position.x
-      value: 35.46
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.pelvis.position.y
@@ -7040,11 +7048,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.pelvis.position.z
-      value: -35.434227
+      value: -27.363228
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.IKPosition.x
-      value: 35.46
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.IKPosition.y
@@ -7052,11 +7060,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.IKPosition.z
-      value: -35.425304
+      value: -27.354305
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.lookAt.IKPosition.x
-      value: 35.46
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.lookAt.IKPosition.y
@@ -7064,11 +7072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.lookAt.IKPosition.z
-      value: -32.425304
+      value: -24.354305
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.IKPosition.x
-      value: 35.371746
+      value: 38.781746
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.IKPosition.y
@@ -7076,15 +7084,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.IKPosition.z
-      value: -35.462635
+      value: -27.391632
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.bendNormal.x
-      value: 0.021315092
+      value: 0.021315828
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.bendNormal.y
-      value: 0.00035420008
+      value: 0.00035419886
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftFoot.bendNormal.z
@@ -7092,7 +7100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.IKPosition.x
-      value: 34.87083
+      value: 38.28083
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.IKPosition.y
@@ -7100,15 +7108,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.IKPosition.z
-      value: -35.460827
+      value: -27.389824
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.bendNormal.x
-      value: -0.000016251612
+      value: -0.000016259142
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.bendNormal.y
-      value: 0.00016095873
+      value: 0.00016103122
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.leftHand.bendNormal.z
@@ -7116,7 +7124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.IKPosition.x
-      value: 35.548252
+      value: 38.958252
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.IKPosition.y
@@ -7124,15 +7132,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.IKPosition.z
-      value: -35.462635
+      value: -27.391632
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.bendNormal.x
-      value: 0.021315094
+      value: 0.021316567
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.bendNormal.y
-      value: -0.0003541044
+      value: -0.000354102
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightFoot.bendNormal.z
@@ -7140,7 +7148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.IKPosition.x
-      value: 36.049168
+      value: 39.459167
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.IKPosition.y
@@ -7148,15 +7156,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.IKPosition.z
-      value: -35.460827
+      value: -27.389826
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.bendNormal.x
-      value: -0.000013915145
+      value: -0.000013946726
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.bendNormal.y
-      value: -0.000126589
+      value: -0.00012703441
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.rightHand.bendNormal.z
@@ -7184,7 +7192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[0].solverPosition.x
-      value: 35.46
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[0].solverPosition.y
@@ -7192,11 +7200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[0].solverPosition.z
-      value: -35.421852
+      value: -27.350853
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[1].solverPosition.x
-      value: 35.46
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[1].solverPosition.y
@@ -7204,7 +7212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: solvers.spine.bones.Array.data[1].solverPosition.z
-      value: -35.425304
+      value: -27.354305
       objectReference: {fileID: 0}
     - target: {fileID: 5139198779471048838, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7254,7 +7262,29 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6859911588959465621, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: _disposition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872173242238413673, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: defaultStateActions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872173242238413673, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: 'defaultStateActions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 37ad1b21d17ab7341988a45119c2fe76, type: 2}
+    - target: {fileID: 7872173242238413673, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: 'defaultStateActions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 905bcd25a83d83448b1694fe2e8506d9, type: 2}
+    - target: {fileID: 7872173242238413673, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: 'defaultStateActions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b77b32fb44592846b20270508e9b74f, type: 2}
+    m_RemovedComponents:
+    - {fileID: 6736438535953200689, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+    - {fileID: 2132661108461513476, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7342,9 +7372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 12.024158
+  hourOfDay: 12.039967
   sunTransform: {fileID: 410087041}
-  time: 12:01
+  time: 12:02
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -13617,6 +13647,182 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.pelvis.position.x
+      value: 3.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.pelvis.position.y
+      value: 3.0577118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.pelvis.position.z
+      value: -2.3762279
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.IKPosition.x
+      value: 3.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.IKPosition.y
+      value: 3.316562
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.IKPosition.z
+      value: -2.367306
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.lookAt.IKPosition.x
+      value: 3.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.lookAt.IKPosition.y
+      value: 3.316562
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.lookAt.IKPosition.z
+      value: 0.632694
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.IKPosition.x
+      value: 2.9727461
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.IKPosition.y
+      value: 2.2064059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.IKPosition.z
+      value: -2.4046328
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.bendNormal.x
+      value: 0.02131545
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.bendNormal.y
+      value: 0.0003541702
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftFoot.bendNormal.z
+      value: -0.0038625544
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.IKPosition.x
+      value: 2.4718301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.IKPosition.y
+      value: 3.4777706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.IKPosition.z
+      value: -2.402825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.bendNormal.x
+      value: -0.000016256332
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.bendNormal.y
+      value: 0.00016100939
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.leftHand.bendNormal.z
+      value: -0.00029269242
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.IKPosition.x
+      value: 3.1492543
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.IKPosition.y
+      value: 2.2064059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.IKPosition.z
+      value: -2.4046328
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.bendNormal.x
+      value: 0.021315817
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.bendNormal.y
+      value: -0.0003541424
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightFoot.bendNormal.z
+      value: 0.0038618923
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.IKPosition.x
+      value: 3.65017
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.IKPosition.y
+      value: 3.4777706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.IKPosition.z
+      value: -2.4028256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.bendNormal.x
+      value: -0.0000139676
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.bendNormal.y
+      value: -0.00012733921
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.rightHand.bendNormal.z
+      value: 0.00029272024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].axis.y
+      value: 0.13376045
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].axis.z
+      value: -0.0000007514383
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].length
+      value: 0.13376045
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[1].axis.y
+      value: 0.133624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[1].axis.z
+      value: 0.0060401936
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].solverPosition.x
+      value: 3.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].solverPosition.y
+      value: 3.182846
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[0].solverPosition.z
+      value: -2.363853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[1].solverPosition.x
+      value: 3.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[1].solverPosition.y
+      value: 3.316562
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712064969501766489, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+      propertyPath: solvers.spine.bones.Array.data[1].solverPosition.z
+      value: -2.367306
+      objectReference: {fileID: 0}
     - target: {fileID: 5139198779471048838, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.061
@@ -13665,7 +13871,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6736438535953200689, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
+    - {fileID: 2132661108461513476, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

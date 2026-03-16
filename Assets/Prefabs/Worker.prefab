@@ -170,12 +170,6 @@ PrefabInstance:
       addedObject: {fileID: 754447575360254792}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6736438535953200689}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2132661108461513476}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6264624497355155556}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
@@ -186,6 +180,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2438378722670912628}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6859911588959465621}
   m_SourcePrefab: {fileID: 100100000, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
 --- !u!4 &107049387948034125 stripped
 Transform:
@@ -757,6 +754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cd302e17154101b28a15cca2b7f2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerBrain
+  defaultGoals:
+  - {fileID: 11400000, guid: 37ad1b21d17ab7341988a45119c2fe76, type: 2}
+  - {fileID: 11400000, guid: 905bcd25a83d83448b1694fe2e8506d9, type: 2}
+  - {fileID: 11400000, guid: 1b77b32fb44592846b20270508e9b74f, type: 2}
 --- !u!114 &754447575360254792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,37 +776,6 @@ MonoBehaviour:
   home: {fileID: 0}
   food: {fileID: 0}
   work: {fileID: 0}
---- !u!114 &6736438535953200689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5483636823446940220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dcacfc15f6c4f74806321810d024a8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.WorkerController
---- !u!114 &2132661108461513476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5483636823446940220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3988f12b9a9a409aaaae7a7c14792aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.WorkerBrain
-  availableActions:
-  - {fileID: 11400000, guid: 6e8c2b89192573247b3b0e02716f6a86, type: 2}
-  - {fileID: 11400000, guid: c5bed49bad4d2dc40903645cee97e177, type: 2}
-  - {fileID: 11400000, guid: e0348cb08c2671b4fbdc5aeb001fc3bd, type: 2}
-  - {fileID: 11400000, guid: 8142ef9110a5b394581e09fb6a35067a, type: 2}
-  - {fileID: 11400000, guid: 6ef3a4408acd9c044a55c1caa95962b3, type: 2}
-  - {fileID: 11400000, guid: ff758a7e6d3e4df469a1016fbd2e9a58, type: 2}
 --- !u!114 &6264624497355155556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +849,19 @@ MonoBehaviour:
   - {fileID: 8197412860031660462}
   - {fileID: 4326452132573578075}
   - {fileID: 1483175628883190008}
+--- !u!114 &6859911588959465621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483636823446940220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e329df8326da44e5a1c546f23805104e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.SocialStats
+  _disposition: 0
 --- !u!4 &5715694650940130532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8103495863266946167, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}

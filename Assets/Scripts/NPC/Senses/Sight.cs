@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NPC.WorkerPrototyping;
 using UnityEngine;
 
 namespace NPC.Senses
@@ -21,9 +22,14 @@ namespace NPC.Senses
         private readonly Dictionary<Guid, Detectable> _entitiesInRange = new();
         private readonly Dictionary<Guid, Detectable> _visibleEntities = new();
         private readonly List<Transform> _visiblePoints = new();
+        
+        private HashSet<Guid> _recentlySeenEntities = new();
+        
+        private Guid Id { get; set; }
 
         public void Start()
         {
+            Id = GetComponent<Entity>().Id;
             StartCoroutine(CanSeeEntities());
         }
 
@@ -36,7 +42,12 @@ namespace NPC.Senses
                 _visiblePoints.Clear();
                 foreach (var entity in _entitiesInRange.Values.Where(CanSeeEntity))
                 {
+                    if (!_recentlySeenEntities.Contains(entity.Id))
+                    {
+                        WorkerEntities.Workers[Id].Brain.SpottedEntity(entity.Id);
+                    }
                     _visibleEntities.TryAdd(entity.Id, entity);
+                    _recentlySeenEntities.Add(entity.Id);
                 }
             }
         }

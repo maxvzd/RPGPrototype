@@ -1,35 +1,19 @@
 ﻿using System;
 using System.Collections;
+using NPC.WorkerPrototyping.Utilities;
 using UnityEngine;
 
 namespace NPC.WorkerPrototyping
 {
-    [Serializable]
-    public abstract class WorkerAction : ScriptableObject
+    public abstract class WorkerAction : ScriptableObject, IEvaluate
     {
         [SerializeField] private WorkerConsiderationBase[] considerations;
         
-        public abstract IEnumerator Execute(Guid id);
-        
-        public float CalculateScore(Guid id)
+        public float Evaluate(Guid id)
         {
-            if (considerations is null || considerations.Length == 0) return 0;
-            
-            var score = 1f;
-            foreach (var consideration in considerations)
-            {
-                var considerationScore = consideration.Score(id);
-                score *= considerationScore;
-
-                if (score == 0) return 0;
-            }
-
-            // Averaging scheme of overall score
-            var originalScore = score;
-            var modFactor = 1f - 1f / considerations.Length;
-            var makeupValue = (1 - originalScore) * modFactor;
-            score = originalScore + (makeupValue * originalScore);
-            return score;
+            return UtilityAiUtilities.EvaluateConsiderations(id, considerations);    
         }
+
+        public abstract IEnumerator Execute(Guid id);
     }
 }
