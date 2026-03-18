@@ -46,7 +46,7 @@ namespace NPC
 
         private void OnAnimatorMove()
         {
-            Vector3 rootPos = _animator.rootPosition;
+            var rootPos = _animator.rootPosition;
             rootPos.y = _navMeshAgent.nextPosition.y;
             transform.position = rootPos;
             _navMeshAgent.nextPosition = rootPos;

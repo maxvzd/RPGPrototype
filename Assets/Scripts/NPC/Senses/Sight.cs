@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NPC.WorkerPrototyping;
 using UnityEngine;
 
 namespace NPC.Senses
@@ -40,14 +39,18 @@ namespace NPC.Senses
                 yield return new WaitForSeconds(0.05f);
                 _visibleEntities.Clear();
                 _visiblePoints.Clear();
-                foreach (var entity in _entitiesInRange.Values.Where(CanSeeEntity))
+                foreach (var spottedEntity in _entitiesInRange.Values.Where(CanSeeEntity))
                 {
-                    if (!_recentlySeenEntities.Contains(entity.Id))
+                    if (!_recentlySeenEntities.Contains(spottedEntity.Id))
                     {
-                        WorkerEntities.Workers[Id].Brain.SpottedEntity(entity.Id);
+                        var entityInfo = Entities.List[Id];
+                        if (entityInfo is NpcEntity npc)
+                        {
+                            npc.NpcInfo.Brain.SpottedEntity(spottedEntity.Id);
+                        }
                     }
-                    _visibleEntities.TryAdd(entity.Id, entity);
-                    _recentlySeenEntities.Add(entity.Id);
+                    _visibleEntities.TryAdd(spottedEntity.Id, spottedEntity);
+                    _recentlySeenEntities.Add(spottedEntity.Id);
                 }
             }
         }

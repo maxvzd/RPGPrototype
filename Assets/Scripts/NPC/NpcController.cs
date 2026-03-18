@@ -1,78 +1,49 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UI.Dialogue;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace NPC
 {
-    public class NpcController : MonoBehaviour
+    public class NpcController
     {
-        private NavMeshAgent _navMeshAgent;
-        private Coroutine _currentCoroutine;
+        private readonly NavMeshAgent _navMeshAgent;
+        private readonly NpcState _state;
 
-        public EventHandler ReachedDestination;
-
-        public void MoveToDestination(Vector3 destination)
+        public NpcController(NavMeshAgent agent, NpcState state)
         {
-            if (_navMeshAgent.destination == destination) return;
+            _navMeshAgent = agent;
+            _state = state;
+        }
+
+        public IEnumerator MoveToGameObject(Vector3 destination)
+        {
+            _navMeshAgent.SetDestination(destination);
+            yield return new WaitUntil(() => _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance);
+        }
+
+        public IEnumerator Work()
+        {
+            yield return new WaitForSeconds(5f);
             
-            _navMeshAgent.destination = destination;
-            StartDistanceCoroutine();
+            _state.AddHunger(5);
+            _state.AddMoney(10);
+            _state.RemoveEnergy(10);
         }
 
-        public void StopMoving()
+        public IEnumerator Eat()
         {
-            _navMeshAgent.isStopped = !_navMeshAgent.isStopped;
-        }
-
-        private void StopDistanceCoroutine()
-        {
-            if (_currentCoroutine is not null)
-            {
-                StopCoroutine(_currentCoroutine);
-                _currentCoroutine = null;
-            }
-        }
-
-        private void StartDistanceCoroutine()
-        {
-            StopDistanceCoroutine();
-            _currentCoroutine = StartCoroutine(CheckRemainingDistanceCoroutine());
-        }
-
-        private IEnumerator CheckRemainingDistanceCoroutine()
-        {
-            while (_navMeshAgent.pathPending)
-            {
-                yield return null;
-            }
+            yield return new WaitForSeconds(5f);
             
-            while (_navMeshAgent.remainingDistance >= _navMeshAgent.stoppingDistance)
-            {
-                yield return null;
-            }
-            
-            Debug.Log("I've reached position");
-            ReachedDestination?.Invoke(this, EventArgs.Empty);
-        }
-        
-        private void Start()
-        {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _state.RemoveHunger(50);
+            _state.RemoveMoney(StockMarket.FoodPrice);
         }
 
-        public static void StartDialog(string dialogue)
+        public IEnumerator Sleep()
         {
-            var options = new List<string>();
-            for (var i = 0; i < 5; i++)
-            {
-                options.Add($"This is option: {i}");
-            }
+            yield return new WaitForSeconds(5f);
             
-            DialogueManager.Instance.PopulateDialogueOptions(dialogue, options);
-            DialogueManager.Instance.ShowUI();
+            _state.AddEnergy(50);
+            _state.AddHunger(25);
         }
     }
 }

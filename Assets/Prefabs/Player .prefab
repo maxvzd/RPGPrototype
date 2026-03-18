@@ -677,7 +677,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -685,6 +684,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &2946877649868094356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1029,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1050,9 +1052,11 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1231,6 +1235,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1252,9 +1258,11 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1614,7 +1622,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -1622,6 +1629,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &5154124638151626130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1875,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1888,9 +1898,11 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -2020,6 +2032,10 @@ GameObject:
   - component: {fileID: 1652839122637853571}
   - component: {fileID: 7612640963182135094}
   - component: {fileID: 3253097425455087951}
+  - component: {fileID: 4173932887440242776}
+  - component: {fileID: 2559548584688938923}
+  - component: {fileID: 3477141258888038181}
+  - component: {fileID: 7553423532564831656}
   m_Layer: 12
   m_Name: 'Player '
   m_TagString: Untagged
@@ -2216,13 +2232,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: -0.11825164, y: 0.34139448, z: -0.011636153}
+      IKPosition: {x: -0.11825164, y: 0.12839447, z: -0.011636153}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: -0.33510196, y: 0.3351023, z: 0.62266076, w: 0.6226611}
-      bendNormal: {x: 0.021405872, y: -0.0012256927, z: 0.012228973}
+      bendNormal: {x: 0.021405868, y: -0.0012256927, z: 0.012228973}
       bone1:
         transform: {fileID: 1198657441717689368}
         weight: 1
@@ -2260,7 +2276,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 0.11822124, y: 0.3413995, z: -0.011636153}
+      IKPosition: {x: 0.11822124, y: 0.1283995, z: -0.011636153}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
@@ -2304,13 +2320,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: -0.62917006, y: 1.6377068, z: -0.009826064}
+      IKPosition: {x: -0.62917006, y: 1.4247068, z: -0.009826064}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: -0.70577615, y: 0.017147783, z: 0.04336245, w: 0.70689875}
-      bendNormal: {x: -0.00000968282, y: 0.000062616346, z: -0.00029858365}
+      bendNormal: {x: -0.000009683307, y: 0.000062616346, z: -0.0002986115}
       bone1:
         transform: {fileID: 258332845998280253}
         weight: 1
@@ -2348,7 +2364,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 0.62984705, y: 1.6549184, z: -0.004148841}
+      IKPosition: {x: 0.62984705, y: 1.4419184, z: -0.004148841}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
@@ -2392,7 +2408,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: -4.4755852e-13, y: 1.4765446, z: 0.024526}
+      IKPosition: {x: -4.4755852e-13, y: 1.2635446, z: 0.024526}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
@@ -2403,25 +2419,25 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 2803520890277386502}
         weight: 1
-        solverPosition: {x: 0, y: 1.2762179, z: 0.02332306}
+        solverPosition: {x: 0, y: 1.063218, z: 0.02332306}
         solverRotation: {x: -0.7071036, y: 0.70710367, z: 0.0021240711, w: 0.0021222532}
         defaultLocalPosition: {x: -0, y: -0.0002332323, z: 0.010632179}
         defaultLocalRotation: {x: -0.49849707, y: 0.49849582, z: 0.5014997, w: 0.5014984}
-        length: 0.20033029
+        length: 0.20033017
         sqrMag: 0
-        axis: {x: -0.20033032, y: -0.000000013465501, z: 0.00000007873178}
+        axis: {x: -0.2003302, y: -0.000000013465491, z: 0.00000007801591}
       - transform: {fileID: 5242463664650171777}
         weight: 1
-        solverPosition: {x: -4.4755852e-13, y: 1.4765446, z: 0.024526}
+        solverPosition: {x: -4.4755852e-13, y: 1.2635446, z: 0.024526}
         solverRotation: {x: -0.7067138, y: 0.7067138, z: -0.023571998, w: -0.023573786}
         defaultLocalPosition: {x: -0.0020033019, y: 0, z: 0.0000000017462298}
         defaultLocalRotation: {x: 0, y: 0.036337867, z: -0, w: 0.9993396}
         length: 0
         sqrMag: 0
-        axis: {x: -0.19980128, y: -0.000000010743995, z: -0.014549467}
+        axis: {x: -0.19980116, y: -0.000000010743987, z: -0.014549458}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: -4.4755852e-13, y: 1.4765446, z: 3.0245261}
+      IKPosition: {x: -4.4755852e-13, y: 1.2635446, z: 3.0245261}
       IKPositionWeight: 0
       root: {fileID: 6666933659650935531}
       target: {fileID: 0}
@@ -2531,7 +2547,7 @@ MonoBehaviour:
       transform: {fileID: 6811454744969871012}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 0, y: 0.213, z: 0}
+      position: {x: 0, y: 0, z: 0}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 270, y: -0, z: 0}
@@ -2576,7 +2592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 7520509550173862448}
   angleToTurnAt: 75
-  turnSpeed: 5
+  turnSpeed: 10
 --- !u!114 &7579643053964521707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2601,6 +2617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7b8d8d804b4ff590d462e6aff653da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weightLimit: 500
 --- !u!114 &2518399482172142874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2613,7 +2630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3951fb67b61344559a50c9314c9933f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
+  uiDocument: {fileID: 0}
 --- !u!114 &191609603774675519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2736,7 +2753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00041bed8e1f00b488b85b6fa11d1ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCastDepth: 0.1
+  maxCastDepth: 0.15
 --- !u!114 &1925173044961823103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2749,8 +2766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34daaaf49561b54fb8f2c7e9843daf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 350
-  verticalLength: 1.3
+  jumpHeight: 400
+  verticalLength: 10000
 --- !u!54 &1652839122637853571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2758,10 +2775,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6327105009001861201}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 80
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2797,7 +2814,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.23
+  m_Radius: 0.2
   m_Height: 1.77
   m_Direction: 1
   m_Center: {x: 0, y: 0.89, z: 0}
@@ -2813,11 +2830,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fdca36775c1114281c1ec165cbff33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepHeight: 0.3
+  stepHeight: 0.5
   detectionDepth: 0.3
   heightOffset: 0.05
   stepHeightTolerance: 0.05
-  upForce: 0.03
+  upForce: 1.5
+--- !u!114 &4173932887440242776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327105009001861201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f659576cf8c49ef8b2dd27de3847169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 0}
+--- !u!114 &2559548584688938923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327105009001861201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92cefec83823c6b46921973e9c4a378d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 0}
+--- !u!114 &3477141258888038181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327105009001861201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ba48c866b0458886146b6a9bd74646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.Senses.Detectable
+  detectablePoints:
+  - {fileID: 8246440142475941526}
+  - {fileID: 6811454744969871012}
+  - {fileID: 2174512156242470958}
+  - {fileID: 187550824326851982}
+  - {fileID: 1380542293860711362}
+  - {fileID: 3096778772012694043}
+--- !u!114 &7553423532564831656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327105009001861201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42451439df346918207a25a7009d6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEntity
 --- !u!1 &6506407998267710773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,6 +3234,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3181,9 +3257,11 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 1

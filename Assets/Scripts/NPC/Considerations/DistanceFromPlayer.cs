@@ -1,0 +1,20 @@
+﻿using System;
+using NPC.UtilityBaseClasses;
+using UnityEngine;
+
+namespace NPC.Considerations
+{
+    [CreateAssetMenu(menuName = "NPC/Considerations/DistanceFromHome")]
+    
+    public class DistanceFromPlayer : UtilityConsideration
+    {
+        [SerializeField] protected AnimationCurve curve;
+        
+        public override float Score(Guid id)
+        {
+            var player = Entities.Player.gameObject;
+            var value = Entities.Npcs[id].NpcInfo.State.IsAtDestination(player.transform.position) ? 0 : 1f;
+            return curve.Evaluate(value);
+        }
+    }
+}
