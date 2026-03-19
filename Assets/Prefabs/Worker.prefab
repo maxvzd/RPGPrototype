@@ -754,10 +754,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cd302e17154101b28a15cca2b7f2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerBrain
-  defaultGoals:
-  - {fileID: 11400000, guid: 37ad1b21d17ab7341988a45119c2fe76, type: 2}
-  - {fileID: 11400000, guid: 905bcd25a83d83448b1694fe2e8506d9, type: 2}
-  - {fileID: 11400000, guid: 1b77b32fb44592846b20270508e9b74f, type: 2}
+  goals:
+  - goal: {fileID: 11400000, guid: 37ad1b21d17ab7341988a45119c2fe76, type: 2}
+    context: {fileID: 11400000, guid: fc6d5ca8a6e52274fbc5a65a5af08151, type: 2}
+  - goal: {fileID: 11400000, guid: 905bcd25a83d83448b1694fe2e8506d9, type: 2}
+    context: {fileID: 11400000, guid: 5464c4595c93af942b9e878367578b71, type: 2}
+  - goal: {fileID: 11400000, guid: 1b77b32fb44592846b20270508e9b74f, type: 2}
+    context: {fileID: 11400000, guid: 34c5ceaad35a54547981bfd1231b84ad, type: 2}
 --- !u!114 &754447575360254792
 MonoBehaviour:
   m_ObjectHideFlags: 0

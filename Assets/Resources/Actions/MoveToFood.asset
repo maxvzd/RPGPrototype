@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aead1d44717438a938858808aa552e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 16366a81659a42309244751930baaae5, type: 3}
   m_Name: MoveToFood
-  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.MoveToFood
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.Actions.MoveToTargetAction
   considerations:
   - {fileID: 11400000, guid: 6c6e3c402121c964b9387c1791c9048d, type: 2}

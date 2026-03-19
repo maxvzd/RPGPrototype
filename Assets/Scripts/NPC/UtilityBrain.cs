@@ -16,10 +16,10 @@ namespace NPC
         private Guid Id { get; }
 
 
-        public UtilityBrain(Guid id, IEnumerable<UtilityGoal> workerGoals)
+        public UtilityBrain(Guid id, IEnumerable<GoalInfo> workerGoals)
         {
             Id = id;
-            _goals = workerGoals.ToDictionary(x => Guid.NewGuid(), x => new GoalInfo(x, new NpcContext()));
+            _goals = workerGoals.ToDictionary(x => Guid.NewGuid(), x => new GoalInfo(x.Goal, x.Context));
         }
 
         private IEnumerator Run()
@@ -27,8 +27,8 @@ namespace NPC
             while (true)
             {
                 //if (!_goals.Any(x => x.Value is not null)) yield break;
-                var goal = DecideBestGoal(_goals.Select(x => x.Value.Goal));
-                yield return goal.ExecuteActions(Id);
+                var goal = DecideBestGoal(_goals.Values);
+                yield return goal.Goal.ExecuteActions(Id, goal.Context);
             }
         }
 
@@ -37,9 +37,9 @@ namespace NPC
             ExecuteCoroutine?.Invoke(this, Run());
         }
         
-        private UtilityGoal DecideBestGoal(IEnumerable<UtilityGoal> actions)
+        private GoalInfo DecideBestGoal(IEnumerable<GoalInfo> goals)
         {
-            return UtilityAiUtilities.Evaluate(actions, Id);
+            return UtilityAiUtilities.Evaluate(goals.ToDictionary(x => x, x=> x.Context), Id);
         }
 
         public void SpottedEntity(Guid id)
@@ -54,16 +54,20 @@ namespace NPC
             _goals.Add(reference, new GoalInfo(goal, context));
         }
 
-        private struct GoalInfo
+        public class GoalInfo : IEvaluate
         {
-            
             public UtilityGoal Goal { get; }
-            public NpcContext NpcContext { get; }
+            public NpcContext Context { get; }
             
-            public GoalInfo(UtilityGoal goal, NpcContext npcContext)
+            public GoalInfo(UtilityGoal goal, NpcContext context)
             {
                 Goal = goal;
-                NpcContext = npcContext;
+                Context = context;
+            }
+
+            public float Evaluate(Guid id, NpcContext context)
+            {
+                return Goal.Evaluate(id, context);
             }
         }
     }

@@ -74,5 +74,7 @@ crashlytics-build.properties
 .qodo
 
 /Assets/Imports
+/Assets/Animation/Animations
+
 
 .qodo

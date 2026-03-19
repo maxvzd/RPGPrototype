@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 776d984c0d5e435bb56194f28bf55ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 16366a81659a42309244751930baaae5, type: 3}
   m_Name: MoveToHome
-  m_EditorClassIdentifier: Assembly-CSharp::NPC.WorkerPrototyping.Actions.MoveToHome
+  m_EditorClassIdentifier: Assembly-CSharp::NPC.Actions.MoveToTargetAction
   considerations:
   - {fileID: 11400000, guid: 8f618d6643215da4e83d619df8fd40cd, type: 2}

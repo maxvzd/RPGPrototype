@@ -4,7 +4,7 @@ namespace NPC.UtilityBaseClasses
 {
     
     [Serializable]
-    public abstract class UtilityConsideration : WorkerConsiderationBase
+    public abstract class UtilityConsideration : UtilityConsiderationBase
     {
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using NPC.UtilityBaseClasses;
 using UnityEngine;
+using NPC.Context;
 
 namespace NPC.Considerations
 {
@@ -9,7 +10,7 @@ namespace NPC.Considerations
     {
         [SerializeField] protected AnimationCurve curve;
         
-        public override float Score(Guid id)
+        public override float Score(Guid id, NpcContext context)
         {
             var home = Entities.Npcs[id].NpcInfo.State.Home;
             var value = Entities.Npcs[id].NpcInfo.State.IsAtDestination(home.position) ? 0 : 1f;

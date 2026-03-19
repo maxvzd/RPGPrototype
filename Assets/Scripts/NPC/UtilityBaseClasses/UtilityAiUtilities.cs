@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPC.Context;
 
 namespace NPC.UtilityBaseClasses
 {
     public static class UtilityAiUtilities
     {
-        public static T Evaluate<T>(IEnumerable<T> actions, Guid id) where T : IEvaluate
+        public static T Evaluate<T>(Dictionary<T, NpcContext> actions, Guid id) where T : IEvaluate
         {
             var scores = new Dictionary<T, float>();
-            foreach (var action in actions)
+            foreach (var item in actions)
             {
-                var score = action.Evaluate(id);
-                scores.TryAdd(action, score);
+                var evaluatee = item.Key;
+                var context = item.Value;
+                var score = evaluatee.Evaluate(id, context);
+                scores.TryAdd(evaluatee, score);
             }
             return scores.OrderByDescending(x => x.Value).First().Key;
         }
         
-        public static float EvaluateConsiderations(Guid id, WorkerConsiderationBase[] considerations)
+        public static float EvaluateConsiderations(Guid id, UtilityConsiderationBase[] considerations, NpcContext context)
         {
             if (considerations is null || considerations.Length == 0) return 0;
             
             var score = 1f;
             foreach (var consideration in considerations)
             {
-                var considerationScore = consideration.Score(id);
+                var considerationScore = consideration.Score(id, context);
                 score *= considerationScore;
 
                 if (score == 0) return 0;

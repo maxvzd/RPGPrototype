@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b3bcc124394ad3af3c54e50dc48dc0, type: 3}
   m_Name: GreetEntity
   m_EditorClassIdentifier: Assembly-CSharp::NPC.UtilityBaseClasses.UtilityGoal
-  considerations: []
+  considerations:
+  - {fileID: 0}
   actions: []

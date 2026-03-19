@@ -46,7 +46,7 @@ namespace NPC.Senses
                         var entityInfo = Entities.List[Id];
                         if (entityInfo is NpcEntity npc)
                         {
-                            npc.NpcInfo.Brain.SpottedEntity(spottedEntity.Id);
+                            //npc.NpcInfo.Brain.SpottedEntity(spottedEntity.Id);
                         }
                     }
                     _visibleEntities.TryAdd(spottedEntity.Id, spottedEntity);

@@ -38,6 +38,12 @@ namespace NPC
             
             return _agent.remainingDistance <= _agent.stoppingDistance;
         }
+
+        public float RemainingDistance(Vector3 target)
+        {
+            if(_agent.hasPath) return _agent.remainingDistance - _agent.stoppingDistance;
+            return 0;
+        }
         
         public void AddEnergy(float energyAmount)
         {
