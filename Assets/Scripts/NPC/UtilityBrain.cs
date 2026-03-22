@@ -46,7 +46,7 @@ namespace NPC
         {
             var goal = NpcUtilityLoader.Instance.Goals["GreetEntity"];
             var reference = UtilityGoal.GenerateReference();
-            var spottedEntity = Entities.List[id];
+            var spottedEntity = EntitiesRegistry.Dictionary[id];
 
             var context = new NpcContext();
             context.Add(ContextKeys.Target, spottedEntity.gameObject);

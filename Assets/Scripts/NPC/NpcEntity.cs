@@ -11,11 +11,10 @@ namespace NPC
     public class NpcEntity : Entity
     {
         [SerializeField] private GoalAndContext[] goals = Array.Empty<GoalAndContext>();
-        
-        private NpcInfo _npcInfo;
-        public NpcInfo NpcInfo => _npcInfo; 
 
-        private void Awake()
+        public NpcInfo NpcInfo { get; private set; }
+
+        private void Start()
         {
             var navMeshAgent = GetComponent<NavMeshAgent>();
             
@@ -24,11 +23,11 @@ namespace NPC
 
             var goalsAndContexts = goals.Select(x => new UtilityBrain.GoalInfo(x.Goal, x.Context.Get(state))); 
             var brain = new UtilityBrain(Id, goalsAndContexts);
-            _npcInfo = NpcInfo.Create(this, state, brain, controller);
-            Entities.Register(this); 
+            NpcInfo = NpcInfo.Create(this, state, brain, controller);
+            EntitiesRegistry.Register(this); 
             
-            brain.ExecuteCoroutine += ExecuteCoroutine;
-            brain.Start();
+            NpcInfo.Brain.ExecuteCoroutine += ExecuteCoroutine;
+            NpcInfo.Brain.Start();
         }
 
         private void ExecuteCoroutine(object sender, IEnumerator e)

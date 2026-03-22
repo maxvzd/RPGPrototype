@@ -12,7 +12,7 @@ namespace NPC.Actions
     {
         public override IEnumerator Execute(Guid id, NpcContext context)
         {
-            var controller = Entities.Npcs[id].NpcInfo.Controller;
+            var controller = EntitiesRegistry.NpcDictionary[id].NpcInfo.Controller;
             yield return controller.Eat();
         }
     }

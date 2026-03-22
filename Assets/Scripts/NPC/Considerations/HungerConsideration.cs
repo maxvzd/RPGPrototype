@@ -12,7 +12,7 @@ namespace NPC.Considerations
         
         public override float Score(Guid id, NpcContext context)
         {
-            var hunger = Entities.Npcs[id].NpcInfo.State.Hunger;
+            var hunger = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.Hunger;
             return curve.Evaluate(hunger);
         }
     }

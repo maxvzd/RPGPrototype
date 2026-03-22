@@ -13,7 +13,7 @@ namespace NPC.Actions
         {
             if (context.TryGet(ContextKeys.Target, out  var target))
             {
-                yield return Entities.Npcs[id].NpcInfo.Controller.MoveToGameObject(target.transform.position);
+                yield return EntitiesRegistry.NpcDictionary[id].NpcInfo.Controller.MoveToGameObject(target.transform.position);
             }
         }
     }

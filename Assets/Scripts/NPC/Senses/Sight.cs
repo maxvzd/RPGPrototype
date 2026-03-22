@@ -43,7 +43,7 @@ namespace NPC.Senses
                 {
                     if (!_recentlySeenEntities.Contains(spottedEntity.Id))
                     {
-                        var entityInfo = Entities.List[Id];
+                        var entityInfo = EntitiesRegistry.Dictionary[Id];
                         if (entityInfo is NpcEntity npc)
                         {
                             //npc.NpcInfo.Brain.SpottedEntity(spottedEntity.Id);

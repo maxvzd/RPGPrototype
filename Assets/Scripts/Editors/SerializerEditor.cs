@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CustomEditors
+namespace Editors
 {
     [CustomEditor(typeof(Serializer))]
     public class SerializerEditor : Editor

@@ -10,7 +10,7 @@ namespace NPC.Considerations
     {
         public override float Score(Guid id, NpcContext context)
         {
-            var money = Entities.Npcs[id].NpcInfo.State.Money;
+            var money = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.Money;
 
             return money > StockMarket.FoodPrice ? 1 : 0;
         }

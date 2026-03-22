@@ -12,8 +12,8 @@ namespace NPC.Considerations
         
         public override float Score(Guid id, NpcContext context)
         {
-            var work = Entities.Npcs[id].NpcInfo.State.Work;
-            var value = Entities.Npcs[id].NpcInfo.State.IsAtDestination(work.position) ? 0 : 1f;
+            var work = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.Work;
+            var value = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.IsAtDestination(work.position) ? 0 : 1f;
             return curve.Evaluate(value);
         }
     }

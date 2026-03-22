@@ -12,7 +12,7 @@ namespace NPC.Considerations
         
         public override float Score(Guid id, NpcContext context)
         {
-            var energy = Entities.Npcs[id].NpcInfo.State.Money;
+            var energy = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.Money;
             return curve.Evaluate(energy);
         }
     }

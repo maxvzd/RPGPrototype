@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DataPersistence.SmartObjects;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace NPC
@@ -8,19 +9,21 @@ namespace NPC
         [SerializeField] private float money;
         [SerializeField] private float energy;
         [SerializeField] private float hunger;
-        [SerializeField] private Transform home;
-        [SerializeField] private Transform food;
-        [SerializeField] private Transform work;
+        [SerializeField] private string home;
+        [SerializeField] private string food;
+        [SerializeField] private string work;
         private NavMeshAgent _agent;
         private SocialStats _socialStats;
+        private SmartObject _home;
+        private SmartObject _food;
+        private SmartObject _work;
 
         public float Money => money; 
         public float Energy => energy; 
         public float Hunger => hunger;
-
-        public Transform Home => home; 
-        public Transform Food => food; 
-        public Transform Work => work;
+        public Transform Home => _home.GameObject.transform; 
+        public Transform Food =>  _food.GameObject.transform; 
+        public Transform Work =>  _work.GameObject.transform;
         public float Disposition => _socialStats.Disposition;
         
         
@@ -28,6 +31,13 @@ namespace NPC
         {
             _agent = GetComponent<NavMeshAgent>();
             _socialStats = GetComponent<SocialStats>();
+        }
+
+        public void Start()
+        {
+            _home = SmartObjectRegistry.Dictionary[home];
+            _food = SmartObjectRegistry.Dictionary[food];
+            _work = SmartObjectRegistry.Dictionary[work];
         }
 
         public bool IsAtDestination(Vector3 destination)

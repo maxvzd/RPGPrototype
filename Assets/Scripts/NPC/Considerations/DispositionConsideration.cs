@@ -12,7 +12,7 @@ namespace NPC.Considerations
         
         public override float Score(Guid id, NpcContext context)
         {
-            var disposition = Entities.Npcs[id].NpcInfo.State.Disposition;
+            var disposition = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.Disposition;
             return curve.Evaluate(disposition);
         }
     }

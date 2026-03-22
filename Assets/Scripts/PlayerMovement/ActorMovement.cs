@@ -5,7 +5,7 @@ namespace PlayerMovement
 { 
     public class ActorMovement : MonoBehaviour
     {
-        [SerializeField] private float playerAccelerationTime;
+        [SerializeField] private float accelerationTime;
         private float _movementSpeed = 1f;
 
         private Animator _animator;
@@ -37,7 +37,7 @@ namespace PlayerMovement
                 movement *= _movementSpeed;
             }
             
-            _smoothedInput = Vector2.SmoothDamp(_smoothedInput, movement, ref _smoothInputVelocity, playerAccelerationTime);
+            _smoothedInput = Vector2.SmoothDamp(_smoothedInput, movement, ref _smoothInputVelocity, accelerationTime);
             
             _animator.SetFloat(AnimatorConstants.Vertical, _smoothedInput.y);
             _animator.SetFloat(AnimatorConstants.Horizontal, _smoothedInput.x);

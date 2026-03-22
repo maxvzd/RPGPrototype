@@ -3,7 +3,7 @@ using System.Collections;
 using NPC.Context;
 using NPC.UtilityBaseClasses;
 
-namespace NPC.Actions.EntitySpottedActions
+namespace NPC.Actions
 {
     public class DoNothingAction : UtilityAction
     {

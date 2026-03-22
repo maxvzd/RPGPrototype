@@ -170,9 +170,6 @@ PrefabInstance:
       addedObject: {fileID: 754447575360254792}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6264624497355155556}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7695728576471463227}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
       insertIndex: -1
@@ -728,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed74551987e4d3c4990a2ea07c32334f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAccelerationTime: 0.35
+  accelerationTime: 0.35
 --- !u!114 &7865198467681133670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,21 +773,9 @@ MonoBehaviour:
   money: 0
   energy: 50
   hunger: 0
-  home: {fileID: 0}
-  food: {fileID: 0}
-  work: {fileID: 0}
---- !u!114 &6264624497355155556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5483636823446940220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e97bde728d4ed4a5cd09cf024a3005, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity
+  home: worker_home
+  food: worker_food
+  work: worker_work_one
 --- !u!114 &7695728576471463227
 MonoBehaviour:
   m_ObjectHideFlags: 0

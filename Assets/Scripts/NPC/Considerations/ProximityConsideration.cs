@@ -14,7 +14,7 @@ namespace NPC.Considerations
         {
             if (!context.TryGet(ContextKeys.Target, out var target)) return 0;
             
-            var remainingDistance = Entities.Npcs[id].NpcInfo.State.RemainingDistance(target.transform.position);
+            var remainingDistance = EntitiesRegistry.NpcDictionary[id].NpcInfo.State.RemainingDistance(target.transform.position);
             return curve.Evaluate(remainingDistance);
         }
     }

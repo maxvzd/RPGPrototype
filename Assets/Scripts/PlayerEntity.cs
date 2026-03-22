@@ -5,6 +5,6 @@ public class PlayerEntity : Entity
 {
     private void Awake()
     {
-        Entities.Register(this);
+        EntitiesRegistry.Register(this);
     }
 }
