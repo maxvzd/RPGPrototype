@@ -7,12 +7,12 @@ namespace DataPersistence.Spawning
     {
         public string Key { get; }
 
-        private Vector3 _position;
+        public Transform Transform { get; }
         
-        public SpawnAnchor(string key, Vector3 position)
+        public SpawnAnchor(string key, Transform transform)
         {
             Key = key;
-            _position = position;
+            Transform = transform;
             
             if (!SpawnAnchorRegistry.Register(this))
             {

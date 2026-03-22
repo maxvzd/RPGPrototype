@@ -9,7 +9,7 @@ namespace DataPersistence.Spawning
         
         public void Awake()
         {
-            _instance = new SpawnAnchor(key, transform.position);
+            _instance = new SpawnAnchor(key, transform);
         }
     }
 }

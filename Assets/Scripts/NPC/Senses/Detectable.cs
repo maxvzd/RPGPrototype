@@ -11,7 +11,7 @@ namespace NPC.Senses
         public Guid Id { get; private set; }
         public IReadOnlyList<Transform> DetectablePoints => detectablePoints;
         
-        public void Start()
+        public void Awake()
         {
             Id = GetComponent<Entity>().Id;
         }

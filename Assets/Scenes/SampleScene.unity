@@ -2268,7 +2268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.72386676, y: 0, z: 0, w: 0.6899398}
+  m_LocalRotation: {x: 0.7274979, y: 0, z: 0, w: 0.68610996}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3074,7 +3074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016656604805612787, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: key
-      value: WorkerTwoSpawn
+      value: worker_two_spawn
       objectReference: {fileID: 0}
     - target: {fileID: 8427288448197319528, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: m_Name
@@ -3692,7 +3692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351665075124412474, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 1351665075124412474, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3728,7 +3728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016656604805612787, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: key
-      value: WorkerOneSpawn
+      value: worker_one_spawn
       objectReference: {fileID: 0}
     - target: {fileID: 8427288448197319528, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: m_Icon
@@ -5094,7 +5094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5483636823446940220, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6859911588959465621, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: _disposition
@@ -5357,7 +5357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5483636823446940220, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5483636823446940220, guid: 9bb34a48dce280b49b45c37f773fa21c, type: 3}
       propertyPath: m_TagString
@@ -8324,6 +8324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaleWorker
       objectReference: {fileID: 0}
+    - target: {fileID: 2363548022427266364, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3136425963134056326, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.885647
@@ -9335,9 +9339,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 12.183288
+  hourOfDay: 12.223605
   sunTransform: {fileID: 410087041}
-  time: 12:11
+  time: 12:13
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -11606,7 +11610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016656604805612787, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: key
-      value: WorkerThreeSpawn
+      value: worker_three_spawn
       objectReference: {fileID: 0}
     - target: {fileID: 8427288448197319528, guid: ee43e22b071d38540a9fc42a3f12d1f9, type: 3}
       propertyPath: m_Name
@@ -15722,6 +15726,10 @@ PrefabInstance:
     - target: {fileID: 2363548022427266364, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2363548022427266364, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3136425963134056326, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
       propertyPath: m_LocalPosition.x

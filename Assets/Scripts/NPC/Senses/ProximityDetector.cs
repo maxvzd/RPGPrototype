@@ -7,7 +7,7 @@ namespace NPC.Senses
         [SerializeField] private SphereCollider sightCollider;
         private SightDetection _sight;
 
-        public void Start()
+        public void Awake()
         {
             _sight = GetComponentInParent<SightDetection>();
         }

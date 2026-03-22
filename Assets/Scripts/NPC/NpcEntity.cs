@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using DataPersistence.Database.Models;
 using NPC.ScriptableObjectContexts;
 using NPC.UtilityBaseClasses;
 using UnityEngine;
@@ -14,18 +15,23 @@ namespace NPC
 
         public NpcInfo NpcInfo { get; private set; }
 
-        private void Start()
+        public void Initialise(DatabaseNpc npcState)
         {
+            Id = Guid.Parse(npcState.Id);
             var navMeshAgent = GetComponent<NavMeshAgent>();
+            var socialStats = GetComponent<SocialStats>();
             
-            var state = GetComponent<NpcState>();
+            var state = new NpcState(npcState, navMeshAgent, socialStats);
             var controller = new NpcController(navMeshAgent, state);
 
             var goalsAndContexts = goals.Select(x => new UtilityBrain.GoalInfo(x.Goal, x.Context.Get(state))); 
             var brain = new UtilityBrain(Id, goalsAndContexts);
             NpcInfo = NpcInfo.Create(this, state, brain, controller);
             EntitiesRegistry.Register(this); 
-            
+        }
+
+        public void Start()
+        {
             NpcInfo.Brain.ExecuteCoroutine += ExecuteCoroutine;
             NpcInfo.Brain.Start();
         }

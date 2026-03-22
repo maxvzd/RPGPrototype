@@ -1,43 +1,49 @@
-﻿using DataPersistence.SmartObjects;
+﻿using DataPersistence.Database.Models;
+using DataPersistence.SmartObjects;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace NPC
 {
-    public class NpcState : MonoBehaviour
+    public class NpcState
     {
-        [SerializeField] private float money;
-        [SerializeField] private float energy;
-        [SerializeField] private float hunger;
-        [SerializeField] private string home;
-        [SerializeField] private string food;
-        [SerializeField] private string work;
-        private NavMeshAgent _agent;
-        private SocialStats _socialStats;
-        private SmartObject _home;
-        private SmartObject _food;
-        private SmartObject _work;
+        private string _name;
+        private readonly NavMeshAgent _agent;
+        private readonly SocialStats _socialStats;
+        private readonly SmartObject _home;
+        private readonly SmartObject _food;
+        private readonly SmartObject _work;
 
-        public float Money => money; 
-        public float Energy => energy; 
-        public float Hunger => hunger;
+        public float Money { get; private set; }
+        public float Energy { get; private set;}
+        public float Hunger { get;  private set;}
         public Transform Home => _home.GameObject.transform; 
         public Transform Food =>  _food.GameObject.transform; 
         public Transform Work =>  _work.GameObject.transform;
         public float Disposition => _socialStats.Disposition;
         
-        
-        public void Awake()
+        public NpcState(DatabaseNpc npcState, NavMeshAgent agent, SocialStats socialStats)
         {
-            _agent = GetComponent<NavMeshAgent>();
-            _socialStats = GetComponent<SocialStats>();
-        }
-
-        public void Start()
-        {
-            _home = SmartObjectRegistry.Dictionary[home];
-            _food = SmartObjectRegistry.Dictionary[food];
-            _work = SmartObjectRegistry.Dictionary[work];
+            _agent = agent;
+            _socialStats = socialStats;
+            
+            Money = npcState.Money;
+            Energy = npcState.Energy;
+            Hunger = npcState.Hunger;
+            _name = npcState.Name;
+            
+            var homeKey = npcState.HomeKey;
+            _home =  SmartObjectRegistry.Dictionary[homeKey];
+            
+            var foodKey = npcState.FoodKey;
+            _food =  SmartObjectRegistry.Dictionary[foodKey];
+            
+            var workKey = npcState.WorkKey;
+            _work =  SmartObjectRegistry.Dictionary[workKey];
+            
+            _home = SmartObjectRegistry.Dictionary[homeKey];
+            _food = SmartObjectRegistry.Dictionary[foodKey];
+            _work = SmartObjectRegistry.Dictionary[workKey];
         }
 
         public bool IsAtDestination(Vector3 destination)
@@ -57,32 +63,32 @@ namespace NPC
         
         public void AddEnergy(float energyAmount)
         {
-            energy += energyAmount;
+            Energy += energyAmount;
         }
         
         public void AddMoney(float moneyAmount)
         {
-            money += moneyAmount;
+            Money += moneyAmount;
         }
         
         public void AddHunger(float hungerAmount)
         {
-            hunger += hungerAmount;
+            Hunger += hungerAmount;
         }
         
         public void RemoveEnergy(float energyAmount)
         {
-            energy -= energyAmount;
+            Energy -= energyAmount;
         }
         
         public void RemoveMoney(float moneyAmount)
         {
-            money -= moneyAmount;
+            Money -= moneyAmount;
         }
         
         public void RemoveHunger(float hungerAmount)
         {
-            hunger -= hungerAmount;
+            Hunger -= hungerAmount;
         }
     }
 }

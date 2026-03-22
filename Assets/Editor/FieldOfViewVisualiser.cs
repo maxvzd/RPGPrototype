@@ -2,10 +2,10 @@ using NPC.Senses;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorTest
+namespace Editor
 {
     [CustomEditor(typeof(SightDetection))]
-    public class FieldOfViewVisualiser : Editor
+    public class FieldOfViewVisualiser : UnityEditor.Editor
     {
         private void OnSceneGUI()
         {
@@ -34,3 +34,4 @@ namespace EditorTest
         }
     }
 }
+
