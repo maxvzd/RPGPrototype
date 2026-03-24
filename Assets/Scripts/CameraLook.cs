@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraLook : MonoBehaviour
 {
     [SerializeField] private Camera fpCamera;
+    [SerializeField] private Transform cameraContainer;
     [SerializeField] private float speed = 3;
     [SerializeField] private float maxLookAngleUp = 60;
     [SerializeField] private float maxLookAngleDown = -60;
@@ -13,6 +14,8 @@ public class CameraLook : MonoBehaviour
     private float _targetTilt;
     private float _tiltVelocity;
     private float _zAxisTilt;
+
+    private bool _lockCamera = false;
 
     private void Start()
     {
@@ -28,8 +31,23 @@ public class CameraLook : MonoBehaviour
         _zAxisTilt = Mathf.SmoothDampAngle(cameraEuler.z, _targetTilt, ref _tiltVelocity, 0.2f);
     }
 
+    public void LockCamera()
+    {
+        _lockCamera = true;
+    }
+
+    public void UnlockCamera()
+    {
+        _lockCamera = false;
+    }
+
     public void MoveCamera(Vector2 mouseInput)
     {
+        if (_lockCamera)
+        {
+            mouseInput = Vector2.zero;
+        }
+        
         _rotation.x += -mouseInput.y * speed;
         _rotation.x = Mathf.Clamp(_rotation.x, maxLookAngleDown, maxLookAngleUp);
 
@@ -41,6 +59,6 @@ public class CameraLook : MonoBehaviour
             _rotation.y += mouseInput.x * speed;
         }
         _rotation.z = _zAxisTilt;
-        fpCamera.transform.rotation = Quaternion.Euler(_rotation);
+        cameraContainer.transform.rotation = Quaternion.Euler(_rotation);
     }
 }

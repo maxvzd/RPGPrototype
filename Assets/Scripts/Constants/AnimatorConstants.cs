@@ -10,7 +10,6 @@ namespace Constants
         public static readonly int TurnRightTrigger = Animator.StringToHash("TurnRightTrigger");
         public static readonly int TurnLeftTrigger = Animator.StringToHash("TurnLeftTrigger");
         public static readonly int JumpTrigger = Animator.StringToHash("JumpTrigger");
-        public static readonly int IsLeftMouseButtonDown = Animator.StringToHash("IsLeftMouseButtonDown");
         public static readonly int AttackSpeedModifier = Animator.StringToHash("AttackSpeedModifier");
         public static readonly int RaiseWeaponSpeedModifier = Animator.StringToHash("RaiseWeaponSpeedModifier");
         public static readonly int ShouldReleaseAttack = Animator.StringToHash("ShouldReleaseAttack");

@@ -6,13 +6,14 @@ using Constants;
 using FirstPerson;
 using Interact;
 using Items.Equipment;
+using PlayerMovement;
 using UI.Container;
 using UI.Dialogue;
 using UI.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PlayerMovement
+namespace Input
 {
     public class PlayerInputHandler : MonoBehaviour
     {
@@ -27,8 +28,12 @@ namespace PlayerMovement
         private InputAction _lookAction;
 
         private Dictionary<InputAction, Action> _wasPerformedActions;
-        private Dictionary<InputAction, Action> _wasPressedActions;
+        private Dictionary<InputAction, Action> _wasPressedActions = new();
         private Dictionary<InputAction, Action> _wasCompletedActions;
+
+        private readonly PlayerInputState _state = new();
+        private Dictionary<InputAction, Action> _isPressedActions;
+        public IPlayerInputState State => _state;
         
         public void Start()
         {
@@ -84,10 +89,10 @@ namespace PlayerMovement
             {
                 { attackAction, () => { _playerAttack.ReleaseAttack(); } },
             };
-
-            _wasPressedActions = new Dictionary<InputAction, Action>
+            
+            _isPressedActions = new Dictionary<InputAction, Action>
             {
-                { attackAction, () => { _playerAttack.HoldAttack(); } },
+                { attackAction, () => { _playerAttack.StartAttack(); } },
             };
 
             inventoryUIManager.UiHidden += EnableRegularActions;
@@ -100,14 +105,13 @@ namespace PlayerMovement
 
         public void Update()
         {
-            var movementInput = _moveAction.ReadValue<Vector2>();
-            var lookInput = _lookAction.ReadValue<Vector2>();
+            _state.MovementInput = _moveAction.ReadValue<Vector2>();
+            _state.MouseInput =_lookAction.ReadValue<Vector2>();
 
-            _movement.Move(movementInput);
-            _cameraLook.MoveCamera(lookInput);
-            _playerAttack.SetMovementInput(movementInput);
+            _movement.Move(_state.MovementInput);
+            _cameraLook.MoveCamera(_state.MouseInput);
             _movement.ChangeSpeed(_increaseSpeedAction.ReadValue<float>() * 0.1f);
-            _cameraLook.TiltCamera(movementInput.x);
+            _cameraLook.TiltCamera(_state.MovementInput.x);
 
             foreach (var action in
                      _wasPerformedActions.Where(action => action.Key.WasPerformedThisFrame()))
@@ -123,6 +127,12 @@ namespace PlayerMovement
 
             foreach (var action in
                      _wasCompletedActions.Where(action => action.Key.WasCompletedThisFrame()))
+            {
+                action.Value.Invoke();
+            }
+            
+            foreach (var action in
+                     _isPressedActions.Where(action => action.Key.IsPressed()))
             {
                 action.Value.Invoke();
             }

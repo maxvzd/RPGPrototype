@@ -31,7 +31,6 @@ namespace PlayerMovement
         {
             _isMovementKeyDown = movement.x != 0 || movement.y != 0;
             
-            
             if (movement.y > 0)
             {
                 movement *= _movementSpeed;
