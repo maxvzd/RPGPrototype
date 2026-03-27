@@ -60,15 +60,6 @@ namespace Items.Equipment
             _armRotator.ShouldRotateArmsWithCamera = !_isWeaponSheathed;
             _armSwap.SwitchArms();
             _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
-
-            if (_isWeaponSheathed)
-            {
-                PlayerTurner.BodyShouldFollowCameraUnRegister();
-            }
-            else
-            {
-                PlayerTurner.BodyShouldFollowCameraRegister();
-            }
         }
 
         public void EquipWeapon(Guid instanceId, GameObject weaponTransform, IEnumerable<SheathedItemPositions> positions, ItemType slot)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Combat;
+using Combat.LockOn;
 using Constants;
 using FirstPerson;
 using Interact;
@@ -46,6 +47,7 @@ namespace Input
             var dialogueManager = GetComponent<DialogueManager>();
             var containerManager = GetComponent<ContainerUiManager>();
             var jumper = GetComponent<JumpBehaviour>();
+            var targetLock = GetComponent<LockOn>();
 
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions[InputConstants.MoveAction];
@@ -59,7 +61,11 @@ namespace Input
             var showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
             var hideInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Interact}"];
             var dropItemAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.DropItem}"];
-
+            
+            var cycleTargetRightAction = _input.actions[InputConstants.CycleTargetRight];
+            var cycleTargetLeftAction = _input.actions[InputConstants.CycleTargetLeft];
+            var breakTargetLock = _input.actions[InputConstants.BreakTargetLock];
+            
             _input.SwitchCurrentActionMap(InputConstants.PlayerActionMap);
 
             _wasPerformedActions = new Dictionary<InputAction, Action>
@@ -83,11 +89,15 @@ namespace Input
                 },
                 { dropItemAction, () => { inventoryUIManager.DropSelectedItem(); } },
                 { jumpAction, () => { jumper.Jump(); } },
+
+                { breakTargetLock, () => { targetLock.BreakTargetLock();} }
             };
 
             _wasCompletedActions = new Dictionary<InputAction, Action>
             {
-                { attackAction, () => { _playerAttack.ReleaseAttack(); } },
+                { attackAction, () => { _playerAttack.ReleaseAttack(); } },                
+                { cycleTargetRightAction, () => { targetLock.CycleTargetRight();} },
+                { cycleTargetLeftAction, () => { targetLock.CycleTargetLeft();} },
             };
             
             _isPressedActions = new Dictionary<InputAction, Action>

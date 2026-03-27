@@ -11,6 +11,9 @@
         public static string Inventory => "Inventory";
         public static string DropItem => "DropItem";
         public static string Jump => "Jump";
+        public static string CycleTargetRight => "CycleTargetRight";
+        public static string CycleTargetLeft => "CycleTargetLeft";
+        public static string BreakTargetLock => "BreakTargetLock";
 
 
         public static string PlayerActionMap => "Player";

@@ -77,6 +77,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CycleTargetRight",
+                    "type": "Button",
+                    "id": "c3f07e4f-ffd8-484a-b333-3e8e9cc39a15",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CycleTargetLeft",
+                    "type": "Button",
+                    "id": "064bb6eb-7521-4786-ae4f-a6d28c7737d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BreakTargetLock",
+                    "type": "Button",
+                    "id": "c1cd8830-bfd4-49d5-b686-1bd577cd4e3f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -182,7 +209,7 @@
                 {
                     "name": "",
                     "id": "19b765f2-6417-4181-8b8a-cfe1373ca3d8",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -193,7 +220,7 @@
                 {
                     "name": "",
                     "id": "d2e01735-5e56-4dcb-85eb-d4711982f6de",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -231,6 +258,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c848f5ff-8b11-4ec8-bf45-1c2a18a38cd4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleTargetRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd373f29-c096-4991-a8d7-b1689f2feb61",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleTargetLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc018bbe-d929-4c55-8b28-2004394f7c0c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BreakTargetLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "164f9485-5e1c-4dc1-b52d-9e60a0c268b6",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BreakTargetLock",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

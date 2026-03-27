@@ -61,7 +61,7 @@ namespace Combat
             
             SetSwingState(true);
             _currentAttackDirection = AttackDirection.None;
-            EntitiesRegistry.Player.CameraLook.LockCamera();
+            EntitiesRegistry.Player.LockOn.LockOnToNearestTarget();
         }
         
         public void ReleaseAttack()
@@ -69,7 +69,6 @@ namespace Combat
             if (_weaponPositionManager.IsWeaponSheathed) return;
             
             SetSwingState(false);
-            EntitiesRegistry.Player.CameraLook.UnlockCamera();
         }
 
         private void SetSwingState(bool isSwinging)
