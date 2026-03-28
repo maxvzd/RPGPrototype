@@ -9,5 +9,9 @@ namespace Interact
         public Guid Id { get; protected set; }
         public abstract void Interact();
         public abstract string IconName { get; }
+        public int GetGameObjectInstanceID()
+        {
+            return gameObject.GetInstanceID();
+        }
     }
 }

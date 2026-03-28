@@ -9,12 +9,12 @@ namespace Registries
         
         public new static bool Register(T item)
         {
-            return Guids.TryAdd(item.Id, item) && Instances.TryAdd(item.GetInstanceID(), item);
+            return Guids.TryAdd(item.Id, item) && Instances.TryAdd(item.GetGameObjectInstanceID(), item);
         }
     }
 
     public interface IUnityEntity
     {
-        int GetInstanceID();
+        int GetGameObjectInstanceID();
     }
 }
