@@ -1,39 +1,26 @@
-﻿using Interact.ContextBuilders;
-using Interact.Contexts;
-using Items.Behaviours;
-using Items.InstancePropertiesClasses;
-using UnityEngine;
+﻿using Items.Behaviours;
+using Items.ItemInstances;
+using NPC;
+using Registries;
 
 namespace Interact
 {
-    public class InteractWithItem : MonoBehaviour, IInteract<PickupContextBuilder>
+    public class InteractWithItem : Interactable
     {
-        private  InstanceProperties _itemProps;
+        private BaseItemInstance _baseItemProps;
+        public override string IconName => "hand-open";
         
-        public string IconName => "hand-open";
-
-        public void Start()
+        public void Awake()
         {
-            var itemBehaviour = GetComponent<ItemBehaviourBase>();
-            _itemProps = itemBehaviour.GetBaseInstance();
-        }
-
-        public PickupContextBuilder GetInteractionContext()
-        {
-            return new PickupContextBuilder();
-        }
-
-        public void Interact(IInteractionContext context)
-        {
-            if (context is PickupContext pickupContext)
-            {
-                Interact(pickupContext);
-            }
+            var itemBehaviour = GetComponent<BaseItemBehaviour>();
+            _baseItemProps = itemBehaviour.Instance;
+            Id = _baseItemProps.Id;
+            InteractRegistry.Register(this);
         }
         
-        private void Interact(PickupContext interactionContext)
+        public override void Interact()
         {
-            if (interactionContext.AddItem(_itemProps))
+            if (EntitiesRegistry.Player.Inventory.AddItem(_baseItemProps))
             {
                 Destroy(gameObject); 
             }

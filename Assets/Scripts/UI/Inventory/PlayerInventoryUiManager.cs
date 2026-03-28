@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Items;
 using Items.Equipment;
+using Registries;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -10,6 +12,11 @@ namespace UI.Inventory
         private InventoryController _inventoryController;
         private global::Items.Inventory _inventory;
         private EquippedSlotManager _playerEquipped;
+
+        private void Awake()
+        {
+            UiRegistry.Register(this);
+        }
 
         private void Start()
         {
@@ -45,7 +52,7 @@ namespace UI.Inventory
 
         public void DropSelectedItem()
         {
-            var instance = _inventoryController.CurrentlyHoveredItem;
+            var instance = _inventoryController.CurrentlyHoveredBaseItem;
             if (instance is null) return;
 
             if (_inventory.RemoveItem(instance))

@@ -4,7 +4,6 @@ using System.Linq;
 using Constants;
 using FirstPerson;
 using Items.Equipment.Sheathing;
-using PlayerMovement;
 using UnityEngine;
 
 namespace Items.Equipment

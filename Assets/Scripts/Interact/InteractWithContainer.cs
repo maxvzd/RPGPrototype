@@ -1,24 +1,26 @@
-﻿using Interact.ContextBuilders;
-using Interact.Contexts;
-using UnityEngine;
+﻿using NPC;
+using Registries;
 
 namespace Interact
 {
-    public class InteractWithContainer: MonoBehaviour, IInteract<ContainerContextBuilder>
+    public class InteractWithContainer: Interactable
     {
-        public ContainerContextBuilder GetInteractionContext()
+        public void Awake()
         {
-            return new ContainerContextBuilder();
+            var container = GetComponent<Container>();
+            Id = container.Id;
+            InteractRegistry.Register(this);
+        }
+        
+        public override string IconName  => "hand-open";
+        
+        public override void Interact()
+        {
+            var items = ContainerRegistry.ByGuid[Id].Inventory;
+            
+            UiRegistry.ContainerUi.PopulateItems(items, EntitiesRegistry.Player.Inventory);
+            UiRegistry.ContainerUi.ShowUI();
         }
 
-        public void Interact(IInteractionContext context)
-        {
-            if (context is ContainerContext containerContext)
-            {
-                containerContext.ShowContainerUI();
-            }
-        }
-
-        public string IconName  => "hand-open";
     }
 }

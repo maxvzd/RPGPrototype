@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Items.Equipment;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine;
 
 namespace Items
@@ -10,21 +10,21 @@ namespace Items
     {
         [SerializeField] private float weightLimit = 500;
         private float _currentWeight = 0;
-        private readonly List<InstanceProperties> _items = new();
+        private readonly List<BaseItemInstance> _items = new();
         private EquippedSlotManager _equipment;
 
-        public IReadOnlyList<InstanceProperties> Items => _items;
+        public IReadOnlyList<BaseItemInstance> Items => _items;
 
         private void Start()
         {
             _equipment = GetComponent<EquippedSlotManager>();
         }
 
-        public bool AddItem(InstanceProperties instance)
+        public bool AddItem(BaseItemInstance instance)
         {
-            if (!(_currentWeight + instance.BaseItemProperties.Weight <= weightLimit))
+            if (!(_currentWeight + instance.BaseDefinition.Weight <= weightLimit))
             {
-                Debug.Log($"Couldn't add {instance.BaseItemProperties.ItemName} as it's too heavy, Current weight: {_currentWeight}");
+                Debug.Log($"Couldn't add {instance.BaseDefinition.ItemName} as it's too heavy, Current weight: {_currentWeight}");
                 return false;
             }
 
@@ -42,12 +42,12 @@ namespace Items
             //     Debug.Log($"After: {itemInstance.Durability}");
             // }
 
-            _currentWeight += instance.BaseItemProperties.Weight;
+            _currentWeight += instance.BaseDefinition.Weight;
             _items.Add(instance);
             return true;
         }
 
-        public bool RemoveItem(InstanceProperties instance)
+        public bool RemoveItem(BaseItemInstance instance)
         {
             if (!_items.Exists(x => x == instance)) return false;
 
@@ -55,11 +55,11 @@ namespace Items
             {
                 if (_equipment.IsItemEquipped(instance))
                 {
-                    _equipment.UnEquipItem(instance.InstanceId);
+                    _equipment.UnEquipItem(instance.Id);
                 }
             }
             
-            _currentWeight -= instance.BaseItemProperties.Weight;
+            _currentWeight -= instance.BaseDefinition.Weight;
             _items.Remove(instance);
 
             // Instance persistence test

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Constants;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory
 {
     public class InventoryController
     {
-        public InstanceProperties CurrentlyHoveredItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
+        public BaseItemInstance CurrentlyHoveredBaseItem => _listController.CurrentlyHoveredIndex > -1 ? _items[_listController.CurrentlyHoveredIndex] : null;
 
         private readonly InventoryListController _listController;
-        private IReadOnlyList<InstanceProperties> _items;
+        private IReadOnlyList<BaseItemInstance> _items;
 
         public EventHandler<int> ItemClicked;
         
@@ -26,7 +26,7 @@ namespace UI.Inventory
             };
         }
 
-        public void PopulateItems(IEnumerable<InstanceProperties> items)
+        public void PopulateItems(IEnumerable<BaseItemInstance> items)
         {
             _items = items.ToList();
             _listController.SetupInventoryList(_items);

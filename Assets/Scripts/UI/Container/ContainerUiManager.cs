@@ -1,3 +1,5 @@
+using Registries;
+
 namespace UI.Container
 {
     public class ContainerUiManager : BaseUIManager
@@ -5,6 +7,11 @@ namespace UI.Container
         private ContainerController _uiController;
         private Items.Inventory _playerInventory;
         private Items.Inventory _containerInventory;
+
+        private void Awake()
+        {
+            UiRegistry.Register(this);
+        }
 
         private void Start()
         {

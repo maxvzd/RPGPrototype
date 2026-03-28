@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Constants;
 using Items.Equipment.Sheathing;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine;
 
 namespace Items.Equipment
@@ -17,12 +17,12 @@ namespace Items.Equipment
             _weaponPositionManager = GetComponent<WeaponPositionManager>();
         }
 
-        public void EquipWeapon(InstanceProperties weapon, ItemType toSlot)
+        public void EquipWeapon(BaseItemInstance weapon, ItemType toSlot)
         {
-            if (weapon.BaseItemProperties is not ISheathable sheathable) return;
+            if (weapon.BaseDefinition is not ISheathable sheathable) return;
         
             var weaponTransform = ItemSpawner.SpawnItem(weapon, Vector3.zero, Quaternion.identity);
-            _equippedInstances.Add(weapon.InstanceId, weaponTransform);
+            _equippedInstances.Add(weapon.Id, weaponTransform);
             weaponTransform.transform.localScale *= 1f; //have to do this cause I fucked up the scale
             var rb = weaponTransform.GetComponent<Rigidbody>();
             var c = weaponTransform.GetComponent<Collider>();
@@ -31,7 +31,7 @@ namespace Items.Equipment
             c.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
         
             _weaponPositionManager.EquipWeapon(
-                weapon.InstanceId,
+                weapon.Id,
                 weaponTransform,
                 sheathable.SheathPositions,
                 toSlot);

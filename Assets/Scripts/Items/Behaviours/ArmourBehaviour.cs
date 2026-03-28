@@ -1,9 +1,8 @@
-﻿using Items.InstancePropertiesClasses;
-using Items.Properties;
+﻿using Items.ItemInstances;
 
 namespace Items.Behaviours
 {
-    public class ArmourBehaviour : ItemBehaviourBase<ArmourProperties, ArmourInstanceProperties>
+    public class ArmourBehaviour : BaseItemBehaviour<ArmourInstance>
     {
     }
 }

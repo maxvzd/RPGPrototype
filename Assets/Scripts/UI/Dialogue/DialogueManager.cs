@@ -1,25 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Registries;
 
 namespace UI.Dialogue
 {
     public class DialogueManager : BaseUIManager
     {
-        public static DialogueManager Instance { get; private set; }
-        
         private DialogueController _controller;
         private IEnumerable<string> _dialogueOptions;
 
         private void Awake()
         {
-            if (Instance is null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                throw new Exception("More than one dialogue manager created");
-            }
+            UiRegistry.Register(this);
         }
 
         private void Start()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Constants;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine.UIElements;
 
 namespace UI.Inventory
@@ -28,7 +28,7 @@ namespace UI.Inventory
             CurrentlyHoveredIndex = -1;
         }
 
-        public void SetupInventoryList(IEnumerable<InstanceProperties> model)
+        public void SetupInventoryList(IEnumerable<BaseItemInstance> model)
         {
             SetItems(model);
             
@@ -103,9 +103,9 @@ namespace UI.Inventory
             _listView.SetSelection(selectedIndices);
         }
 
-        public void SetItems(IEnumerable<InstanceProperties> items)
+        public void SetItems(IEnumerable<BaseItemInstance> items)
         {
-            _items = items.Select(x => new ItemViewModel(x.BaseItemProperties)).ToList();
+            _items = items.Select(x => new ItemViewModel(x.BaseDefinition)).ToList();
             _listView.itemsSource = _items;
             _listView.RefreshItems();
         }

@@ -1,16 +1,16 @@
 ﻿using Items.Behaviours;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine;
 
 namespace Items
 {
     public class ItemSpawner : MonoBehaviour
     {
-        public static GameObject SpawnItem(InstanceProperties instance, Vector3 positionToSpawnAt, Quaternion rotation)
+        public static GameObject SpawnItem(BaseItemInstance instance, Vector3 positionToSpawnAt, Quaternion rotation)
         {
-            var newItem = Instantiate(instance.BaseItemProperties.Prefab, positionToSpawnAt, rotation);
-            var itemBehaviour = newItem.GetComponent<ItemBehaviourBase>();
-            itemBehaviour.InitializeInstance(instance);
+            var newItem = Instantiate(instance.BaseDefinition.Prefab, positionToSpawnAt, rotation);
+            var itemBehaviour = newItem.GetComponent<BaseItemBehaviour>();
+            itemBehaviour.SetInstance(instance);
             return newItem;
         }
     }

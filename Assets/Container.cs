@@ -1,18 +1,28 @@
+using System;
 using System.Collections.Generic;
 using Items;
-using Items.InstancePropertiesClasses;
+using Items.ItemScriptableObjects;
+using Registries;
 using UnityEngine;
 
-public class Container : MonoBehaviour
+public class Container : MonoBehaviour, IEntity
 {
-    [SerializeField] private List<ItemInstanceProperties> items;
+    [SerializeField] private List<ItemInstanceScriptableObject> items;
+
+    public Guid Id { get; } = Guid.NewGuid();
+    public Inventory Inventory { get; private set; }
+
+    public void Awake()
+    {
+        ContainerRegistry.Register(this);
+    }
 
     private void Start()
     {
-        var invent = GetComponent<Inventory>();
+        Inventory = GetComponent<Inventory>();
         foreach (var item in items)
         {
-            invent.AddItem(item);
+            Inventory.AddItem(item.BaseInstance);
         }
     }
 }

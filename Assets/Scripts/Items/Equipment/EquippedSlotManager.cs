@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Items.Equipment.Sheathing;
-using Items.InstancePropertiesClasses;
+using Items.ItemInstances;
 using UnityEngine;
 
 namespace Items.Equipment
@@ -18,12 +18,12 @@ namespace Items.Equipment
 
         private EquippedMeshManager _equippedMeshManager;
         
-        public bool IsItemEquipped(InstanceProperties instance)
-            => GetEquipmentSlotsForTypes(instance).Any(slot => slot.Contains(instance.InstanceId));
+        public bool IsItemEquipped(BaseItemInstance instance)
+            => GetEquipmentSlotsForTypes(instance).Any(slot => slot.Contains(instance.Id));
 
-        public void ActivateItem(InstanceProperties instance)
+        public void ActivateItem(BaseItemInstance instance)
         {
-            if (UnEquipItem(instance.InstanceId)) return;
+            if (UnEquipItem(instance.Id)) return;
 
             EquipItem(instance);
         }
@@ -41,11 +41,11 @@ namespace Items.Equipment
             _equippedMeshManager = GetComponent<EquippedMeshManager>();
         }
 
-        private void EquipItem(InstanceProperties instance)
+        private void EquipItem(BaseItemInstance instance)
         {
-            if (instance.BaseItemProperties is not IEquippable) return;
+            if (instance.BaseDefinition is not IEquippable) return;
             
-            var validSlots = instance.BaseItemProperties.Types
+            var validSlots = instance.BaseDefinition.Types
                 .Select(itemType => new { ItemType = itemType, Slot = _equipmentSlots.GetValueOrDefault(itemType) })
                 .Where(entry => entry.Slot != null)
                 .ToList();
@@ -68,18 +68,18 @@ namespace Items.Equipment
             }
         }
 
-        private void AddItemToSlot(ItemType slotType, IEquipmentSlot slot, InstanceProperties instance)
+        private void AddItemToSlot(ItemType slotType, IEquipmentSlot slot, BaseItemInstance instance)
         {
-            slot.AddItem(instance.InstanceId);
-            if (instance.BaseItemProperties is ISheathable)
+            slot.AddItem(instance.Id);
+            if (instance.BaseDefinition is ISheathable)
             {
                 _equippedMeshManager.EquipWeapon(instance, slotType);
             }
         }
 
-        private IEnumerable<IEquipmentSlot> GetEquipmentSlotsForTypes(InstanceProperties instance)
+        private IEnumerable<IEquipmentSlot> GetEquipmentSlotsForTypes(BaseItemInstance instance)
         {
-            return instance.BaseItemProperties.Types.Select(type
+            return instance.BaseDefinition.Types.Select(type
                 => _equipmentSlots.TryGetValue(type, out var value)
                     ? value
                     : new NullEquipmentSlot());

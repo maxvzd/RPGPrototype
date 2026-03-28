@@ -1,5 +1,6 @@
 ﻿using DataPersistence.Spawning;
 using NPC;
+using Registries;
 using UnityEngine;
 
 namespace DataPersistence.Database

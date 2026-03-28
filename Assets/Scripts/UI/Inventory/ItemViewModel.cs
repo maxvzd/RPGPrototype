@@ -1,5 +1,5 @@
 ﻿using Items;
-using Items.Properties;
+using Items.ItemDefinitions;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -13,7 +13,7 @@ namespace UI.Inventory
         public Texture2D InventoryIcon { get; }
         public float Weight { get; }
 
-        public ItemViewModel(ItemProperties item)
+        public ItemViewModel(ItemDefinition item)
         {
             Name = item.ItemName;
             Description = item.Description;

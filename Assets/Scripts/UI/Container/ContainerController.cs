@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Constants;
-using Items.InstancePropertiesClasses;
 using UI.Inventory;
 using UnityEngine.UIElements;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Registries;
+using UnityEngine;
 
 namespace DataPersistence.SmartObjects
 {
