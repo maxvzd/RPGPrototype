@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Constants;
-using Items.Equipment.Sheathing;
 using Items.ItemInstances;
 using UnityEngine;
 
@@ -9,39 +8,25 @@ namespace Items.Equipment
 {
     public class EquippedMeshManager : MonoBehaviour
     {
-        private Dictionary<Guid, GameObject> _equippedInstances = new();
-        private WeaponPositionManager _weaponPositionManager;
+        private Dictionary<Guid, GameObject> _equippedGameObjects = new();
+        public IReadOnlyDictionary<Guid, GameObject> EquippedGameObjects => _equippedGameObjects;
 
-        private void Start()
+        public GameObject SpawnGameObject(BaseItemInstance weapon)
         {
-            _weaponPositionManager = GetComponent<WeaponPositionManager>();
-        }
-
-        public void EquipWeapon(BaseItemInstance weapon, ItemType toSlot)
-        {
-            if (weapon.BaseDefinition is not ISheathable sheathable) return;
-        
             var weaponTransform = ItemSpawner.SpawnItem(weapon, Vector3.zero, Quaternion.identity);
-            _equippedInstances.Add(weapon.Id, weaponTransform);
+            _equippedGameObjects.Add(weapon.Id, weaponTransform);
             weaponTransform.transform.localScale *= 1f; //have to do this cause I fucked up the scale
             var rb = weaponTransform.GetComponent<Rigidbody>();
             var c = weaponTransform.GetComponent<Collider>();
             rb.isKinematic = true;
             rb.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
             c.excludeLayers = LayerMask.GetMask(LayerConstants.Player);
-        
-            _weaponPositionManager.EquipWeapon(
-                weapon.Id,
-                weaponTransform,
-                sheathable.SheathPositions,
-                toSlot);
+            return weaponTransform;
         }
 
-        public bool UnEquipWeapon(Guid instanceId)
+        public bool RemoveGameObject(Guid instanceId)
         {
-            if (!_equippedInstances.Remove(instanceId, out var weaponGameObject)) return false;
-
-            _weaponPositionManager.UnEquipWeapon(instanceId);
+            if (!_equippedGameObjects.Remove(instanceId, out var weaponGameObject)) return false;
             Destroy(weaponGameObject);
             return true;
         }

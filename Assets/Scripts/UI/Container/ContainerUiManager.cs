@@ -1,3 +1,4 @@
+using Items.ItemInstances;
 using Registries;
 
 namespace UI.Container
@@ -23,9 +24,9 @@ namespace UI.Container
             HideUI();
         }
 
-        private void ContainerItemClicked(object sender, int e)
+        private void ContainerItemClicked(object sender, BaseItemInstance e)
         {
-            var item = _containerInventory.Items[e];
+            var item = _containerInventory.Items[e.Id];
             if (_containerInventory.RemoveItem(item))
             {
                 _playerInventory.AddItem(item);
@@ -38,9 +39,9 @@ namespace UI.Container
             _uiController.SetItems(_playerInventory, _containerInventory);
         }
 
-        private void PlayerItemClicked(object sender, int e)
+        private void PlayerItemClicked(object sender, BaseItemInstance e)
         {
-            var item = _playerInventory.Items[e];
+            var item = _playerInventory.Items[e.Id];
             if (_playerInventory.RemoveItem(item))
             {
                 _containerInventory.AddItem(item);

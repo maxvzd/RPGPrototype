@@ -1,5 +1,6 @@
 ﻿using System;
 using Constants;
+using Items.ItemInstances;
 using UI.Inventory;
 using UnityEngine.UIElements;
 
@@ -10,8 +11,8 @@ namespace UI.Container
         private readonly InventoryListController _containerListController;
         private readonly InventoryListController _playerListController;
         
-        public EventHandler<int> PlayerItemClicked;
-        public EventHandler<int> ContainerItemClicked;
+        public EventHandler<BaseItemInstance> PlayerItemClicked;
+        public EventHandler<BaseItemInstance> ContainerItemClicked;
 
         public ContainerController(VisualElement root)
         {
@@ -23,25 +24,27 @@ namespace UI.Container
             
             _playerListController.ItemClicked += (sender, i) =>
             {
-                PlayerItemClicked?.Invoke(sender, i);
+                var item = _playerListController.GetItemAtIndex(i);
+                PlayerItemClicked?.Invoke(sender, item);
             };
             
             _containerListController.ItemClicked += (sender, i) =>
             {
-                ContainerItemClicked?.Invoke(sender, i);
+                var item = _containerListController.GetItemAtIndex(i);
+                ContainerItemClicked?.Invoke(sender, item);
             };
         }
         
         public void PopulateItems(Items.Inventory playerInventory, Items.Inventory containerInventory)
         {
-            _playerListController.SetupInventoryList(playerInventory.Items);
-            _containerListController.SetupInventoryList(containerInventory.Items);
+            _playerListController.SetupInventoryList(playerInventory.Items.Values);
+            _containerListController.SetupInventoryList(containerInventory.Items.Values);
         }
 
         public void SetItems(Items.Inventory playerInventory, Items.Inventory containerInventory)
         {
-            _playerListController.SetItems(playerInventory.Items);
-            _containerListController.SetItems(containerInventory.Items);
+            _playerListController.SetItems(playerInventory.Items.Values);
+            _containerListController.SetItems(containerInventory.Items.Values);
         }
     }
 }

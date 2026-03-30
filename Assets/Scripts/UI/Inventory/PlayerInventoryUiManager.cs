@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using FirstPerson;
 using Items;
 using Items.Equipment;
+using Items.Equipment.Sheathing;
+using Items.ItemInstances;
+using NPC;
 using Registries;
 using UnityEngine;
 
@@ -11,7 +15,9 @@ namespace UI.Inventory
     {
         private InventoryController _inventoryController;
         private global::Items.Inventory _inventory;
-        private EquippedSlotManager _playerEquipped;
+        private EquipmentSlotManager _playerEquipment;
+        private FirstPersonCombatAnimationManager _firstPersonAnimationController;
+        private WeaponSheathing _weaponSheathing;
 
         private void Awake()
         {
@@ -24,29 +30,35 @@ namespace UI.Inventory
             _inventoryController.ItemClicked += OnItemClicked;
 
             _inventory = GetComponent<global::Items.Inventory>();
-            _playerEquipped = GetComponent<EquippedSlotManager>();
+            _playerEquipment = GetComponent<EquipmentSlotManager>();
+            _firstPersonAnimationController = GetComponent<FirstPersonCombatAnimationManager>();
+            _weaponSheathing = GetComponent<WeaponSheathing>();
             HideUI();
+            
+            var animationEventHandler = GetComponent<PlayerAnimationEventListener>();
+            animationEventHandler.WeaponDropped += WeaponDropped;
+            animationEventHandler.OffHandDropped += OffHandDropped;
         }
 
-        private void OnItemClicked(object sender, int e)
+        private void OnItemClicked(object sender, BaseItemInstance e)
         {
-            _playerEquipped.ActivateItem(_inventory.Items[e]);
-
+            _playerEquipment.ToggleItemEquipped(_inventory.Items[e.Id]);
             SetSelectedIndices();
         }
 
         private void SetSelectedIndices()
         {
             var selectedIndices = new List<int>();
-            for (var i = 0; i < _inventory.Items.Count; i++)
+
+            var i = 0;
+            foreach (var item in _inventory.Items.Values)
             {
-                var item = _inventory.Items[i];
-                if (_playerEquipped.IsItemEquipped(item))
+                if (_playerEquipment.IsItemEquipped(item))
                 {
                     selectedIndices.Add(i);
                 }
+                i++;
             }
-
             _inventoryController.SetSelectedItems(selectedIndices);
         }
 
@@ -57,20 +69,50 @@ namespace UI.Inventory
 
             if (_inventory.RemoveItem(instance))
             {
+                var equipmentSlots = EntitiesRegistry.Player.EquipmentSlots;
+                
+                if (equipmentSlots.EquipmentSlots[ItemType.Weapon].Contains(instance.Id) && !_weaponSheathing.IsWeaponSheathed)
+                {
+                    _firstPersonAnimationController.MoveToDropItemState(FirstPersonAnimationLayers.RightArm);
+                }
+                else if (equipmentSlots.EquipmentSlots[ItemType.Offhand].Contains(instance.Id) && !_weaponSheathing.IsOffhandSheathed)
+                {
+                    _firstPersonAnimationController.MoveToDropItemState(FirstPersonAnimationLayers.LeftArm);
+                }
+                else
+                {
+                    var positionToSpawnAt = transform.position + transform.forward * 0.5f + transform.up * 1.5f;
+                    equipmentSlots.DropItem(instance, Quaternion.identity, positionToSpawnAt);
+                }
                 SetSelectedIndices();
-                var currTransform = transform;
-                var positionToSpawnAt = currTransform.position + currTransform.forward * 0.5f + currTransform.up * 1.5f;
-                ItemSpawner.SpawnItem(instance, positionToSpawnAt, Quaternion.identity);
             }
 
-            _inventoryController.PopulateItems(_inventory.Items);
+            _inventoryController.PopulateItems(_inventory.Items.Values);
             _inventoryController.ResetCurrentlyHovered();
         }
 
         protected override void PopulateItems()
         {
-            _inventoryController.PopulateItems(_inventory.Items);
+            _inventoryController.PopulateItems(_inventory.Items.Values);
             SetSelectedIndices();
+        }
+        
+        private void OffHandDropped(object sender, EventArgs e)
+        {
+            DropItem(ItemType.Offhand);
+        }
+
+        private void WeaponDropped(object sender, EventArgs e)
+        {
+            DropItem(ItemType.Weapon);
+        }
+
+        private static void DropItem(ItemType type)
+        {
+            var equipmentSlots = EntitiesRegistry.Player.EquipmentSlots;
+            var itemId = equipmentSlots.EquipmentSlots[type].GetFirstItem();
+            var instance = ItemRegistry.ByGuid[itemId];
+            equipmentSlots.DropItem(instance);
         }
     }
 }

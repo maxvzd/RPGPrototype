@@ -14,7 +14,7 @@ namespace UI.Inventory
         private readonly InventoryListController _listController;
         private IReadOnlyList<BaseItemInstance> _items;
 
-        public EventHandler<int> ItemClicked;
+        public EventHandler<BaseItemInstance> ItemClicked;
         
         public InventoryController(VisualElement root)
         {
@@ -22,7 +22,8 @@ namespace UI.Inventory
             _listController = new InventoryListController(inventoryListView);
             _listController.ItemClicked += (sender, i) =>
             {
-                ItemClicked?.Invoke(sender, i);
+                var item = _listController.GetItemAtIndex(i);
+                ItemClicked?.Invoke(sender, item);
             };
         }
 

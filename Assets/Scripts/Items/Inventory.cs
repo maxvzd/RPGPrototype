@@ -1,23 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using Items.Equipment;
+using System.Linq;
 using Items.ItemInstances;
+using Items.ItemScriptableObjects;
+using Registries;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Items
 {
     public class Inventory : MonoBehaviour
     {
+        [SerializeField] private List<ItemInstanceScriptableObject> startingItems;
         [SerializeField] private float weightLimit = 500;
         private float _currentWeight = 0;
-        private readonly List<BaseItemInstance> _items = new();
-        private EquippedSlotManager _equipment;
+        private readonly Dictionary<Guid, BaseItemInstance> _items = new();
 
-        public IReadOnlyList<BaseItemInstance> Items => _items;
+        public IReadOnlyDictionary<Guid, BaseItemInstance> Items => _items;
 
         private void Start()
         {
-            _equipment = GetComponent<EquippedSlotManager>();
+            _items.AddRange(startingItems.ToDictionary(x => x.BaseInstance.Id, x => x.BaseInstance));
+            foreach (var item in startingItems)
+            {
+                ItemRegistry.Register(item.BaseInstance);
+            }
         }
 
         public bool AddItem(BaseItemInstance instance)
@@ -43,24 +50,16 @@ namespace Items
             // }
 
             _currentWeight += instance.BaseDefinition.Weight;
-            _items.Add(instance);
+            _items.Add(instance.Id, instance);
             return true;
         }
 
         public bool RemoveItem(BaseItemInstance instance)
         {
-            if (!_items.Exists(x => x == instance)) return false;
-
-            if (_equipment is not null)
-            {
-                if (_equipment.IsItemEquipped(instance))
-                {
-                    _equipment.UnEquipItem(instance.Id);
-                }
-            }
+            if (!_items.ContainsKey(instance.Id)) return false;
             
             _currentWeight -= instance.BaseDefinition.Weight;
-            _items.Remove(instance);
+            _items.Remove(instance.Id);
 
             // Instance persistence test
             // if (instance is ItemInstanceProperties itemInstance)

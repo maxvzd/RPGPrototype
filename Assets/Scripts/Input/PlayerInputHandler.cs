@@ -4,9 +4,8 @@ using System.Linq;
 using Combat;
 using Combat.LockOn;
 using Constants;
-using FirstPerson;
 using Interact;
-using Items.Equipment;
+using Items.Equipment.Sheathing;
 using PlayerMovement;
 using UI.Container;
 using UI.Dialogue;
@@ -20,8 +19,6 @@ namespace Input
     {
         private ActorMovement _movement;
         private CameraLook _cameraLook;
-        private FirstPersonCameraSwap _armSwap;
-        private PlayerAttack _playerAttack;
 
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -40,9 +37,9 @@ namespace Input
         {
             _movement = GetComponent<ActorMovement>();
             _cameraLook = GetComponent<CameraLook>();
-            var weaponPosition = GetComponent<WeaponPositionManager>();
+            var weaponSheathing = GetComponent<WeaponSheathing>();
             var interactionSystem = GetComponent<PlayerInteractionSystem>();
-            _playerAttack = GetComponent<PlayerAttack>();
+            var playerAttack = GetComponent<PlayerAttack>();
             var inventoryUIManager = GetComponent<PlayerInventoryUiManager>();
             var dialogueManager = GetComponent<DialogueManager>();
             var containerManager = GetComponent<ContainerUiManager>();
@@ -70,7 +67,7 @@ namespace Input
 
             _wasPerformedActions = new Dictionary<InputAction, Action>
             {
-                { raiseWeaponAction, () => { weaponPosition.SheatheWeapon(); } },
+                { raiseWeaponAction, () => { weaponSheathing.ToggleSheathed(); } },
                 { interactAction, () => { interactionSystem.Interact(); } },
                 { showInventoryPlayerAction, inventoryUIManager.ShowUI },
                 { hideInventoryUIAction, () =>
@@ -95,14 +92,14 @@ namespace Input
 
             _wasCompletedActions = new Dictionary<InputAction, Action>
             {
-                { attackAction, () => { _playerAttack.ReleaseAttack(); } },                
+                { attackAction, () => { playerAttack.ReleaseAttack(); } },                
                 { cycleTargetRightAction, () => { targetLock.CycleTargetRight();} },
                 { cycleTargetLeftAction, () => { targetLock.CycleTargetLeft();} },
             };
             
             _isPressedActions = new Dictionary<InputAction, Action>
             {
-                { attackAction, () => { _playerAttack.StartAttack(); } },
+                { attackAction, () => { playerAttack.StartAttack(); } },
             };
 
             inventoryUIManager.UiHidden += EnableRegularActions;

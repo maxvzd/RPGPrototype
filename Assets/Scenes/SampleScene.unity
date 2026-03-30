@@ -2446,7 +2446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7737273, y: 0, z: 0, w: 0.6335188}
+  m_LocalRotation: {x: 0.7780551, y: 0, z: 0, w: 0.62819606}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5068,7 +5068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140ebc759bb1b4a41a7d242f9c3d4573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
 --- !u!114 &794427389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5081,6 +5080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7b8d8d804b4ff590d462e6aff653da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingItems: []
   weightLimit: 50
 --- !u!114 &794427390
 MonoBehaviour:
@@ -10140,9 +10140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 12.758638
+  hourOfDay: 12.811046
   sunTransform: {fileID: 410087041}
-  time: 12:46
+  time: 12:49
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -11217,6 +11217,14 @@ PrefabInstance:
       propertyPath: angleToTurnAt
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 1337328536839258496, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
+      propertyPath: startingItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337328536839258496, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
+      propertyPath: 'startingItems.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b17b29d794dcb534eb6e7209274e99cd, type: 2}
     - target: {fileID: 1461130945700243141, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.45
@@ -17778,6 +17786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7b8d8d804b4ff590d462e6aff653da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingItems: []
   weightLimit: 50
 --- !u!114 &7577692398037268003
 MonoBehaviour:
@@ -17791,8 +17800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140ebc759bb1b4a41a7d242f9c3d4573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: b17b29d794dcb534eb6e7209274e99cd, type: 2}
 --- !u!1001 &8143476942110277247
 PrefabInstance:
   m_ObjectHideFlags: 0

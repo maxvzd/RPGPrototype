@@ -2,9 +2,9 @@
 using Constants;
 using UnityEngine;
 
-namespace Combat
+namespace FirstPerson
 {
-    public class CombatAnimationStateMachineManager : MonoBehaviour
+    public class FirstPersonCombatAnimationManager : MonoBehaviour
     {
         private Animator _animator;
 
@@ -40,5 +40,27 @@ namespace Combat
         {
             _animator.SetBool(AnimatorConstants.ShouldReleaseAttack, shouldReleaseAttack);
         }
+        
+        public void MoveToUnsheatheState(FirstPersonAnimationLayers layer)
+        {
+            _animator.CrossFadeInFixedTime(AnimatorConstants.UnsheatheState, .5f, (int)layer, 0, 0);
+        }
+        
+        public void MoveToSheatheState(FirstPersonAnimationLayers layer)
+        {
+            _animator.CrossFadeInFixedTime(AnimatorConstants.SheatheState, .5f, (int)layer, 0, 0);
+        }
+
+        public void MoveToDropItemState(FirstPersonAnimationLayers layer)
+        {
+            _animator.CrossFadeInFixedTime(AnimatorConstants.DropItemState, .5f, (int)layer, 0, 0);
+        }
+    }
+
+    public enum FirstPersonAnimationLayers
+    {
+        Base = 0,
+        RightArm = 1,
+        LeftArm = 2
     }
 }

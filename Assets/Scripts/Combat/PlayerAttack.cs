@@ -1,5 +1,6 @@
 using System;
-using Items.Equipment;
+using FirstPerson;
+using Items.Equipment.Sheathing;
 using NPC;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Combat
     {
         [SerializeField] private float attackSensitivity;
 
-        private WeaponPositionManager _weaponPositionManager;
+        private WeaponSheathing _weaponSheathing;
         private PlayerAnimationEventListener _animationEventHandler;
 
         private bool _isLeftMouseHeld;
@@ -17,23 +18,26 @@ namespace Combat
         private bool _isSwingFinished = true;
 
         private AttackDirection _currentAttackDirection;
-        private CombatAnimationStateMachineManager _combatAnimationHandler;
+        private FirstPersonCombatAnimationManager _combatAnimationHandler;
+        private CameraLook _cameraLook;
+        private Guid? _cameraLookToken;
 
         public bool IsWeaponRaised { get; private set; }
 
         private void Start()
         {
-            _weaponPositionManager = GetComponent<WeaponPositionManager>();
+            _weaponSheathing = GetComponent<WeaponSheathing>();
             _animationEventHandler = GetComponent<PlayerAnimationEventListener>();
             _animationEventHandler.SwingFinished += SwingFinished;
 
-            _combatAnimationHandler = GetComponent<CombatAnimationStateMachineManager>();
+            _combatAnimationHandler = GetComponent<FirstPersonCombatAnimationManager>();
             _currentAttackDirection = AttackDirection.None;
+            _cameraLook = GetComponentInChildren<CameraLook>();
         }
         
         private void Update()
         {
-            if (_weaponPositionManager.IsWeaponSheathed) return;
+            if (_weaponSheathing.IsWeaponSheathed) return;
             if (!_isLeftMouseHeld || !_isSwingFinished) return;
 
             var mouseInput = EntitiesRegistry.Player.Input.MouseInput;
@@ -56,19 +60,25 @@ namespace Combat
 
         public void StartAttack()
         { 
-            if (_weaponPositionManager.IsWeaponSheathed) return;
+            if (_weaponSheathing.IsWeaponSheathed) return;
             if(_isLeftMouseHeld) return;
             
             SetSwingState(true);
             _currentAttackDirection = AttackDirection.None;
             EntitiesRegistry.Player.LockOn.LockOnToNearestTarget();
+            _cameraLookToken ??= _cameraLook.RegisterCameraLock();
         }
         
         public void ReleaseAttack()
         { 
-            if (_weaponPositionManager.IsWeaponSheathed) return;
+            if (_weaponSheathing.IsWeaponSheathed) return;
             
             SetSwingState(false);
+            if (_cameraLookToken != null)
+            {
+                _cameraLook.UnRegisterCameraLock(_cameraLookToken.Value);
+                _cameraLookToken = null;
+            }
         }
 
         private void SetSwingState(bool isSwinging)

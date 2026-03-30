@@ -24,6 +24,7 @@ namespace Combat.LockOn
         private float _bodyYawVelocity;
         private float _bodyRollVelocity;
         private LockOnTriggerHandler _lockOnEvents;
+        private Guid? _cameraLockToken;
 
         public void Start()
         {
@@ -58,8 +59,8 @@ namespace Combat.LockOn
                 BreakTargetLock();
                 return;
             }
-            
-            EntitiesRegistry.Player.CameraLook.LockCamera();
+
+            _cameraLockToken ??= EntitiesRegistry.Player.CameraLook.RegisterCameraLock();
                 
             var bodyHeading = _target.LookAtTransform.position - transform.position;
             var cameraHeading = _target.LookAtTransform.position - cameraContainer.transform.position;
@@ -155,7 +156,11 @@ namespace Combat.LockOn
         public void BreakTargetLock()
         {
             _target = null;
-            EntitiesRegistry.Player.CameraLook.UnlockCamera();
+            if (_cameraLockToken is not null)
+            {
+                EntitiesRegistry.Player.CameraLook.UnRegisterCameraLock(_cameraLockToken.Value);
+                _cameraLockToken = null;
+            }
         }
         
         private void OnDrawGizmosSelected()

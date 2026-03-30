@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FirstPerson
 {
-    public class RotateArms : MonoBehaviour
+    public class FirstPersonRotateArms : MonoBehaviour
     {
         [SerializeField] private Transform objectToMatch;
         [SerializeField] private List<AnimationOffset> offsets;

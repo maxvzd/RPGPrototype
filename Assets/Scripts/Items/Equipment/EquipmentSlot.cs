@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Helpers;
 
 namespace Items.Equipment
 {
     public interface IEquipmentSlot
     {
-        bool AddItem(Guid guid);
-        bool RemoveItem(Guid guid);
-        bool HasEmptySlots();
-        bool Contains(Guid guid);
-        Guid GetFirstItem();
+        bool AddItem(Guid guid) => false;
+        bool RemoveItem(Guid guid) => false;
+        bool HasEmptySlots() => false;
+        bool Contains(Guid guid) => false;
+        Guid GetFirstItem() => Guid.Empty;
     }
 
-    public class NullEquipmentSlot : IEquipmentSlot
-    {
-        public bool AddItem(Guid guid) => false;
-        public bool RemoveItem(Guid guid) => false;
-        public bool HasEmptySlots() => false;
-        public bool Contains(Guid guid) => false;
-        public Guid GetFirstItem() => Guid.Empty;
-    }
+    public class EmptyEquipmentSlot : IEquipmentSlot { }
     
     public class EquipmentSlot : IEquipmentSlot
     {

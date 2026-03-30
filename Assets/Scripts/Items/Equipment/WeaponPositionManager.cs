@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Constants;
-using FirstPerson;
 using Items.Equipment.Sheathing;
 using UnityEngine;
 
@@ -10,163 +8,162 @@ namespace Items.Equipment
 {
     public class WeaponPositionManager : MonoBehaviour
     {
-        public bool IsWeaponSheathed => _isWeaponSheathed;
-
-        private Animator _animator;
-        private bool _isWeaponSheathed = true;
         private PlayerAnimationEventListener _animationEventHandler;
-        private bool IsWeaponEquipped => _weaponPositions is not null && _weaponPositions.Any(x => !x.Value.IsEmpty);
         private Guid _equippedInstance;
-        private IReadOnlyDictionary<ItemType, SocketMap> _weaponPositions;
+        private Dictionary<ItemType, ISocket> _sockets;
 
         [SerializeField] private Transform rightHandSocket;
         [SerializeField] private Transform leftHandSocket;
         [SerializeField] private Transform sheathedSocket;
-        private RotateArms _armRotator;
-        private FirstPersonCameraSwap _armSwap;
 
         public void Start()
         {
-            _animator = GetComponent<Animator>();
-            _animationEventHandler = GetComponent<PlayerAnimationEventListener>();
-            _animationEventHandler.WeaponSheathed += WeaponSheathed;
-            _animationEventHandler.WeaponUnSheathed += WeaponSheathed;
-            _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
-
-            _armSwap = GetComponent<FirstPersonCameraSwap>();
-
-            _weaponPositions = new Dictionary<ItemType, SocketMap>
+            _sockets = new Dictionary<ItemType, ISocket>
             {
-                { ItemType.Weapon, new SocketMap(Guid.Empty, rightHandSocket, sheathedSocket, null, null) },
-                { ItemType.Offhand, new SocketMap(Guid.Empty, leftHandSocket, sheathedSocket, null, null) }
+                { ItemType.Weapon, new EmptySocket(rightHandSocket, sheathedSocket, ItemType.Weapon) },
+                { ItemType.Offhand, new EmptySocket(leftHandSocket, sheathedSocket, ItemType.Offhand) }
             };
-
-            _armRotator = GetComponent<RotateArms>();
-
-            UpdateWeaponPosition();
         }
 
-        private void WeaponSheathed(object sender, EventArgs e)
+        
+        public void MoveItemsToWieldedSocket()
         {
-            UpdateWeaponPosition();
+            foreach (var value in _sockets)
+            {
+                value.Value.MoveToWieldedSocket();
+            }
+        }
+        
+        public void MoveItemsToSheathedSocket()
+        {
+            foreach (var socket in _sockets.Values)
+            {
+                socket.MovedToSheathedSocket();
+            }
         }
 
-        public void SheatheWeapon()
+        public void AddItemToSlot(Guid id, GameObject itemGameObject, IEnumerable<SheathedItemPositions> positions, ItemType slot)
         {
-            if (!IsWeaponEquipped) return;
-
-            _isWeaponSheathed = !_isWeaponSheathed;
-            _armRotator.ShouldRotateArmsWithCamera = !_isWeaponSheathed;
-            _armSwap.SwitchArms();
-            _animator.SetBool(AnimatorConstants.WeaponSheathed, _isWeaponSheathed);
-        }
-
-        public void EquipWeapon(Guid instanceId, GameObject weaponTransform, IEnumerable<SheathedItemPositions> positions, ItemType slot)
-        {
-            _isWeaponSheathed = true;
-
             var position = positions.FirstOrDefault(x => x.Type == slot);
             if (position is not null)
             {
-                _weaponPositions[slot].EquipItem(instanceId, weaponTransform, position);
-            }
-
-            UpdateWeaponPosition();
-        }
-
-        public void UnEquipWeapon(Guid id)
-        {
-            foreach (var weaponPosition in _weaponPositions)
-            {
-                if (!weaponPosition.Value.IsItem(id)) continue;
-
-                weaponPosition.Value.UnEquipItem();
-                return;
+                _sockets[slot] = _sockets[slot].AddItem(new WeaponPositionInfo(id, itemGameObject, position));
+                _sockets[slot].MovedToSheathedSocket();
             }
         }
 
-        private void UpdateWeaponPosition()
+        public void RemoveItem(Guid id)
         {
-            if (!IsWeaponEquipped) return;
-            if (!_isWeaponSheathed)
+            var socketsToRemove = _sockets.Values.Where(socket => socket.Contains(id)).ToList();
+            foreach (var socket in socketsToRemove)
             {
-                foreach (var value in _weaponPositions)
-                {
-                    value.Value.UnsheatheItem();
-                }
-            }
-            else
-            {
-                foreach (var value in _weaponPositions)
-                {
-                    value.Value.SheatheItem();
-                }
+                _sockets[socket.ForItemType] = socket.RemoveItem();
             }
         }
 
-        private class SocketMap
+        private interface ISocket
         {
-            public bool IsEmpty { get; private set; } = true;
+            bool IsEmpty { get; }
+            Socket AddItem(WeaponPositionInfo weapon);
+            EmptySocket RemoveItem();
+            void MoveToWieldedSocket();
+            void MovedToSheathedSocket();
+            bool Contains(Guid id);
+            ItemType ForItemType { get; }
+        }
 
-            private Guid _instanceId;
-            private readonly Transform _wieldedSocket;
-            private readonly Transform _sheathedSocket;
-            private GameObject _item;
-            private SheathedItemPositions _sheathePosition;
+        private abstract class BaseSocket : ISocket
+        {
+            public ItemType ForItemType { get; }
+            protected readonly Transform WieldedSocket;
+            protected readonly Transform SheathedSocket;
+            public virtual bool IsEmpty => true;
 
-            public SocketMap(Guid instanceId, Transform wieldedSocket, Transform sheathedSocket, GameObject item, SheathedItemPositions sheathePosition)
+            protected BaseSocket(Transform wieldedSocket, Transform sheathedSocket, ItemType forItemType)
             {
-                _instanceId = instanceId;
-                _wieldedSocket = wieldedSocket;
-                _sheathedSocket = sheathedSocket;
-                _item = item;
-                _sheathePosition = sheathePosition;
+                WieldedSocket = wieldedSocket;
+                SheathedSocket = sheathedSocket;
+                ForItemType = forItemType;
             }
 
-            public void EquipItem(Guid id, GameObject item, SheathedItemPositions sheathePosition)
+            public Socket AddItem(WeaponPositionInfo weapon)
             {
-                IsEmpty = false;
-                _instanceId = id;
-                _sheathePosition = sheathePosition;
-                _item = item;
+                return new Socket(weapon, WieldedSocket, SheathedSocket, ForItemType);
             }
 
-            public void UnEquipItem()
+            public EmptySocket RemoveItem()
             {
-                IsEmpty = true;
-                _instanceId = Guid.Empty;
-                _sheathePosition = null;
-                _item = null;
+                return new EmptySocket(WieldedSocket, SheathedSocket, ForItemType);
             }
 
-            public void UnsheatheItem()
+            public virtual void MoveToWieldedSocket() { }
+            public virtual void MovedToSheathedSocket() { }
+            public virtual bool Contains(Guid id) => false;
+        }
+        
+        private class EmptySocket : BaseSocket
+        {
+            public EmptySocket(Transform wieldedSocket, Transform sheathedSocket, ItemType forItemType) : base(wieldedSocket, sheathedSocket, forItemType) { }
+        }
+
+        private class Socket : BaseSocket
+        {
+            public override bool IsEmpty => false;
+            private readonly WeaponPositionInfo _weaponPositionInfo;
+
+            public Socket(WeaponPositionInfo weaponPositionInfo, Transform wieldedSocket, Transform sheathedSocket, ItemType forItemType) : base(wieldedSocket, sheathedSocket, forItemType)
             {
-                if (IsEmpty) return;
-                SetItemPosition(LayerConstants.VisibleInFirstPerson, _wieldedSocket, _sheathePosition.WieldedPosition, _sheathePosition.WieldedRotation);
+                _weaponPositionInfo = weaponPositionInfo;
             }
 
-            public void SheatheItem()
+            public override void MoveToWieldedSocket()
             {
-                if (IsEmpty) return;
-                SetItemPosition(LayerConstants.Default, _sheathedSocket, _sheathePosition.SheathedPosition, _sheathePosition.SheathedRotation);
+                SetItemPosition(
+                    WieldedSocket, 
+                    _weaponPositionInfo.SheathePositions.WieldedPosition, 
+                    _weaponPositionInfo.SheathePositions.WieldedRotation, 
+                    _weaponPositionInfo.GameObject);
             }
 
-            private void SetItemPosition(string layerName, Transform socket, Vector3 pos, Vector3 rot)
+            public override void MovedToSheathedSocket()
             {
-                _item.layer = LayerMask.NameToLayer(layerName);
-                for (var i = 0; i < _item.transform.childCount; i++)
+                SetItemPosition(
+                    SheathedSocket, 
+                    _weaponPositionInfo.SheathePositions.SheathedPosition, 
+                    _weaponPositionInfo.SheathePositions.SheathedRotation, 
+                    _weaponPositionInfo.GameObject);
+            }
+
+            public override bool Contains(Guid id)
+            {
+                return _weaponPositionInfo.Id == id;
+            }
+
+            private static void SetItemPosition(Transform socket, Vector3 pos, Vector3 rot, GameObject gameObject)
+            {
+                //gameObject.layer = LayerMask.NameToLayer(layerName);
+                for (var i = 0; i < gameObject.transform.childCount; i++)
                 {
-                    var child = _item.transform.GetChild(i);
-                    child.gameObject.layer = LayerMask.NameToLayer(layerName);
+                    var child = gameObject.transform.GetChild(i);
+                    //child.gameObject.layer = LayerMask.NameToLayer(layerName);
                 }
-
-                _item.transform.SetParent(socket);
-                _item.transform.SetLocalPositionAndRotation(pos, Quaternion.Euler(rot));
+                
+                gameObject.transform.SetParent(socket);
+                gameObject.transform.SetLocalPositionAndRotation(pos, Quaternion.Euler(rot));
             }
+        }
 
-            public bool IsItem(Guid id)
+        private class WeaponPositionInfo
+        {
+            public Guid Id { get; }
+            public GameObject GameObject { get; }
+            public SheathedItemPositions SheathePositions { get; }
+
+            public WeaponPositionInfo(Guid id, GameObject gameObject, SheathedItemPositions sheathePosition)
             {
-                return id == _instanceId;
+                Id = id;
+                GameObject = gameObject;
+                SheathePositions = sheathePosition;
             }
         }
     }

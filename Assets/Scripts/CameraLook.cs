@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Constants;
 using PlayerMovement;
 using UnityEngine;
@@ -19,10 +21,10 @@ public class CameraLook : MonoBehaviour
     private float _targetTilt;
     private float _tiltVelocity;
     private float _zAxisTilt;
-    private bool _lockCamera;
     private float _playerYawVelocity;
-
     public Camera MainCamera => mainCamera;
+
+    private readonly HashSet<Guid> _lockCamera = new();
 
     private void Start()
     {
@@ -41,14 +43,16 @@ public class CameraLook : MonoBehaviour
         _zAxisTilt = Mathf.SmoothDampAngle(cameraEuler.z, _targetTilt, ref _tiltVelocity, 0.2f);
     }
 
-    public void LockCamera()
+    public Guid RegisterCameraLock()
     {
-        _lockCamera = true;
+        var token = Guid.NewGuid();
+        _lockCamera.Add(token);
+        return token;
     }
 
-    public void UnlockCamera()
+    public void UnRegisterCameraLock(Guid token)
     {
-        _lockCamera = false;
+        _lockCamera.Remove(token);
     }
     
     private void SetTurnRight(bool value)
@@ -63,7 +67,7 @@ public class CameraLook : MonoBehaviour
 
     public void MoveCamera(Vector2 mouseInput)
     {
-        if (_lockCamera)
+        if (_lockCamera.Count > 0)
         {
             SetTurnLeft(false);
             SetTurnRight(false);

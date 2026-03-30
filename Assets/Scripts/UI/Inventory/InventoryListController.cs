@@ -105,9 +105,14 @@ namespace UI.Inventory
 
         public void SetItems(IEnumerable<BaseItemInstance> items)
         {
-            _items = items.Select(x => new ItemViewModel(x.BaseDefinition)).ToList();
+            _items = items.Select(x => new ItemViewModel(x)).ToList();
             _listView.itemsSource = _items;
             _listView.RefreshItems();
+        }
+
+        public BaseItemInstance GetItemAtIndex(int index)
+        {
+            return _items[index].Item;
         }
     }
 }

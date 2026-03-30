@@ -7,6 +7,8 @@ public class PlayerAnimationEventListener : MonoBehaviour
     public EventHandler SwingFinished;
     public EventHandler WeaponSheathed;
     public EventHandler WeaponUnSheathed;
+    public EventHandler WeaponDropped;
+    public EventHandler OffHandDropped;
 
     private void OnReadyToAttack()
     {
@@ -26,5 +28,15 @@ public class PlayerAnimationEventListener : MonoBehaviour
     private void OnWeaponUnSheathed()
     {
         WeaponUnSheathed?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void DropItemRight()
+    {
+        WeaponDropped?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void DropItemLeft()
+    {
+        OffHandDropped?.Invoke(this, EventArgs.Empty);
     }
 }

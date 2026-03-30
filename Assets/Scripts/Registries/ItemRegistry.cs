@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Items.ItemInstances;
+﻿using Items.ItemInstances;
 
 namespace Registries
 {
