@@ -18,7 +18,7 @@ namespace Items
 
         public IReadOnlyDictionary<Guid, BaseItemInstance> Items => _items;
 
-        private void Start()
+        public void Awake()
         {
             _items.AddRange(startingItems.ToDictionary(x => x.BaseInstance.Id, x => x.BaseInstance));
             foreach (var item in startingItems)

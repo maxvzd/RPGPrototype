@@ -53,6 +53,7 @@ namespace Input
             var raiseWeaponAction = _input.actions[InputConstants.RaiseWeapon];
             var interactAction = _input.actions[InputConstants.Interact];
             var attackAction = _input.actions[InputConstants.Attack];
+            var blockAction = _input.actions[InputConstants.Block];
             var jumpAction = _input.actions[InputConstants.Jump];
             var showInventoryPlayerAction = _input.actions[$"{InputConstants.PlayerActionMap}/{InputConstants.Inventory}"];
             var showInventoryUIAction = _input.actions[$"{InputConstants.UIActionMap}/{InputConstants.Inventory}"];
@@ -86,6 +87,7 @@ namespace Input
                 },
                 { dropItemAction, () => { inventoryUIManager.DropSelectedItem(); } },
                 { jumpAction, () => { jumper.Jump(); } },
+                { blockAction, () => { playerAttack.StartBlock(); }},
 
                 { breakTargetLock, () => { targetLock.BreakTargetLock();} }
             };
@@ -93,6 +95,7 @@ namespace Input
             _wasCompletedActions = new Dictionary<InputAction, Action>
             {
                 { attackAction, () => { playerAttack.ReleaseAttack(); } },                
+                { blockAction, () => { playerAttack.ReleaseBlock(); } },                
                 { cycleTargetRightAction, () => { targetLock.CycleTargetRight();} },
                 { cycleTargetLeftAction, () => { targetLock.CycleTargetLeft();} },
             };

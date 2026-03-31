@@ -14,7 +14,7 @@ namespace Constants
         public static readonly int RaiseWeaponSpeedModifier = Animator.StringToHash("RaiseWeaponSpeedModifier");
         public static readonly int ShouldReleaseAttack = Animator.StringToHash("ShouldReleaseAttack");
         public static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
-        public static readonly int DropRightItem = Animator.StringToHash("DropRightItem");
+        public static readonly int BlockHeld = Animator.StringToHash("BlockHeld");
         
         #endregion
         
@@ -38,6 +38,8 @@ namespace Constants
         public static readonly int SheatheState = Animator.StringToHash("Sheathe");
         public static readonly int CombatReadyWalkState = Animator.StringToHash("CombatReadyWalk");
         public static readonly int DropItemState = Animator.StringToHash("DropItem");
+        public static readonly int RaiseShieldState = Animator.StringToHash("RaiseShield");
+        public static readonly int BlockState = Animator.StringToHash("Block");
         
         #endregion
     }

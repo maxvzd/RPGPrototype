@@ -16,7 +16,7 @@ namespace Items.Equipment
         [SerializeField] private Transform leftHandSocket;
         [SerializeField] private Transform sheathedSocket;
 
-        public void Start()
+        public void Awake()
         {
             _sockets = new Dictionary<ItemType, ISocket>
             {
@@ -24,7 +24,6 @@ namespace Items.Equipment
                 { ItemType.Offhand, new EmptySocket(leftHandSocket, sheathedSocket, ItemType.Offhand) }
             };
         }
-
         
         public void MoveItemsToWieldedSocket()
         {
@@ -141,13 +140,6 @@ namespace Items.Equipment
 
             private static void SetItemPosition(Transform socket, Vector3 pos, Vector3 rot, GameObject gameObject)
             {
-                //gameObject.layer = LayerMask.NameToLayer(layerName);
-                for (var i = 0; i < gameObject.transform.childCount; i++)
-                {
-                    var child = gameObject.transform.GetChild(i);
-                    //child.gameObject.layer = LayerMask.NameToLayer(layerName);
-                }
-                
                 gameObject.transform.SetParent(socket);
                 gameObject.transform.SetLocalPositionAndRotation(pos, Quaternion.Euler(rot));
             }

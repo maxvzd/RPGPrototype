@@ -27,13 +27,15 @@ namespace FirstPerson
 
         public void TransitionToIdle()
         {           
-            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, .5f, 1, 0, 0);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, .5f, (int)FirstPersonAnimationLayers.RightArm, 0, 0);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.CombatReadyState, .5f, (int)FirstPersonAnimationLayers.LeftArm, 0, 0);
         }
 
         public void TransitionToWeaponRaisedState(AttackDirection attackDirection)
         {
             var state = _weaponRaisedStates[attackDirection];
-            _animator.CrossFadeInFixedTime(state, .4f, 1, 0, 0);
+            _animator.CrossFadeInFixedTime(state, .4f, (int)FirstPersonAnimationLayers.RightArm, 0, 0);
+            _animator.CrossFadeInFixedTime(state, .4f, (int)FirstPersonAnimationLayers.LeftArm, 0, 0);
         }
 
         public void SetShouldReleaseAttack(bool shouldReleaseAttack)
@@ -55,12 +57,24 @@ namespace FirstPerson
         {
             _animator.CrossFadeInFixedTime(AnimatorConstants.DropItemState, .5f, (int)layer, 0, 0);
         }
+
+        public void TransitionToBlock()
+        {
+            _animator.SetBool(AnimatorConstants.BlockHeld, true);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.BlockState, .2f, (int)FirstPersonAnimationLayers.LeftArm, 0, 0);
+            _animator.CrossFadeInFixedTime(AnimatorConstants.BlockState, .2f, (int)FirstPersonAnimationLayers.RightArm, 0, 0);
+        }
+
+        public void ReleaseBlock()
+        {
+            _animator.SetBool(AnimatorConstants.BlockHeld, false);
+        }
     }
 
     public enum FirstPersonAnimationLayers
     {
         Base = 0,
-        RightArm = 1,
-        LeftArm = 2
+        RightArm = 2,
+        LeftArm = 3
     }
 }

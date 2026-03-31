@@ -2446,7 +2446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7780551, y: 0, z: 0, w: 0.62819606}
+  m_LocalRotation: {x: 0.78317934, y: 0, z: 0, w: 0.6217959}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10140,9 +10140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minutesInDay: 60
-  hourOfDay: 12.811046
+  hourOfDay: 12.87368
   sunTransform: {fileID: 410087041}
-  time: 12:49
+  time: 12:52
 --- !u!4 &1367038837
 Transform:
   m_ObjectHideFlags: 0
@@ -11575,7 +11575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7367259006149932418, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
       propertyPath: turnTime
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7367259006149932418, guid: 435eac15b3ffd8248a94e4798129bccd, type: 3}
       propertyPath: turnSpeed
@@ -17198,6 +17198,18 @@ PrefabInstance:
     - target: {fileID: 3136425963134056326, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173415770952848907, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.656
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173415770952848907, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173415770952848907, guid: 054b9b8452da40d49b33dee5bf617fc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90.024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

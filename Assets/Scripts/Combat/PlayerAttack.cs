@@ -81,6 +81,16 @@ namespace Combat
             }
         }
 
+        public void StartBlock()
+        {
+            _combatAnimationHandler.TransitionToBlock();
+        }
+
+        public void ReleaseBlock()
+        {
+            _combatAnimationHandler.ReleaseBlock();
+        }
+
         private void SetSwingState(bool isSwinging)
         {
             _combatAnimationHandler.SetShouldReleaseAttack(!isSwinging);

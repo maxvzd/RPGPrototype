@@ -14,7 +14,7 @@
         public static string CycleTargetRight => "CycleTargetRight";
         public static string CycleTargetLeft => "CycleTargetLeft";
         public static string BreakTargetLock => "BreakTargetLock";
-
+        public static string Block => "Block";
 
         public static string PlayerActionMap => "Player";
         public static string UIActionMap => "UI";

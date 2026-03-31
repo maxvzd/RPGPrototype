@@ -27,7 +27,7 @@ namespace Items.Equipment
         public EventHandler<ItemType> OnItemEquipped;
         public EventHandler<ItemType> OnItemUnEquipped;
         
-        private void Start()
+        private void Awake()
         {
             _equippedMeshManager = GetComponent<EquippedMeshManager>();
             _weaponPositionManager = GetComponent<WeaponPositionManager>();

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Linq;
 using DataPersistence.Database.Models;
+using Items;
+using Items.Equipment;
 using NPC.ScriptableObjectContexts;
 using NPC.UtilityBaseClasses;
 using UnityEngine;
@@ -32,6 +34,13 @@ namespace NPC
 
         public void Start()
         {
+            //Temp code for equipping sword
+            var inventory = GetComponent<Inventory>();
+            var equipment = GetComponent<EquipmentSlotManager>();
+            var item = inventory.Items.Values.FirstOrDefault();
+            equipment.ToggleItemEquipped(item);
+            //
+            
             NpcInfo.Brain.ExecuteCoroutine += ExecuteCoroutine;
             NpcInfo.Brain.Start();
         }

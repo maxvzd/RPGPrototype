@@ -69,8 +69,6 @@ public class CameraLook : MonoBehaviour
     {
         if (_lockCamera.Count > 0)
         {
-            SetTurnLeft(false);
-            SetTurnRight(false);
             mouseInput.x *= 0.1f;
             mouseInput.y *= 0.1f;
         }
@@ -97,8 +95,8 @@ public class CameraLook : MonoBehaviour
         currentCameraRotation.z = _zAxisTilt;
         cameraContainer.transform.rotation = Quaternion.Euler(currentCameraRotation);
         
-        SetTurnLeft(!_movement.IsMovementKeysDown && mouseInput.x < 0);
-        SetTurnRight(!_movement.IsMovementKeysDown && mouseInput.x > 0);
+        SetTurnLeft(!_movement.IsMovementKeysDown && mouseInput.x < 0 && _lockCamera.Count == 0);
+        SetTurnRight(!_movement.IsMovementKeysDown && mouseInput.x > 0 && _lockCamera.Count == 0);
     }
     
     private static float CalculateAndClampAngle(float currentPlayerAngle, float targetAngle, float minAngle, float maxAngle)
